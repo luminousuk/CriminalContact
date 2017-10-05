@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CriminalContact.Entities.Bank
+namespace CriminalContact.Entities
 {
     public sealed class Transaction
     {

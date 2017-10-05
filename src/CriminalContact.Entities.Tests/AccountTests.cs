@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CriminalContact.Entities.Bank;
 
-namespace CriminalContact.Entities.Tests.Bank
+namespace CriminalContact.Entities.Tests
 {
     [TestClass]
     public class AccountTests
@@ -82,7 +81,7 @@ namespace CriminalContact.Entities.Tests.Bank
                 Task.Factory.StartNew(() => account.Withdraw(40.0M))
             };
             Task.WaitAll(tasks);
-            
+
             Assert.AreEqual(100.0M, account.Balance);
         }
 
