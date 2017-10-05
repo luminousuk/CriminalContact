@@ -9,7 +9,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Transaction_Multiple_SumEqualsBalance()
         {
-            var account = new Account(null, 101);
+            var account = new Account(101);
 
             account.Deposit(100.0M);
             account.Withdraw(50.0M);

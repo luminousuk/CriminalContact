@@ -8,17 +8,42 @@ namespace CriminalContact.Entities
     {
         private readonly object _transactionLock = new object();
         private readonly IList<Transaction> _transactions = new List<Transaction>();
+        private decimal _balance;
 
-        public Account(Player player, int accountNumber, decimal openingBalance = 0M)
+        public Account(int accountNumber, decimal openingBalance = 0M)
         {
-            Player = player;
             AccountNumber = accountNumber;
-            Balance = openingBalance;
+            IsOpen = true;
+            Balance = 0M;
+
+            if (openingBalance > 0M)
+                Deposit(openingBalance, "Opening balance");
         }
 
         public int AccountNumber { get; }
-        public Player Player { get; }
-        public decimal Balance { get; private set; }
+
+        public decimal Balance
+        {
+            get
+            {
+                lock (_transactionLock)
+                {
+                    return _balance;
+                }
+            }
+            private set
+            {
+                if (value < 0)
+                    throw new ArgumentException("Balance can not be set below zero");
+
+                lock (_transactionLock)
+                {
+                    _balance = value;
+                }
+            }
+        }
+
+        public bool IsOpen { get; set; }
 
         public IReadOnlyList<Transaction> Transactions
         {
@@ -73,10 +98,13 @@ namespace CriminalContact.Entities
             if (Balance < amount)
                 throw new ArgumentOutOfRangeException(nameof(amount), amount, "Insufficient balance to transfer");
 
-            var balance = Withdraw(amount, $"Transfer to {targetAccount.AccountNumber}");
-            targetAccount.Deposit(amount, $"Transfer from {AccountNumber}");
+            lock (_transactionLock)
+            {
+                var balance = Withdraw(amount, $"Transfer to {targetAccount.AccountNumber}");
+                targetAccount.Deposit(amount, $"Transfer from {AccountNumber}");
 
-            return balance;
+                return balance;
+            }
         }
     }
 }

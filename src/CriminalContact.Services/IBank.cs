@@ -6,9 +6,7 @@ namespace CriminalContact.Services
     public interface IBank
     {
         IReadOnlyCollection<Account> Accounts { get; }
-        Account OpenAccount(Player player, decimal openingBalance);
-        decimal Withdraw(Account account);
-        decimal Deposit(Account account);
-        decimal Transfer(Account sourceAccount, Account targetAccount);
+        Account OpenAccount(decimal openingBalance);
+        void GenerateInterest(decimal interestPct);
     }
 }

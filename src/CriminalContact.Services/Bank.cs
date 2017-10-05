@@ -2,46 +2,42 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
+using System.Threading.Tasks;
 using CriminalContact.Entities;
 
 namespace CriminalContact.Services
 {
     public class Bank : IBank
     {
+        private static readonly Random Rand = new Random();
+
         private readonly IList<Account> _accounts = new List<Account>();
         public IReadOnlyCollection<Account> Accounts => new ReadOnlyCollection<Account>(_accounts);
-        public Account OpenAccount(Player player, decimal openingBalance = 0M)
+
+        public Account OpenAccount(decimal openingBalance = 0M)
         {
-            var account = new Account(player, GenerateAccountNumber(), openingBalance);
+            var account = new Account(GenerateAccountNumber(), openingBalance);
             _accounts.Add(account);
             return account;
         }
 
-        public decimal Withdraw(Account account)
+        public void GenerateInterest(decimal interestPct)
         {
-            throw new NotImplementedException();
-        }
-
-        public decimal Deposit(Account account)
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal Transfer(Account sourceAccount, Account targetAccount)
-        {
-            throw new NotImplementedException();
+            Parallel.ForEach(_accounts, account =>
+            {
+                var interest = account.Balance * interestPct;
+                account.Deposit(interest, "Interest");
+            });
         }
 
         private int GenerateAccountNumber()
         {
             var accountNumbers = _accounts.Select(a => a.AccountNumber).ToList();
-            var rand = new Random();
 
             int accountNumber;
             do
             {
-                accountNumber = rand.Next(1000, 9999);
+                accountNumber = Rand.Next(1000, 9999);
             } while (accountNumbers.Contains(accountNumber));
 
             return accountNumber;

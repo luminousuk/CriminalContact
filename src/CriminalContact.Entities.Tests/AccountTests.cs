@@ -10,7 +10,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Deposit_PositiveAmount_ReturnsCorrectBalance()
         {
-            var account = new Account(null, 0);
+            var account = new Account(0);
 
             var balance = account.Deposit(100.0M);
 
@@ -20,7 +20,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Deposit_NegativeAmount_ThrowsException()
         {
-            var account = new Account(null, 0);
+            var account = new Account(0);
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => account.Deposit(-100.0M));
         }
@@ -28,7 +28,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Deposit_Mulithreaded_ReturnsCorrectBalance()
         {
-            var account = new Account(null, 0, 100.0M);
+            var account = new Account(0, 100.0M);
 
             var tasks = new Task[]
             {
@@ -45,7 +45,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Withdraw_PositiveAmount_ReturnsCorrectBalance()
         {
-            var account = new Account(null, 0, 200.0M);
+            var account = new Account(0, 200.0M);
 
             var balance = account.Withdraw(100.0M);
 
@@ -55,7 +55,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Withdraw_NegativeAmount_ThrowsException()
         {
-            var account = new Account(null, 0);
+            var account = new Account(0);
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => account.Withdraw(-100.0M));
         }
@@ -63,7 +63,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Withdraw_InsufficientBalance_ThrowsException()
         {
-            var account = new Account(null, 0);
+            var account = new Account(0);
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => account.Withdraw(100.0M));
         }
@@ -71,7 +71,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Withdraw_Mulithreaded_ReturnsCorrectBalance()
         {
-            var account = new Account(null, 0, 200.0M);
+            var account = new Account(0, 200.0M);
 
             var tasks = new Task[]
             {
@@ -88,7 +88,7 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void Transactions_AfterMultiple_CorrectCount()
         {
-            var account = new Account(null, 0);
+            var account = new Account(0);
 
             for (var i = 1; i <= 10; i++)
                 account.Deposit(i);
@@ -99,8 +99,8 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void TransferTo_PositiveAmount_BothAccountBalancesCorrect()
         {
-            var sourceAccount = new Account(null, 0, 100.0M);
-            var targetAccount = new Account(null, 0, 100.0M);
+            var sourceAccount = new Account(0, 100.0M);
+            var targetAccount = new Account(0, 100.0M);
 
             sourceAccount.TransferTo(targetAccount, 50.0M);
 
@@ -111,8 +111,8 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void TransferTo_InsufficientBalance_ExceptionThrownBalancesCorrect()
         {
-            var sourceAccount = new Account(null, 0, 10.0M);
-            var targetAccount = new Account(null, 0, 100.0M);
+            var sourceAccount = new Account(0, 10.0M);
+            var targetAccount = new Account(0, 100.0M);
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => sourceAccount.TransferTo(targetAccount, 50.0M));
 
@@ -123,8 +123,8 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void TransferTo_Mulithreaded_ReturnsCorrectBalances()
         {
-            var sourceAccount = new Account(null, 100, 100.0M);
-            var targetAccount = new Account(null, 200, 100.0M);
+            var sourceAccount = new Account(100, 100.0M);
+            var targetAccount = new Account(200, 100.0M);
 
             var tasks = new Task[]
             {
@@ -142,8 +142,8 @@ namespace CriminalContact.Entities.Tests
         [TestMethod]
         public void DepositWithdrawTransferTo_ComplexTransactionsMulithreaded_ReturnsCorrectBalances()
         {
-            var sourceAccount = new Account(null, 100, 1000.0M);
-            var targetAccount = new Account(null, 200, 1000.0M);
+            var sourceAccount = new Account(100, 1000.0M);
+            var targetAccount = new Account(200, 1000.0M);
 
             var tasks = new Task[]
             {

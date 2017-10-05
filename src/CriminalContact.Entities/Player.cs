@@ -2,10 +2,9 @@
 {
     public class Player
     {
-        public Player(string name, int accountNumber)
+        public Player(string name)
         {
             Name = name;
-            BankAccount = new Account(this, accountNumber);
             IsDead = false;
         }
 
