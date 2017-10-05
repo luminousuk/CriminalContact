@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact", "CriminalContact\CriminalContact.csproj", "{405B854C-3D63-4467-863D-E8243AEF7CB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.Entities", "CriminalContact.Entities\CriminalContact.Entities.csproj", "{1DF58018-7DBB-4298-B8BD-9314A166B8FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriminalContact.Entities", "CriminalContact.Entities\CriminalContact.Entities.csproj", "{1DF58018-7DBB-4298-B8BD-9314A166B8FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.Entities.Tests", "CriminalContact.Entities.Tests\CriminalContact.Entities.Tests.csproj", "{A9C3502A-8B79-40F1-AEE1-5FF42793B4C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.Services", "CriminalContact.Services\CriminalContact.Services.csproj", "{0612519E-538F-4E31-BA5B-3690FAAFB6AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{A9C3502A-8B79-40F1-AEE1-5FF42793B4C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9C3502A-8B79-40F1-AEE1-5FF42793B4C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9C3502A-8B79-40F1-AEE1-5FF42793B4C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0612519E-538F-4E31-BA5B-3690FAAFB6AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0612519E-538F-4E31-BA5B-3690FAAFB6AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0612519E-538F-4E31-BA5B-3690FAAFB6AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0612519E-538F-4E31-BA5B-3690FAAFB6AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
