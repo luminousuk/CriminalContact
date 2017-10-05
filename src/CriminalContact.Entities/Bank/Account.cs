@@ -21,21 +21,21 @@ namespace CriminalContact.Entities.Bank
         public decimal Balance { get; private set; }
         public IReadOnlyList<Transaction> Transactions => new ReadOnlyCollection<Transaction>(_transactions);
 
-        public decimal Deposit(decimal amount)
+        public decimal Deposit(decimal amount, string description = null)
         {
             if (amount <= 0)
                 throw new ArgumentOutOfRangeException(nameof(amount), amount, "Cannot deposit a zero or negative amount");
 
             lock (_transactionLock)
             {
-                var transaction = new Transaction(amount);
+                var transaction = new Transaction(amount, description);
                 _transactions.Add(transaction);
                 Balance += transaction.Amount;
                 return Balance;
             }
         }
 
-        public decimal Withdraw(decimal amount)
+        public decimal Withdraw(decimal amount, string description = null)
         {
             if (amount <= 0)
                 throw new ArgumentOutOfRangeException(nameof(amount), amount, "Cannot withdraw a zero or negative amount");
@@ -45,7 +45,7 @@ namespace CriminalContact.Entities.Bank
 
             lock (_transactionLock)
             {
-                var transaction = new Transaction(-amount);
+                var transaction = new Transaction(-amount, description);
                 _transactions.Add(transaction);
                 Balance += transaction.Amount;
                 return Balance;
@@ -60,9 +60,8 @@ namespace CriminalContact.Entities.Bank
             if (Balance < amount)
                 throw new ArgumentOutOfRangeException(nameof(amount), amount, "Insufficient balance to transfer");
 
-            var balance = Withdraw(amount);
-
-            targetAccount.Deposit(amount);
+            var balance = Withdraw(amount, $"Transfer to {targetAccount.AccountNumber}");
+            targetAccount.Deposit(amount, $"Transfer from {AccountNumber}");
 
             return balance;
 

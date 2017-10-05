@@ -124,8 +124,8 @@ namespace CriminalContact.Entities.Tests.Bank
         [TestMethod]
         public void TransferTo_Mulithreaded_ReturnsCorrectBalances()
         {
-            var sourceAccount = new Account(null, 0, 100.0M);
-            var targetAccount = new Account(null, 0, 100.0M);
+            var sourceAccount = new Account(null, 100, 100.0M);
+            var targetAccount = new Account(null, 200, 100.0M);
 
             var tasks = new Task[]
             {
@@ -138,6 +138,28 @@ namespace CriminalContact.Entities.Tests.Bank
 
             Assert.AreEqual(0.0M, sourceAccount.Balance);
             Assert.AreEqual(200.0M, targetAccount.Balance);
+        }
+
+        [TestMethod]
+        public void DepositWithdrawTransferTo_ComplexTransactionsMulithreaded_ReturnsCorrectBalances()
+        {
+            var sourceAccount = new Account(null, 100, 1000.0M);
+            var targetAccount = new Account(null, 200, 1000.0M);
+
+            var tasks = new Task[]
+            {
+                Task.Factory.StartNew(() => sourceAccount.Deposit(100.0M)),
+                Task.Factory.StartNew(() => sourceAccount.TransferTo(targetAccount, 10.0M)),
+                Task.Factory.StartNew(() => targetAccount.Withdraw(100.0M)),
+                Task.Factory.StartNew(() => sourceAccount.TransferTo(targetAccount, 20.0M)),
+                Task.Factory.StartNew(() => sourceAccount.TransferTo(targetAccount, 30.0M)),
+                Task.Factory.StartNew(() => sourceAccount.Withdraw(50.0M)),
+                Task.Factory.StartNew(() => sourceAccount.TransferTo(targetAccount, 40.0M))
+            };
+            Task.WaitAll(tasks);
+
+            Assert.AreEqual(950.0M, sourceAccount.Balance);
+            Assert.AreEqual(1000.0M, targetAccount.Balance);
         }
     }
 }
