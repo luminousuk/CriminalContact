@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriminalContact.Entities", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.Entities.Tests", "CriminalContact.Entities.Tests\CriminalContact.Entities.Tests.csproj", "{A9C3502A-8B79-40F1-AEE1-5FF42793B4C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.Services", "CriminalContact.Services\CriminalContact.Services.csproj", "{0612519E-538F-4E31-BA5B-3690FAAFB6AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriminalContact.Services", "CriminalContact.Services\CriminalContact.Services.csproj", "{0612519E-538F-4E31-BA5B-3690FAAFB6AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.Services.Tests", "CriminalContact.Services.Tests\CriminalContact.Services.Tests.csproj", "{C99852EB-C0F3-4B53-BE38-852580534772}"
 EndProject

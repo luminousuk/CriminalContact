@@ -13,6 +13,8 @@ namespace CriminalContact.Services
 
         private readonly IList<Account> _accounts = new List<Account>();
         public IReadOnlyCollection<Account> Accounts => new ReadOnlyCollection<Account>(_accounts);
+        public decimal InterestPct { get; set; } = 0.1M;
+        public int InterestIntervalSeconds { get; set; } = 60 * 60; // 1 hour
 
         public Account OpenAccount(decimal openingBalance = 0M)
         {
@@ -21,11 +23,11 @@ namespace CriminalContact.Services
             return account;
         }
 
-        public void GenerateInterest(decimal interestPct)
+        public void GenerateInterest()
         {
             Parallel.ForEach(_accounts, account =>
             {
-                var interest = account.Balance * interestPct;
+                var interest = account.Balance * InterestPct;
                 account.Deposit(interest, "Interest");
             });
         }

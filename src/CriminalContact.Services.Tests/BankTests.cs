@@ -26,9 +26,12 @@ namespace CriminalContact.Services.Tests
         public void GenerateInterest_MultileAccounts_BalancesCorrect()
         {
             const int accountCount = 1000;
-            const decimal interest = 0.1M;
+            const decimal interestPct = 0.1M;
 
-            var bank = new Bank();
+            var bank = new Bank()
+            {
+                InterestPct = interestPct
+            };
             var rand = new Random();
             var initialBalances = Enumerable.Repeat(1M, accountCount).Select(i => (i * rand.Next(1000, 100000)) / 100).ToList();
             
@@ -37,9 +40,9 @@ namespace CriminalContact.Services.Tests
                 bank.OpenAccount(initialBalances[i]);
             }
 
-            bank.GenerateInterest(interest);
+            bank.GenerateInterest();
 
-            var resultingBalances = initialBalances.Select(i => i + (i * interest)).ToList();
+            var resultingBalances = initialBalances.Select(i => i + (i * interestPct)).ToList();
 
             var actualBalances = bank.Accounts.Select(a => a.Balance).ToList();
 

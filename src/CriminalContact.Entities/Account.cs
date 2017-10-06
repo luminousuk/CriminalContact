@@ -43,7 +43,7 @@ namespace CriminalContact.Entities
             }
         }
 
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get; private set; }
 
         public IReadOnlyList<Transaction> Transactions
         {
@@ -58,6 +58,9 @@ namespace CriminalContact.Entities
 
         public decimal Deposit(decimal amount, string description = null)
         {
+            if (!IsOpen)
+                throw new InvalidOperationException("Account is closed");
+
             if (amount <= 0)
                 throw new ArgumentOutOfRangeException(nameof(amount), amount,
                     "Cannot deposit a zero or negative amount");
@@ -73,6 +76,9 @@ namespace CriminalContact.Entities
 
         public decimal Withdraw(decimal amount, string description = null)
         {
+            if (!IsOpen)
+                throw new InvalidOperationException("Account is closed");
+
             if (amount <= 0)
                 throw new ArgumentOutOfRangeException(nameof(amount), amount,
                     "Cannot withdraw a zero or negative amount");
@@ -91,6 +97,9 @@ namespace CriminalContact.Entities
 
         public decimal TransferTo(Account targetAccount, decimal amount)
         {
+            if (!IsOpen)
+                throw new InvalidOperationException("Account is closed");
+
             if (amount <= 0)
                 throw new ArgumentOutOfRangeException(nameof(amount), amount,
                     "Cannot transfer a zero or negative amount");
@@ -100,11 +109,17 @@ namespace CriminalContact.Entities
 
             lock (_transactionLock)
             {
-                var balance = Withdraw(amount, $"Transfer to {targetAccount.AccountNumber}");
+                // TODO: Handle targetAccount.Deposit exceptions and cancel transaction
                 targetAccount.Deposit(amount, $"Transfer from {AccountNumber}");
+                var balance = Withdraw(amount, $"Transfer to {targetAccount.AccountNumber}");
 
                 return balance;
             }
+        }
+
+        public void CloseAccount()
+        {
+            IsOpen = false;
         }
     }
 }
