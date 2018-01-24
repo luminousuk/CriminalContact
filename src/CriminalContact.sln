@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriminalContact.Services", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.Services.Tests", "CriminalContact.Services.Tests\CriminalContact.Services.Tests.csproj", "{C99852EB-C0F3-4B53-BE38-852580534772}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.UWP", "CriminalContact.UWP\CriminalContact.UWP.csproj", "{58389FCC-A6A8-404B-94AA-E6665C44BCCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,26 @@ Global
 		{C99852EB-C0F3-4B53-BE38-852580534772}.Release|x64.Build.0 = Release|Any CPU
 		{C99852EB-C0F3-4B53-BE38-852580534772}.Release|x86.ActiveCfg = Release|Any CPU
 		{C99852EB-C0F3-4B53-BE38-852580534772}.Release|x86.Build.0 = Release|Any CPU
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|ARM.ActiveCfg = Debug|ARM
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|ARM.Build.0 = Debug|ARM
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|ARM.Deploy.0 = Debug|ARM
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|x64.ActiveCfg = Debug|x64
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|x64.Build.0 = Debug|x64
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|x64.Deploy.0 = Debug|x64
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|x86.ActiveCfg = Debug|x86
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|x86.Build.0 = Debug|x86
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Debug|x86.Deploy.0 = Debug|x86
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|Any CPU.ActiveCfg = Release|x86
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|ARM.ActiveCfg = Release|ARM
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|ARM.Build.0 = Release|ARM
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|ARM.Deploy.0 = Release|ARM
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|x64.ActiveCfg = Release|x64
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|x64.Build.0 = Release|x64
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|x64.Deploy.0 = Release|x64
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|x86.ActiveCfg = Release|x86
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|x86.Build.0 = Release|x86
+		{58389FCC-A6A8-404B-94AA-E6665C44BCCB}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
