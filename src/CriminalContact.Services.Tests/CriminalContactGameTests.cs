@@ -1,20 +1,21 @@
-﻿using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-
-namespace CriminalContact.Services.Tests
+﻿namespace CriminalContact.Services.Tests
 {
+    using System.Threading;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Moq;
+
     [TestClass]
     public class CriminalContactGameTests
     {
         [TestMethod]
-        public void Begin_WithInterestInterval_GeneratesInterest()
+        public void BeginWithInterestIntervalGeneratesInterest()
         {
             var mockBank = new Mock<IBank>();
-            mockBank.Setup(x => x.InterestIntervalSeconds).Returns(1);
             mockBank.Setup(x => x.GenerateInterest());
 
-            var game = new CriminalContactGame(mockBank.Object);
+            var game = new CriminalContactGame(mockBank.Object) { InterestIntervalSeconds = 1 };
 
             game.Begin();
 
@@ -26,7 +27,7 @@ namespace CriminalContact.Services.Tests
         }
 
         [TestMethod]
-        public void CriminalContactGame_UponInstantiation_PendingStatus()
+        public void CriminalContactGameUponInstantiationPendingStatus()
         {
             var mockBank = new Mock<IBank>();
 
@@ -36,7 +37,7 @@ namespace CriminalContact.Services.Tests
         }
 
         [TestMethod]
-        public void CriminalContactGame_AfterBegin_InProgressStatus()
+        public void CriminalContactGameAfterBeginInProgressStatus()
         {
             var mockBank = new Mock<IBank>();
 
@@ -50,7 +51,7 @@ namespace CriminalContact.Services.Tests
         }
 
         [TestMethod]
-        public void CriminalContactGame_AfterFinish_FinishedStatus()
+        public void CriminalContactGameAfterFinishFinishedStatus()
         {
             var mockBank = new Mock<IBank>();
 

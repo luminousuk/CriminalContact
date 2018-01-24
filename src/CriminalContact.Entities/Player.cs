@@ -8,9 +8,14 @@
             IsDead = false;
         }
 
-        public string Name { get; }
         public Account BankAccount { get; set; }
+
         public bool IsDead { get; }
+
+        public string Name { get; }
+
         public Player Parent { get; set; }
+
+        public PlayerRole Role { get; set; }
     }
 }

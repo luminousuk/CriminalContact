@@ -1,16 +1,23 @@
-﻿using System;
-using CriminalContact.Entities;
-
-namespace CriminalContact.Services
+﻿namespace CriminalContact.Services
 {
+    using System;
+
+    using CriminalContact.Entities;
+
     public interface IGame
     {
-        GameStatus Status { get; }
-        DateTime? StartTime { get; }
-        DateTime? EndTime { get; }
         TimeSpan Elapsed { get; }
+
+        DateTime? EndTime { get; }
+
+        DateTime? StartTime { get; }
+
+        GameStatus Status { get; }
+
         Player AddPlayer(string name, decimal startingBalance);
+
         void Begin();
+
         void Finish();
     }
 }

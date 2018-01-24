@@ -1,13 +1,14 @@
-﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CriminalContact.Entities.Tests
+﻿namespace CriminalContact.Entities.Tests
 {
+    using System.Linq;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class TransactionTests
     {
         [TestMethod]
-        public void Transaction_Multiple_SumEqualsBalance()
+        public void TransactionMultipleSumEqualsBalance()
         {
             var account = new Account(101);
 

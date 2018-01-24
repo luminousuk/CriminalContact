@@ -1,53 +1,45 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CriminalContact.Services.Tests
+﻿namespace CriminalContact.Services.Tests
 {
+    using System;
+    using System.Linq;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class BankTests
     {
         [TestMethod]
-        public void OpenAccount_MultipleAccounts_UniqueAccountNumbers()
+        public void GenerateInterestMultipleAccountsBalancesCorrect()
         {
-            const int accountCount = 1000;
+            const int AccountCount = 1000;
+            const decimal InterestPct = 0.1M;
 
-            var bank = new Bank();
-            
-            for (var i = 0; i < accountCount; i++)
-            {
-                bank.OpenAccount();
-            }
-
-            Assert.AreEqual(accountCount, bank.Accounts.Select(a => a.AccountNumber).Distinct().Count());
-        }
-
-        [TestMethod]
-        public void GenerateInterest_MultileAccounts_BalancesCorrect()
-        {
-            const int accountCount = 1000;
-            const decimal interestPct = 0.1M;
-
-            var bank = new Bank()
-            {
-                InterestPct = interestPct
-            };
+            var bank = new Bank { InterestPct = InterestPct };
             var rand = new Random();
-            var initialBalances = Enumerable.Repeat(1M, accountCount).Select(i => (i * rand.Next(1000, 100000)) / 100).ToList();
-            
-            for (var i = 0; i < accountCount; i++)
-            {
-                bank.OpenAccount(initialBalances[i]);
-            }
+            var initialBalances = Enumerable.Repeat(1M, AccountCount).Select(i => i * rand.Next(1000, 100000) / 100)
+                .ToList();
+
+            for (var i = 0; i < AccountCount; i++) bank.OpenAccount(initialBalances[i]);
 
             bank.GenerateInterest();
 
-            var resultingBalances = initialBalances.Select(i => i + (i * interestPct)).ToList();
+            var resultingBalances = initialBalances.Select(i => i + i * InterestPct).ToList();
 
             var actualBalances = bank.Accounts.Select(a => a.Balance).ToList();
 
             CollectionAssert.AreEqual(resultingBalances, actualBalances);
+        }
 
+        [TestMethod]
+        public void OpenAccountMultipleAccountsUniqueAccountNumbers()
+        {
+            const int AccountCount = 1000;
+
+            var bank = new Bank();
+
+            for (var i = 0; i < AccountCount; i++) bank.OpenAccount();
+
+            Assert.AreEqual(AccountCount, bank.Accounts.Select(a => a.AccountNumber).Distinct().Count());
         }
     }
 }

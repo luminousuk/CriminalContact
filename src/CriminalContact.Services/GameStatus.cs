@@ -3,7 +3,9 @@
     public enum GameStatus
     {
         Pending,
+
         InProgress,
+
         Finished
     }
 }

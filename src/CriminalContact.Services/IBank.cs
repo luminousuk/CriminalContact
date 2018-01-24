@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
-using CriminalContact.Entities;
-
-namespace CriminalContact.Services
+﻿namespace CriminalContact.Services
 {
+    using System.Collections.Generic;
+
+    using CriminalContact.Entities;
+
     public interface IBank
     {
         IReadOnlyCollection<Account> Accounts { get; }
+
         decimal InterestPct { get; set; }
-        int InterestIntervalSeconds { get; set; }
-        Account OpenAccount(decimal openingBalance);
+
         void GenerateInterest();
+
+        Account OpenAccount(decimal openingBalance);
     }
 }

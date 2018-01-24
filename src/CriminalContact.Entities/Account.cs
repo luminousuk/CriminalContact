@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
-namespace CriminalContact.Entities
+﻿namespace CriminalContact.Entities
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+
     public sealed class Account
     {
-        private readonly object _transactionLock = new object();
-        private readonly IList<Transaction> _transactions = new List<Transaction>();
-        private decimal _balance;
+        private readonly object transactionLock = new object();
+
+        private readonly IList<Transaction> transactions = new List<Transaction>();
+
+        private decimal balance;
 
         public Account(int accountNumber, decimal openingBalance = 0M)
         {
@@ -16,8 +18,7 @@ namespace CriminalContact.Entities
             IsOpen = true;
             Balance = 0M;
 
-            if (openingBalance > 0M)
-                Deposit(openingBalance, "Opening balance");
+            if (openingBalance > 0M) Deposit(openingBalance, "Opening balance");
         }
 
         public int AccountNumber { get; }
@@ -26,19 +27,19 @@ namespace CriminalContact.Entities
         {
             get
             {
-                lock (_transactionLock)
+                lock (transactionLock)
                 {
-                    return _balance;
+                    return balance;
                 }
             }
+
             private set
             {
-                if (value < 0)
-                    throw new ArgumentException("Balance can not be set below zero");
+                if (value < 0) throw new ArgumentException("Balance can not be set below zero");
 
-                lock (_transactionLock)
+                lock (transactionLock)
                 {
-                    _balance = value;
+                    balance = value;
                 }
             }
         }
@@ -49,47 +50,32 @@ namespace CriminalContact.Entities
         {
             get
             {
-                lock (_transactionLock)
+                lock (transactionLock)
                 {
-                    return new ReadOnlyCollection<Transaction>(_transactions);
+                    return new ReadOnlyCollection<Transaction>(transactions);
                 }
             }
         }
 
-        public decimal Deposit(decimal amount, string description = null)
+        public void CloseAccount()
         {
-            if (!IsOpen)
-                throw new InvalidOperationException("Account is closed");
-
-            if (amount <= 0)
-                throw new ArgumentOutOfRangeException(nameof(amount), amount,
-                    "Cannot deposit a zero or negative amount");
-
-            lock (_transactionLock)
-            {
-                var transaction = new Transaction(amount, description);
-                _transactions.Add(transaction);
-                Balance += transaction.Amount;
-                return Balance;
-            }
+            IsOpen = false;
         }
 
-        public decimal Withdraw(decimal amount, string description = null)
+        public decimal Deposit(decimal amount, string description = null)
         {
-            if (!IsOpen)
-                throw new InvalidOperationException("Account is closed");
+            if (!IsOpen) throw new InvalidOperationException("Account is closed");
 
             if (amount <= 0)
-                throw new ArgumentOutOfRangeException(nameof(amount), amount,
-                    "Cannot withdraw a zero or negative amount");
+                throw new ArgumentOutOfRangeException(
+                    nameof(amount),
+                    amount,
+                    "Cannot deposit a zero or negative amount");
 
-            if (Balance < amount)
-                throw new ArgumentOutOfRangeException(nameof(amount), amount, "Insufficient balance to withdraw");
-
-            lock (_transactionLock)
+            lock (transactionLock)
             {
-                var transaction = new Transaction(-amount, description);
-                _transactions.Add(transaction);
+                var transaction = new Transaction(amount, description);
+                transactions.Add(transaction);
                 Balance += transaction.Amount;
                 return Balance;
             }
@@ -97,29 +83,47 @@ namespace CriminalContact.Entities
 
         public decimal TransferTo(Account targetAccount, decimal amount)
         {
-            if (!IsOpen)
-                throw new InvalidOperationException("Account is closed");
+            if (!IsOpen) throw new InvalidOperationException("Account is closed");
 
             if (amount <= 0)
-                throw new ArgumentOutOfRangeException(nameof(amount), amount,
+                throw new ArgumentOutOfRangeException(
+                    nameof(amount),
+                    amount,
                     "Cannot transfer a zero or negative amount");
 
             if (Balance < amount)
                 throw new ArgumentOutOfRangeException(nameof(amount), amount, "Insufficient balance to transfer");
 
-            lock (_transactionLock)
+            lock (transactionLock)
             {
                 // TODO: Handle targetAccount.Deposit exceptions and cancel transaction
                 targetAccount.Deposit(amount, $"Transfer from {AccountNumber}");
-                var balance = Withdraw(amount, $"Transfer to {targetAccount.AccountNumber}");
+                var newBalance = Withdraw(amount, $"Transfer to {targetAccount.AccountNumber}");
 
-                return balance;
+                return newBalance;
             }
         }
 
-        public void CloseAccount()
+        public decimal Withdraw(decimal amount, string description = null)
         {
-            IsOpen = false;
+            if (!IsOpen) throw new InvalidOperationException("Account is closed");
+
+            if (amount <= 0)
+                throw new ArgumentOutOfRangeException(
+                    nameof(amount),
+                    amount,
+                    "Cannot withdraw a zero or negative amount");
+
+            if (Balance < amount)
+                throw new ArgumentOutOfRangeException(nameof(amount), amount, "Insufficient balance to withdraw");
+
+            lock (transactionLock)
+            {
+                var transaction = new Transaction(-amount, description);
+                transactions.Add(transaction);
+                Balance += transaction.Amount;
+                return Balance;
+            }
         }
     }
 }
