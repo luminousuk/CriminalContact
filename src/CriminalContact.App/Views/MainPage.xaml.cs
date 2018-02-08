@@ -1,11 +1,11 @@
 ﻿using System;
-using CriminalContact.App.ViewModels;
+using CriminalContact.UWP.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
 
-namespace CriminalContact.App.Views
+namespace CriminalContact.UWP.Views
 {
     public sealed partial class MainPage : Page
     {

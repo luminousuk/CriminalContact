@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace CriminalContact.App.Views
+namespace CriminalContact.UWP.Views
 {
     public sealed partial class SettingsPage : Page
     {

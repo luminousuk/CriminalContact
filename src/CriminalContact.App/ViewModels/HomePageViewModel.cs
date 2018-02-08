@@ -12,44 +12,39 @@
     using Windows.ApplicationModel;
     using Windows.UI.Xaml.Navigation;
 
-    public class MainPageViewModel : ViewModelBase
+    public class HomePageViewModel : ViewModelBase
     {
-        private string value = "Gas";
+        private string gameStatusText = "No game in progress.";
 
-        public MainPageViewModel()
+        public HomePageViewModel()
         {
-            if (DesignMode.DesignModeEnabled) Value = "Designtime value";
+            if (DesignMode.DesignModeEnabled) GameStatusText = "No game in progress.";
         }
 
-        public string Value
+        public string GameStatusText
         {
-            get => value;
-            set => Set(ref this.value, value);
+            get => gameStatusText;
+            set => Set(ref gameStatusText, value);
         }
 
-        public void GotoAbout()
+        public void GotoAboutPage()
         {
-            NavigationService.Navigate(typeof(SettingsPage), 2);
+            NavigationService.Navigate(typeof(SettingsPage));
         }
 
-        public void GotoDetailsPage()
+        public void GotoGamePage()
         {
-            NavigationService.Navigate(typeof(DetailPage), Value);
+            NavigationService.Navigate(typeof(DetailPage));
         }
 
-        public void GotoPrivacy()
+        public void GotoSettingsPage()
         {
-            NavigationService.Navigate(typeof(SettingsPage), 1);
-        }
-
-        public void GotoSettings()
-        {
-            NavigationService.Navigate(typeof(SettingsPage), 0);
+            NavigationService.Navigate(typeof(SettingsPage));
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
         {
-            if (suspending) suspensionState[nameof(Value)] = Value;
+            if (suspending) suspensionState[nameof(GameStatusText)] = GameStatusText;
             await Task.CompletedTask;
         }
 
@@ -58,7 +53,7 @@
             NavigationMode mode,
             IDictionary<string, object> suspensionState)
         {
-            if (suspensionState.Any()) Value = suspensionState[nameof(Value)]?.ToString();
+            if (suspensionState.Any()) GameStatusText = suspensionState[nameof(GameStatusText)]?.ToString();
             await Task.CompletedTask;
         }
 

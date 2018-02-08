@@ -1,40 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Template10.Common;
-using Template10.Mvvm;
-using Template10.Services.NavigationService;
-using Windows.UI.Xaml.Navigation;
-
-namespace CriminalContact.App.ViewModels
+﻿namespace CriminalContact.UWP.ViewModels
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Template10.Mvvm;
+    using Template10.Services.NavigationService;
+
+    using Windows.ApplicationModel;
+    using Windows.UI.Xaml.Navigation;
+
     public class DetailPageViewModel : ViewModelBase
     {
+        private string value = "Default";
+
         public DetailPageViewModel()
         {
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                Value = "Designtime value";
-            }
+            if (DesignMode.DesignModeEnabled) Value = "Designtime value";
         }
 
-        private string _Value = "Default";
-        public string Value { get { return _Value; } set { Set(ref _Value, value); } }
-
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
+        public string Value
         {
-            Value = (suspensionState.ContainsKey(nameof(Value))) ? suspensionState[nameof(Value)]?.ToString() : parameter?.ToString();
-            await Task.CompletedTask;
+            get => value;
+            set => Set(ref this.value, value);
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
         {
-            if (suspending)
-            {
-                suspensionState[nameof(Value)] = Value;
-            }
+            if (suspending) suspensionState[nameof(Value)] = Value;
+            await Task.CompletedTask;
+        }
+
+        public override async Task OnNavigatedToAsync(
+            object parameter,
+            NavigationMode mode,
+            IDictionary<string, object> suspensionState)
+        {
+            Value = suspensionState.ContainsKey(nameof(Value))
+                        ? suspensionState[nameof(Value)]?.ToString()
+                        : parameter?.ToString();
             await Task.CompletedTask;
         }
 

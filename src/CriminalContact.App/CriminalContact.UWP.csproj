@@ -7,8 +7,8 @@
     <ProjectGuid>{6BCE7FE0-6C4B-48FB-B414-3CE62C928CB0}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CriminalContact.App</RootNamespace>
-    <AssemblyName>CriminalContact.App</AssemblyName>
+    <RootNamespace>CriminalContact.UWP</RootNamespace>
+    <AssemblyName>CriminalContact.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -95,11 +95,22 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DecimalSliderConverter.cs" />
+    <Compile Include="Converters\DecimalToStringConverter.cs" />
+    <Compile Include="Converters\DoubleToStringConverter.cs" />
+    <Compile Include="Converters\MinutesToDurationStringConverter.cs" />
+    <Compile Include="Converters\ValueToStringConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
+    <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\DetailPageViewModel.cs" />
+    <Compile Include="ViewModels\PlayerRoleViewModel.cs" />
+    <Compile Include="ViewModels\SettingsAboutPartViewModel.cs" />
+    <Compile Include="ViewModels\SettingsBankingPartViewModel.cs" />
+    <Compile Include="ViewModels\SettingsGamePartViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsRolesPartViewModel.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
     </Compile>

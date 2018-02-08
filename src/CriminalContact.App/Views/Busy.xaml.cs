@@ -6,7 +6,7 @@ using Template10.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace CriminalContact.App.Views
+namespace CriminalContact.UWP.Views
 {
     public sealed partial class Busy : UserControl
     {

@@ -1,77 +1,75 @@
-﻿using System;
-using Template10.Common;
-using Template10.Utils;
-using Windows.UI.Xaml;
-
-namespace CriminalContact.App.Services.SettingsServices
+﻿namespace CriminalContact.UWP.Services.SettingsServices
 {
+    using System;
+
+    using CriminalContact.UWP.Views;
+
+    using Template10.Common;
+    using Template10.Services.SettingsService;
+    using Template10.Utils;
+
+    using Windows.UI.Xaml;
+
     public class SettingsService
     {
-        public static SettingsService Instance { get; } = new SettingsService();
-        Template10.Services.SettingsService.ISettingsHelper _helper;
+        private readonly ISettingsHelper helper;
+
         private SettingsService()
         {
-            _helper = new Template10.Services.SettingsService.SettingsHelper();
+            helper = new SettingsHelper();
         }
 
-        public bool UseShellBackButton
-        {
-            get { return _helper.Read<bool>(nameof(UseShellBackButton), true); }
-            set
-            {
-                _helper.Write(nameof(UseShellBackButton), value);
-                BootStrapper.Current.NavigationService.GetDispatcherWrapper().Dispatch(() =>
-                {
-                    BootStrapper.Current.ShowShellBackButton = value;
-                    BootStrapper.Current.UpdateShellBackButton();
-                });
-            }
-        }
+        public static SettingsService Instance { get; } = new SettingsService();
 
         public ApplicationTheme AppTheme
         {
             get
             {
                 var theme = ApplicationTheme.Light;
-                var value = _helper.Read<string>(nameof(AppTheme), theme.ToString());
-                return Enum.TryParse<ApplicationTheme>(value, out theme) ? theme : ApplicationTheme.Dark;
+                var value = helper.Read(nameof(AppTheme), theme.ToString());
+                return Enum.TryParse(value, out theme) ? theme : ApplicationTheme.Dark;
             }
+
             set
             {
-                _helper.Write(nameof(AppTheme), value.ToString());
-                (Window.Current.Content as FrameworkElement).RequestedTheme = value.ToElementTheme();
-                Views.Shell.HamburgerMenu.RefreshStyles(value, true);
+                helper.Write(nameof(AppTheme), value.ToString());
+                ((FrameworkElement)Window.Current.Content).RequestedTheme = value.ToElementTheme();
+                Shell.HamburgerMenu.RefreshStyles(value, true);
             }
         }
 
         public TimeSpan CacheMaxDuration
         {
-            get { return _helper.Read<TimeSpan>(nameof(CacheMaxDuration), TimeSpan.FromDays(2)); }
+            get => helper.Read(nameof(CacheMaxDuration), TimeSpan.FromDays(2));
             set
             {
-                _helper.Write(nameof(CacheMaxDuration), value);
+                helper.Write(nameof(CacheMaxDuration), value);
                 BootStrapper.Current.CacheMaxDuration = value;
             }
         }
 
-        public bool ShowHamburgerButton
+        public int GameDuration
         {
-            get { return _helper.Read<bool>(nameof(ShowHamburgerButton), true); }
-            set
-            {
-                _helper.Write(nameof(ShowHamburgerButton), value);
-                Views.Shell.HamburgerMenu.HamburgerButtonVisibility = value ? Visibility.Visible : Visibility.Collapsed;
-            }
+            get => helper.Read(nameof(GameDuration), 360);
+            set => helper.Write(nameof(GameDuration), value);
         }
 
-        public bool IsFullScreen
+        public bool IsBankingInterestEnabled
         {
-            get { return _helper.Read<bool>(nameof(IsFullScreen), false); }
-            set
-            {
-                _helper.Write(nameof(IsFullScreen), value);
-                Views.Shell.HamburgerMenu.IsFullScreen = value;
-            }
+            get => helper.Read(nameof(IsBankingInterestEnabled), true);
+            set => helper.Write(nameof(IsBankingInterestEnabled), value);
+        }
+
+        public int BankingInterestIntervalMins
+        {
+            get => helper.Read(nameof(BankingInterestIntervalMins), 60);
+            set => helper.Write(nameof(BankingInterestIntervalMins), value);
+        }
+
+        public int BankingInterestPercentage
+        {
+            get => helper.Read(nameof(BankingInterestPercentage), 10);
+            set => helper.Write(nameof(BankingInterestPercentage), value);
         }
     }
 }

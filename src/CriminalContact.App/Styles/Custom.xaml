@@ -10,6 +10,10 @@
     <Color x:Key="ContrastColor">White</Color>
     <Color x:Key="SystemAccentColor">SteelBlue</Color>
 
+    <Style x:Key="SliderValueTextBlockStyle" BasedOn="{StaticResource BodyTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="Margin" Value="8,28,0,0" />
+    </Style>
+
     <ResourceDictionary.ThemeDictionaries>
 
         <ResourceDictionary x:Key="Light">
@@ -49,7 +53,7 @@
 
                 <!--
 
-                Windows 10 2015 (1511) CriminalContact.App Menu Style
+                Windows 10 2015 (1511) Hamburger1 Menu Style
                 Simply replace AccentColor with the follow setters.
 
                 <Setter Property="HamburgerBackground" Value="{StaticResource CustomColorBrush}" />
@@ -114,5 +118,5 @@
 
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
-</ResourceDictionary>
 
+</ResourceDictionary>

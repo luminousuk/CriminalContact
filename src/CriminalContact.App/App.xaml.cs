@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml;
 using System.Threading.Tasks;
-using CriminalContact.App.Services.SettingsServices;
+using CriminalContact.UWP.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
 using Template10.Controls;
 using Template10.Common;
@@ -9,7 +9,7 @@ using System.Linq;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 
-namespace CriminalContact.App
+namespace CriminalContact.UWP
 {
     /// Documentation on APIs used in this page:
     /// https://github.com/Windows-XAML/Template10/wiki
@@ -28,7 +28,6 @@ namespace CriminalContact.App
             var settings = SettingsService.Instance;
             RequestedTheme = settings.AppTheme;
             CacheMaxDuration = settings.CacheMaxDuration;
-            ShowShellBackButton = settings.UseShellBackButton;
 
             #endregion
         }
