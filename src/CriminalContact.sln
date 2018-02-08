@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriminalContact.Services", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.Services.Tests", "CriminalContact.Services.Tests\CriminalContact.Services.Tests.csproj", "{C99852EB-C0F3-4B53-BE38-852580534772}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.UWP", "CriminalContact.App\CriminalContact.UWP.csproj", "{6BCE7FE0-6C4B-48FB-B414-3CE62C928CB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriminalContact.UWP", "CriminalContact.UWP\CriminalContact.UWP.csproj", "{6BCE7FE0-6C4B-48FB-B414-3CE62C928CB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
