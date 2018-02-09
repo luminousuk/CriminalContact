@@ -1,0 +1,23 @@
+﻿<common:BootStrapper x:Class="CriminalContact.UWP.App"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:common="using:Template10.Common"
+                     xmlns:converters="using:CriminalContact.UWP.Converters">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles\Custom.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--  custom resources  -->
+            <converters:ValueToStringConverter x:Key="ValueToStringConverter" />
+            <converters:MinutesToDurationStringConverter x:Key="MinutesToDurationStringConverter" />
+            <converters:DecimalSliderConverter x:Key="DecimalSliderConverter" />
+            <converters:DoubleToStringConverter x:Key="DoubleToStringConverter" />
+            <converters:DecimalToStringConverter x:Key="DecimalToStringConverter" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</common:BootStrapper>
