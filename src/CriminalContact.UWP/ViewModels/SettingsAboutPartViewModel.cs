@@ -14,8 +14,6 @@
 
         public string Publisher => Package.Current.PublisherDisplayName;
 
-        public Uri RateMe => new Uri("http://aka.ms/template10");
-
         public string Version
         {
             get
