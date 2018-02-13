@@ -6,7 +6,7 @@
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:CriminalContact.App.Views"
+      xmlns:local="using:CriminalContact.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:CriminalContact.UWP.ViewModels" mc:Ignorable="d">
 

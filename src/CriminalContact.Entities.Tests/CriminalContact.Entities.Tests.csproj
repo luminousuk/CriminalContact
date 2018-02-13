@@ -51,6 +51,7 @@
     <Compile Include="AccountTests.cs" />
     <Compile Include="TransactionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PlayerRoleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

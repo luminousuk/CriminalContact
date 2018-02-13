@@ -1,25 +1,46 @@
 ﻿namespace CriminalContact.Entities
 {
-    public enum PlayerRole
+    using System;
+
+    public class PlayerRole : IEquatable<PlayerRole>
     {
-        None,
+        public PlayerRole(string name, decimal bonus, decimal multiplier)
+        {
+            Name = name;
+            Bonus = bonus;
+            Multiplier = multiplier;
+        }
 
-        ArmsDealer,
+        public string Name { get; }
 
-        Chemist,
+        public decimal Bonus { get; }
 
-        Distiller,
+        public decimal Multiplier { get; }
 
-        Farmer,
+        public static bool operator ==(PlayerRole p1, PlayerRole p2)
+        {
+            return p1 != null && p1.Equals(p2);
+        }
 
-        Goldsmith,
+        public static bool operator !=(PlayerRole p1, PlayerRole p2)
+        {
+            return p1 == null || !p1.Equals(p2);
+        }
 
-        Mayor,
+        public bool Equals(PlayerRole other)
+        {
+            return string.Equals(Name, other.Name);
+        }
 
-        Miner,
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is PlayerRole role && Equals(role);
+        }
 
-        StoreKeeper,
-
-        Undertaker
+        public override int GetHashCode()
+        {
+            return Name != null ? Name.GetHashCode() : 0;
+        }
     }
 }

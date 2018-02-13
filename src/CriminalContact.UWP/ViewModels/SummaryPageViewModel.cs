@@ -12,13 +12,13 @@
     using Windows.ApplicationModel;
     using Windows.UI.Xaml.Navigation;
 
-    public class HomePageViewModel : ViewModelBase
+    public class SummaryPageViewModel : ViewModelBase
     {
-        private string gameStatusText = "No game in progress.";
+        private string gameStatusText = "There is no game currently in progress.";
 
-        public HomePageViewModel()
+        public SummaryPageViewModel()
         {
-            if (DesignMode.DesignModeEnabled) GameStatusText = "No game in progress.";
+            if (DesignMode.DesignModeEnabled) GameStatusText = "There is no game currently in progress.";
         }
 
         public string GameStatusText
