@@ -83,7 +83,7 @@
                                       RelativePanel.AlignLeftWithPanel="True"
                                       RelativePanel.AlignTopWithPanel="True" />
 
-                        <StackPanel x:Name="GameDurationStackPanel" Orientation="Horizontal"
+                        <!--<StackPanel x:Name="GameDurationStackPanel" Orientation="Horizontal"
                                     RelativePanel.AlignLeftWithPanel="True"
                                     RelativePanel.Below="IsNightModeThemeToggleSwitch">
                             <Slider x:Name="GameDurationSlider" Header="Game Duration (mins)" Minimum="60"
@@ -92,7 +92,7 @@
                                     IsThumbToolTipEnabled="False" />
                             <TextBlock Style="{StaticResource SliderValueTextBlockStyle}"
                                        Text="{x:Bind GameDurationSlider.Value, Converter={StaticResource MinutesToDurationStringConverter}, Mode=OneWay}" />
-                        </StackPanel>
+                        </StackPanel>-->
 
                     </RelativePanel>
 

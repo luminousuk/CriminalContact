@@ -23,16 +23,6 @@
             }
         }
 
-        public int GameDuration
-        {
-            get => settings.GameDuration;
-            set
-            {
-                settings.GameDuration = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public bool IsNightModeTheme
         {
             get => settings.AppTheme.Equals(ApplicationTheme.Dark);

@@ -29,6 +29,8 @@
 
         public DateTime? EndTime { get; private set; }
 
+        public bool InterestEnabled { get; set; }
+
         public int InterestIntervalSeconds { get; set; } = 60 * 60; // 1 hour
 
         public DateTime? StartTime { get; private set; }
@@ -71,7 +73,8 @@
 
         private void OnTick(object sender, ElapsedEventArgs e)
         {
-            if (DateTime.Now >= interestLastGenerated.AddSeconds(InterestIntervalSeconds)) bank.GenerateInterest();
+            if (InterestEnabled && DateTime.Now >= interestLastGenerated.AddSeconds(InterestIntervalSeconds))
+                bank.GenerateInterest();
         }
     }
 }
