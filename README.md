@@ -1,5 +1,5 @@
 
-![Criminal Contact Logo](src/CriminalContact.UWP/Assets/StoreLogo.scale-400.png)
+![Criminal Contact Logo](src/img/logo.png)
 
 # CriminalContact
 Game management system for Criminal Contact live action role play events
@@ -12,7 +12,7 @@ This application provides basic game/player management and banking functionality
 
 ## Status
 
-The application is currently in pre-release status and functionality is constantly being added.
+A different approach has been taken and the UWP work has been abandoned in favor of an Electron app.
 
 ## Installation
 
