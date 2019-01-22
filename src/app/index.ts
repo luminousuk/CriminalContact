@@ -13,8 +13,20 @@ function createAccountAndPlayer(name: string, balance: number): Player {
     return player;
 }
 
-const p1 = createAccountAndPlayer("Bob Saget", 500);
-const p2 = createAccountAndPlayer("Noel Edmunds", 700);
-
-bank.TransferFunds(p2.account.accountNumber, p1.account.accountNumber, 100);
-
+$(() => {
+    const players: Player[] = [];
+    const $txtName = $("#txtName");
+    const $numBalance = $("#numBalance");
+    const $numTransfer = $("#numTransfer");
+    $("#btnCreatePlayer").click(() => {
+        const player = createAccountAndPlayer($txtName.val() as string, Number($numBalance.val()));
+        players.push(player);
+    });
+    $("#btnTransfer").click(() => {
+        const p1 = players[0];
+        const p2 = players[1];
+        const amount = Number($numTransfer.val());
+        bank.TransferFunds(p1.account.accountNumber, p2.account.accountNumber, amount);
+    });
+    console.clear();
+});

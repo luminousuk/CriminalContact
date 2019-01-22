@@ -2,18 +2,40 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    <p>We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script></p>
+    <div class="container">
+        <div class="text-center">
+            <h1>Criminal Contact</h1>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="txtName">Name</label>
+                    <input type="text" class="form-control" id="txtName">
+                </div>
+                <div class="form-group">
+                    <label for="numBalance">Balance</label>
+                    <input type="number" class="form-control" id="numBalance">
+                </div>
+                <button class="btn btn-primary" id="btnCreatePlayer">Create Player</button>
+            </div>
+        </div>
+        <div class="form-row mt-2">
+            <div class="col">
+                <div class="form-group">
+                    <label for="numTransfer">Transfer</label>
+                    <input type="number" class="form-control" id="numTransfer">
+                </div>
+                <button class="btn btn-primary" id="btnTransfer">Transfer</button>
+            </div>
+        </div>
+    </div>    
   </body>
 
   <script>
-    // You can also require other files to run in this process
-    require('./dist/app/index.js')
+    let $ = require("jquery");
+    require('./dist/app/index.js');
   </script>
 </html>
