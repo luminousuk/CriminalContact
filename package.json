@@ -1,5 +1,6 @@
 {
   "name": "criminal-contact",
+  "productName": "Criminal Contact",
   "version": "0.1.0",
   "description": "Game management system for Criminal Contact live action role play events",
   "repository": "https://github.com/luminousuk/CriminalContact.git",
