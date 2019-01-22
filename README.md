@@ -1,5 +1,5 @@
 
-![Criminal Contact Logo](src/img/logo.png)
+![Criminal Contact Logo](img/logo.png)
 
 # CriminalContact
 Game management system for Criminal Contact live action role play events
