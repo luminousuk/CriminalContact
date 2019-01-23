@@ -1,7 +1,7 @@
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 console.log(__dirname);
 
@@ -14,12 +14,17 @@ const common_config = {
     module: {
         rules: [
             {
-                test: /\.ts$/,
-                use: "ts-loader",
-                exclude: /node_modules/
+                test: /\.tsx?$/,
+                use: {
+                    loader: "ts-loader",
+                    options: {
+                        appendTsSuffixTo: [/\.vue$/],
+                    }
+                },
+                exclude: /node_modules/,
             },
             {
-                test: /\.(scss)$/,
+                test: /\.(s?css)$/,
                 use: [
                     {
                         loader: "style-loader"
@@ -40,12 +45,23 @@ const common_config = {
             },
             {
                 test: /\.vue$/,
-                use: "vue-loader"
+                use: {
+                    loader: "vue-loader",
+                    options: {
+                        loaders: {
+                          'scss': 'vue-style-loader!css-loader!sass-loader',
+                          'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+                        }
+                    }
+                }
             }
         ]
     },
     resolve: {
-        extensions: [".ts", ".js"]
+        extensions: [".ts", ".js", ".vue", ".json"],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        }
     },
     output: {
         filename: "[name].js",

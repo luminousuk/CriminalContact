@@ -9,7 +9,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "watch": "tsc -w",
-    "start": "yarn build && electron ."
+    "start": "electron ."
   },
   "main": "dist/main.js",
   "dependencies": {
@@ -33,6 +33,7 @@
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
     "typescript": "^3.2.4",
+    "vue-class-component": "^6.3.2",
     "vue-loader": "^15.5.1",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.22",

@@ -2,14 +2,27 @@
 import "bootstrap";
 import "./scss/app.scss";
 import Vue from "vue";
-import App from "./app.vue";
-// import { BankService } from "./services/bank-service";
-// import { Player } from "./models/player";
+import VueRouter, { RouteConfig } from "vue-router";
+import CcApp from "./components/cc-app.vue";
 
+const routes: RouteConfig[] = [
+    {
+        path: "/*",
+        component: CcApp
+    }
+];
+
+const router = new VueRouter({
+    routes
+});
+
+Vue.use(VueRouter);
 const app = new Vue({
     el: "#ccApp",
-    render: h => h(App)
+    template: "<router-view></router-view>",
+    router
 });
+
 
 // const bank = new BankService();
 
