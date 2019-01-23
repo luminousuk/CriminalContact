@@ -6,11 +6,6 @@
   "repository": "https://github.com/luminousuk/CriminalContact.git",
   "author": "Chris Pickford <chris@luminousuk.com>",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "@types/jquery": "^3.3.29",
-    "electron": "^4.0.1",
-    "typescript": "^3.2.4"
-  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -18,11 +13,12 @@
   },
   "main": "dist/main/app.js",
   "dependencies": {
+    "electron": "^4.0.1",
+    "typescript": "^3.2.4",
     "bootstrap": "^4.2.1",
-    "core-js": "^2.6.3",
-    "jquery": "^3.3.1",
-    "rxjs": "^6.3.3",
-    "systemjs": "^3.0.0",
-    "zone.js": "^0.8.28"
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.3.29"
   }
 }
