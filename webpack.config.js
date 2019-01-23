@@ -1,6 +1,7 @@
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 
 console.log(__dirname);
 
@@ -36,6 +37,10 @@ const common_config = {
                         loader: "sass-loader"
                     }
                 ]
+            },
+            {
+                test: /\.vue$/,
+                use: "vue-loader"
             }
         ]
     },
@@ -46,8 +51,6 @@ const common_config = {
         filename: "[name].js",
         path: path.resolve(__dirname, "dist")
     },
-    plugins: [
-    ],
     optimization: {
         minimize: true,
         splitChunks: {
@@ -83,7 +86,8 @@ module.exports = [
         plugins: [
             new HtmlWebpackPlugin({
                 template: "src/app/index.html"
-            })
+            }),
+            new VueLoaderPlugin()
         ]
     })
 ];
