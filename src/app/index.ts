@@ -3,7 +3,7 @@ import { Player } from "./models/player";
 
 const bank = new BankService();
 
-function createAccountAndPlayer(name: string, balance: number): Player {
+const createAccountAndPlayer = (name: string, balance: number): Player => {
     const account = bank.OpenAccount(balance);
     console.log(`Opened account #${account.accountNumber} with £${account.balance}`);
     
