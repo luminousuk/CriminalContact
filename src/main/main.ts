@@ -34,7 +34,7 @@ export default class Main {
         });
 
         // Main.mainWindow.loadFile(path.join(__dirname, "../index.html"));
-        Main.mainWindow.loadFile("index.html");
+        Main.mainWindow.loadFile("dist/index.html");
 
         Main.mainWindow.webContents.openDevTools();
 

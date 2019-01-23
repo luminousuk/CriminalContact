@@ -1,3 +1,6 @@
+import $ from "jquery";
+import "bootstrap";
+import "./scss/app.scss";
 import { BankService } from "./services/bank-service";
 import { Player } from "./models/player";
 
