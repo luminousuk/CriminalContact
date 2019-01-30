@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import Main from "./main";
 
-Main.main(process, app, BrowserWindow);
+Main.main(process, app, ipcMain, BrowserWindow);
