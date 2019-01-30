@@ -18,9 +18,9 @@ export default class Main {
     ) {
         Main.process = _process;
         Main.application = _app;
-        Main.attachListeners();
         Main.ipcMain = _ipcMain;
         Main.BrowserWindow = _browserWindow;
+        Main.attachListeners();
     }
 
     private static attachListeners(): void {
