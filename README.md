@@ -1,19 +1,27 @@
-
-![Criminal Contact Logo](img/logo.png)
-
 # CriminalContact
-Game management system for Criminal Contact live action role play events
 
-[![Build status](https://ci.appveyor.com/api/projects/status/n1j1i9stlfcg7tae?svg=true)](https://ci.appveyor.com/project/chrispickford/criminalcontact)
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 
-## About
+## Development server
 
-This application provides basic game/player management and banking functionality for the Airsoft based Live Action Role Playing game Criminal Contact. It's designed to replace a Microsoft Access database and be more user friendly as well as offer more functionality.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Status
+## Code scaffolding
 
-A different approach has been taken and the UWP work has been abandoned in favor of an Electron app.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Installation
+## Build
 
-Currently unavailable. Will become available on the Microsoft Store upon release.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
