@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FileService } from "./file.service";
-import { BankService } from './bank.service';
-import { Player } from '../models/player';
+import { FileService } from "./services/file.service";
+import { BankService } from './services/bank.service';
+import { Player } from './shared/models/player.model';
 
 @Component({
   selector: 'app-root',

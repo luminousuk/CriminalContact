@@ -37,8 +37,8 @@ export default class Main {
 
     private static onReady() {
         Main.mainWindow = new Main.BrowserWindow({
-            height: 600,
-            width: 800,
+            height: 768,
+            width: 1024,
             // webPreferences: {
             //     nodeIntegration: false
             // }

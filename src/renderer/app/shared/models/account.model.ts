@@ -1,4 +1,4 @@
-import { Transaction } from "./transaction";
+import { Transaction } from "./transaction.model";
 
 export class Account {        
     private readonly _transactions: Transaction[];
