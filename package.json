@@ -6,7 +6,8 @@
   "author": "Chris Pickford <chris@luminousuk.com>",
   "repository": "https://github.com/luminousuk/CriminalContact.git",
   "license": "Apache-2.0",
-  "main": "src/electron/app.js",
+  "main": "dist/app.js",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -16,7 +17,6 @@
     "e2e": "ng e2e",
     "electron": "ng build --base-href ./ && tsc --p ./src/electron && electron ."
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
     "@angular/common": "~7.2.0",
