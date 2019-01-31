@@ -32,41 +32,41 @@
     </table>
   </div>
   <div class="col-3">
-    <h2>Interest</h2>
+    <h4>Interest</h4>
     <div class="form-group">
         <label for="interestPct">Interest %</label>
-        <input type="number" class="form-control" [(ngModel)]="interestPct" id="interestPct">
+        <input type="number" class="form-control form-control-sm" [(ngModel)]="interestPct" id="interestPct">
       </div>
-    <button type="button" class="btn btn-primary" (click)="addInterest()">Add Interest</button>
+    <button type="button" class="btn btn-sm btn-primary" (click)="addInterest()">Add Interest</button>
 
-    <h2>Create Player</h2>
+    <h4>Create Player</h4>
     <div class="form-group">
       <label for="newPlayerName">Name</label>
-      <input type="text" class="form-control" [(ngModel)]="newPlayerName" id="newPlayerName">
+      <input type="text" class="form-control form-control-sm" [(ngModel)]="newPlayerName" id="newPlayerName">
     </div>
     <div class="form-group">
       <label for="newPlayerName">Initial amount</label>
-      <input type="number" class="form-control" [(ngModel)]="newPlayerAmount" id="newPlayerAmount">
+      <input type="number" class="form-control form-control-sm" [(ngModel)]="newPlayerAmount" id="newPlayerAmount">
     </div>
-    <button type="button" class="btn btn-primary" (click)="createPlayer()">Create</button>
+    <button type="button" class="btn btn-sm btn-primary" (click)="createPlayer()">Create</button>
 
-    <h2>Transfer money</h2>
+    <h4>Transfer money</h4>
     <div class="form-group">
       <label for="newPlayerName">From</label>
-      <select [(ngModel)]="transferFrom" class="form-control">
+      <select [(ngModel)]="transferFrom" class="form-control form-control-sm">
           <option *ngFor="let player of players" [ngValue]="player">{{player.name}}</option>
       </select>
     </div>
     <div class="form-group">
         <label for="newPlayerName">To</label>
-        <select [(ngModel)]="transferTo" class="form-control">
+        <select [(ngModel)]="transferTo" class="form-control form-control-sm">
             <option *ngFor="let player of players" [ngValue]="player">{{player.name}}</option>
         </select>
       </div>
     <div class="form-group">
       <label for="newPlayerName">Amount</label>
-      <input type="number" class="form-control" [(ngModel)]="transferAmount" id="transferAmount">
+      <input type="number" class="form-control form-control-sm" [(ngModel)]="transferAmount" id="transferAmount">
     </div>
-    <button type="button" class="btn btn-primary" (click)="transfer()">Transfer</button>
+    <button type="button" class="btn btn-sm btn-primary" (click)="transfer()">Transfer</button>
   </div>
 </div>
