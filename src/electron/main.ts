@@ -27,7 +27,6 @@ export default class Main {
         Main.application.on("window-all-closed", Main.onWindowsAllClosed);
         Main.application.on("activate", Main.onActivate);
         Main.application.on("ready", Main.onReady);
-        Main.application.on("ready-to-show", Main.onReadyToShow);
 
         Main.ipcMain.on("getFiles", Main.getFiles);
     }
@@ -57,9 +56,10 @@ export default class Main {
         Main.mainWindow.webContents.openDevTools();
 
         Main.mainWindow.on("closed", Main.onClose);
+        Main.mainWindow.on("ready-to-show", Main.onReadyToShow);
     }
 
-    private static onReadyToShow(): void {
+    private static onReadyToShow() {
         Main.mainWindow.show();
         Main.mainWindow.focus();
     }
