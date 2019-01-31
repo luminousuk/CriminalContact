@@ -53,6 +53,13 @@ export class BankTestComponent implements OnInit {
     this.bankService.GenerateInterest(this.interestPct);
   }
 
+  public showTransactions(player: Player): void {
+    player.account.transactions.forEach(t => {
+      console.log(`${t.description} - £${t.amount.toFixed(2)} - £${t.cumulativeBalance.toFixed(2)}`);
+    });
+    console.log(`Current balance: £${player.account.balance}`);
+  }
+
   private createAccountAndPlayer(name: string, balance: number): Player {
     const account = this.bankService.OpenAccount(balance);
     console.log(`Opened account #${account.accountNumber} with £${account.balance}`);

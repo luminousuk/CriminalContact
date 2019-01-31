@@ -21,6 +21,10 @@ export class Account {
         return this._balance;
     }
 
+    get transactions(): Transaction[] {
+        return this._transactions;
+    }
+
     public Deposit(amount: number, description: string): void {
 
         if (amount <= 0) {
@@ -44,9 +48,9 @@ export class Account {
 
     private CreateTransaction(amount: number, description: string)
     {
+        this._balance += amount;
         const transaction = new Transaction(this, amount, description);
         this._transactions.push(transaction);
-        this._balance += amount;
         console.log(`Account #${this._accountNumber} new balance £${this._balance}`);
     }
 }
