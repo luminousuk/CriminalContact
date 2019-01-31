@@ -39,6 +39,13 @@ public TransferFunds(from: number, to: number, amount: number) {
 
 }
 
+public GenerateInterest(interestPct: number) {
+    this._accounts.forEach((act: Account, key: number) => {
+        const interestAmount = act.balance * interestPct;
+        act.Deposit(interestAmount, "Interest");
+    });
+}
+
 private GetNextAccountNumber(): number {
     const min = 1000;
     const max = 9999;

@@ -39,6 +39,18 @@ export class BankTestComponent implements OnInit {
     this.bankService.TransferFunds(from, to, this.transferAmount);
   }
 
+  public getTotalPlayerBalance(): number {
+    let total = 0;
+    for(let player of this.players) {
+      total += player.account.balance;
+    }
+    return total;
+  }
+
+  public addInterest(): void {
+    this.bankService.GenerateInterest(0.1);
+  }
+
   private createAccountAndPlayer(name: string, balance: number): Player {
     const account = this.bankService.OpenAccount(balance);
     console.log(`Opened account #${account.accountNumber} with £${account.balance}`);
