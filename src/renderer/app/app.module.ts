@@ -5,11 +5,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BankTestComponent } from './bank-test/bank-test.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BankTestComponent
+    BankTestComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

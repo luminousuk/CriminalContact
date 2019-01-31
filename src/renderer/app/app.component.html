@@ -1,15 +1,11 @@
-<main role="main">
-
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Criminal Contact</h1>
-    </div>
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <cc-sidebar></cc-sidebar>
+    <main role="main" class="col">
+      <div class="container-fluid">
+        <cc-bank-test></cc-bank-test>
+        <router-outlet></router-outlet>
+      </div>
+    </main>
   </div>
-
-  <div class="container">
-    <cc-bank-test></cc-bank-test>
-
-    <router-outlet></router-outlet>
-  </div>
-
-</main>
+</div>

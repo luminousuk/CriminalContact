@@ -27,6 +27,7 @@ export default class Main {
         Main.application.on("window-all-closed", Main.onWindowsAllClosed);
         Main.application.on("activate", Main.onActivate);
         Main.application.on("ready", Main.onReady);
+        Main.application.on("ready-to-show", Main.onReadyToShow);
 
         Main.ipcMain.on("getFiles", Main.getFiles);
     }
@@ -39,6 +40,7 @@ export default class Main {
         Main.mainWindow = new Main.BrowserWindow({
             height: 768,
             width: 1024,
+            show: false
             // webPreferences: {
             //     nodeIntegration: false
             // }
@@ -55,6 +57,11 @@ export default class Main {
         Main.mainWindow.webContents.openDevTools();
 
         Main.mainWindow.on("closed", Main.onClose);
+    }
+
+    private static onReadyToShow(): void {
+        Main.mainWindow.show();
+        Main.mainWindow.focus();
     }
 
     private static onWindowsAllClosed() {

@@ -1,0 +1,21 @@
+$cc-sidebar-item-size: 50px;
+
+.cc-sidebar {
+    flex: 0 0 $cc-sidebar-item-size;
+    background-color: #EEE;
+    
+    &-item {
+        color: #000;
+        height: $cc-sidebar-item-size;
+        min-height: $cc-sidebar-item-size;
+        width: $cc-sidebar-item-size;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background-color: #DDD;
+            text-decoration: none;
+        }
+    }    
+}
