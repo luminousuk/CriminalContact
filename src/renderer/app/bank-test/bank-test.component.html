@@ -32,8 +32,12 @@
   </div>
   <div class="col-3">
     <h2>Interest</h2>
+    <div class="form-group">
+        <label for="interestPct">Interest %</label>
+        <input type="number" class="form-control" [(ngModel)]="interestPct" id="interestPct">
+      </div>
     <button type="button" class="btn btn-primary" (click)="addInterest()">Add Interest</button>
-    
+
     <h2>Create Player</h2>
     <div class="form-group">
       <label for="newPlayerName">Name</label>

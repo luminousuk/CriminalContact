@@ -12,6 +12,8 @@ export class BankTestComponent implements OnInit {
 
   public players: Player[] = [];
 
+  public interestPct: number = 0.1;
+
   public newPlayerName: string = "";
   public newPlayerAmount: number = 1000;
 
@@ -48,7 +50,7 @@ export class BankTestComponent implements OnInit {
   }
 
   public addInterest(): void {
-    this.bankService.GenerateInterest(0.1);
+    this.bankService.GenerateInterest(this.interestPct);
   }
 
   private createAccountAndPlayer(name: string, balance: number): Player {
