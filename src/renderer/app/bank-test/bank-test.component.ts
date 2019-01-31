@@ -54,6 +54,7 @@ export class BankTestComponent implements OnInit {
   }
 
   public showTransactions(player: Player): void {
+    console.log(`Transaction history for ${player.name}`);
     player.account.transactions.forEach(t => {
       console.log(`${t.description} - £${t.amount.toFixed(2)} - £${t.cumulativeBalance.toFixed(2)}`);
     });
@@ -62,11 +63,7 @@ export class BankTestComponent implements OnInit {
 
   private createAccountAndPlayer(name: string, balance: number): Player {
     const account = this.bankService.OpenAccount(balance);
-    console.log(`Opened account #${account.accountNumber} with £${account.balance}`);
-    
     const player = new Player(name, account);
-    console.log(`Created player ${player.name}`);
-
     return player;
   }
 }

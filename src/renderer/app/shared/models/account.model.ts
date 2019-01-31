@@ -51,6 +51,6 @@ export class Account {
         this._balance += amount;
         const transaction = new Transaction(this, amount, description);
         this._transactions.push(transaction);
-        console.log(`Account #${this._accountNumber} new balance £${this._balance}`);
+        //console.log(`Account #${this._accountNumber} new balance £${this._balance}`);
     }
 }
