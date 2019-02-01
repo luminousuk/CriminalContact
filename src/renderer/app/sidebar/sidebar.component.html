@@ -2,7 +2,7 @@
   <a *ngFor="let item of items"
     class="cc-sidebar-item"
     [class.mt-auto]="item.floatBottom"
-    href="{{item.href}}"
+    routerLink="{{item.route}}"
     title="{{item.title}}">
       <span class="oi oi-{{item.iconClass}}"></span>
   </a>

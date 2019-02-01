@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 interface ISidebarItem {
   iconClass: string;
   title: string;
-  href: string;
+  route: string;
   floatBottom: boolean;
 }
 
@@ -17,32 +17,26 @@ export class SidebarComponent implements OnInit {
   items: ISidebarItem[] = [
     {
       iconClass: "home",
-      title: "Home",
-      href: "#",
-      floatBottom: false
-    },
-    {
-      iconClass: "bar-chart",
       title: "Dashboard",
-      href: "#",
+      route: "/dashboard",
       floatBottom: false
     },
     {
       iconClass: "people",
       title: "Players",
-      href: "#",
+      route: "/people",
       floatBottom: false
     },
     {
       iconClass: "credit-card",
       title: "Banking",
-      href: "#",
+      route: "/banking",
       floatBottom: false
     },
     {
       iconClass: "cog",
       title: "Settings",
-      href: "#",
+      route: "/settings",
       floatBottom: true
     }
   ];
