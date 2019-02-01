@@ -1,6 +1,10 @@
 $cc-sidebar-item-size: 50px;
 
 .cc-sidebar {
+    position: fixed;
+    width: $cc-sidebar-item-size;
+    top: 0;
+    left: 0;
     flex: 0 0 $cc-sidebar-item-size;
     background-color: #EEE;
     
