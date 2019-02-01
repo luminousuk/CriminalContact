@@ -5,6 +5,7 @@ interface ISidebarItem {
   title: string;
   route: string;
   floatBottom: boolean;
+  active: boolean;
 }
 
 @Component({
@@ -19,25 +20,29 @@ export class SidebarComponent implements OnInit {
       iconClass: "home",
       title: "Dashboard",
       route: "/dashboard",
-      floatBottom: false
+      floatBottom: false,
+      active: true
     },
     {
       iconClass: "people",
       title: "Players",
       route: "/people",
-      floatBottom: false
+      floatBottom: false,
+      active: false
     },
     {
       iconClass: "credit-card",
       title: "Banking",
       route: "/banking",
-      floatBottom: false
+      floatBottom: false,
+      active: false
     },
     {
       iconClass: "cog",
       title: "Settings",
       route: "/settings",
-      floatBottom: true
+      floatBottom: true,
+      active: false
     }
   ];
 
