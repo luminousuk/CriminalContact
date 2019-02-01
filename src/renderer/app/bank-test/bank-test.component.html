@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-9">
+  <div class="col-8">
     <h2>Players</h2>
     <table class="table">
       <thead>
@@ -31,42 +31,54 @@
       </tfoot>
     </table>
   </div>
-  <div class="col-3">
-    <h4>Interest</h4>
-    <div class="form-group">
-        <label for="interestPct">Interest %</label>
-        <input type="number" class="form-control form-control-sm" [(ngModel)]="interestPct" id="interestPct">
+  <div class="col-4">
+    <div class="card mb-2">
+      <div class="card-body">
+        <h5 class="card-title">Interest</h5>
+        <div class="form-group">
+          <label for="interestPct">Interest %</label>
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="interestPct" id="interestPct">
+        </div>
+        <button type="button" class="btn btn-sm btn-primary" (click)="addInterest()">Add Interest</button>
       </div>
-    <button type="button" class="btn btn-sm btn-primary" (click)="addInterest()">Add Interest</button>
+    </div>
 
-    <h4>Create Player</h4>
-    <div class="form-group">
-      <label for="newPlayerName">Name</label>
-      <input type="text" class="form-control form-control-sm" [(ngModel)]="newPlayerName" id="newPlayerName">
-    </div>
-    <div class="form-group">
-      <label for="newPlayerName">Initial amount</label>
-      <input type="number" class="form-control form-control-sm" [(ngModel)]="newPlayerAmount" id="newPlayerAmount">
-    </div>
-    <button type="button" class="btn btn-sm btn-primary" (click)="createPlayer()">Create</button>
-
-    <h4>Transfer money</h4>
-    <div class="form-group">
-      <label for="newPlayerName">From</label>
-      <select [(ngModel)]="transferFrom" class="form-control form-control-sm">
-          <option *ngFor="let player of players" [ngValue]="player">{{player.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-        <label for="newPlayerName">To</label>
-        <select [(ngModel)]="transferTo" class="form-control form-control-sm">
-            <option *ngFor="let player of players" [ngValue]="player">{{player.name}}</option>
-        </select>
+    <div class="card mb-2">
+      <div class="card-body">
+        <h5 class="card-title">Create Player</h5>
+        <div class="form-group">
+          <label for="newPlayerName">Name</label>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="newPlayerName" id="newPlayerName">
+        </div>
+        <div class="form-group">
+          <label for="newPlayerName">Initial amount</label>
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="newPlayerAmount" id="newPlayerAmount">
+        </div>
+        <button type="button" class="btn btn-sm btn-primary" (click)="createPlayer()">Create</button>
       </div>
-    <div class="form-group">
-      <label for="newPlayerName">Amount</label>
-      <input type="number" class="form-control form-control-sm" [(ngModel)]="transferAmount" id="transferAmount">
     </div>
-    <button type="button" class="btn btn-sm btn-primary" (click)="transfer()">Transfer</button>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Transfer money</h5>
+        <div class="form-group">
+          <label for="newPlayerName">From</label>
+          <select [(ngModel)]="transferFrom" class="form-control form-control-sm">
+              <option *ngFor="let player of players" [ngValue]="player">{{player.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label for="newPlayerName">To</label>
+            <select [(ngModel)]="transferTo" class="form-control form-control-sm">
+                <option *ngFor="let player of players" [ngValue]="player">{{player.name}}</option>
+            </select>
+          </div>
+        <div class="form-group">
+          <label for="newPlayerName">Amount</label>
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="transferAmount" id="transferAmount">
+        </div>
+        <button type="button" class="btn btn-sm btn-primary" (click)="transfer()">Transfer</button>
+      </div>
+    </div>
   </div>
 </div>
