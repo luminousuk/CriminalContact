@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BankService } from '../services/bank.service';
 import { Player } from '../shared/models/player.model';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'cc-bank-test',
@@ -9,8 +10,6 @@ import { Player } from '../shared/models/player.model';
   styleUrls: ['./bank-test.component.scss']
 })
 export class BankTestComponent implements OnInit {
-
-  public players: Player[] = [];
 
   public interestPct: number = 0.1;
 
@@ -21,24 +20,30 @@ export class BankTestComponent implements OnInit {
   public transferTo: Player;
   public transferAmount: number;
 
-  constructor(private bankService: BankService) { }
+  constructor(
+    private _bankService: BankService,
+    private _playerService: PlayerService
+  ) { }
 
   ngOnInit() {
   }
 
+  public get players(): Player[] {
+    return this._playerService.players;
+  }
+
   public createPlayer(): void {
-    const player = this.createAccountAndPlayer(this.newPlayerName, this.newPlayerAmount);
-    this.players.push(player);
+    this._playerService.createPlayer(this.newPlayerName, this.newPlayerAmount);
   }
 
   public deletePlayer(player:Player): void {
-    this.players = this.players.filter(p => p !== player);
+    this._playerService.deletePlayer(player);
   }
 
   public transfer(): void {
     const from = this.transferFrom.account.accountNumber;
     const to = this.transferTo.account.accountNumber;
-    this.bankService.TransferFunds(from, to, this.transferAmount);
+    this._bankService.TransferFunds(from, to, this.transferAmount);
   }
 
   public getTotalPlayerBalance(): number {
@@ -50,7 +55,7 @@ export class BankTestComponent implements OnInit {
   }
 
   public addInterest(): void {
-    this.bankService.GenerateInterest(this.interestPct);
+    this._bankService.GenerateInterest(this.interestPct);
   }
 
   public showTransactions(player: Player): void {
@@ -59,11 +64,5 @@ export class BankTestComponent implements OnInit {
       console.log(`${t.description} - £${t.amount.toFixed(2)} - £${t.cumulativeBalance.toFixed(2)}`);
     });
     console.log(`Current balance: £${player.account.balance}`);
-  }
-
-  private createAccountAndPlayer(name: string, balance: number): Player {
-    const account = this.bankService.OpenAccount(balance);
-    const player = new Player(name, account);
-    return player;
   }
 }

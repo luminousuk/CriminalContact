@@ -2,9 +2,11 @@
   <a *ngFor="let item of items"
     class="cc-sidebar-item"
     [class.mt-auto]="item.floatBottom"
-    [class.active]="item.active"
     routerLink="{{item.route}}"
-    title="{{item.title}}">
+    routerLinkActive="active"
+    placement="right"
+    ngbTooltip="{{item.title}}"
+    data-container="body">
       <span class="oi oi-{{item.iconClass}}"></span>
   </a>
 </nav>

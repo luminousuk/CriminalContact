@@ -1,12 +1,12 @@
 import { Account } from "./account.model";
+import Entity from './entity.model';
 
-export class Player {
-    //private readonly _account: Account;
-
+export class Player extends Entity {
     constructor(
         private _name: string,
         private _account: Account
-    ) {        
+    ) {
+        super();
     }
 
     get name(): string {
