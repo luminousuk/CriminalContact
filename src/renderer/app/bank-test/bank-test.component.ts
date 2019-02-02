@@ -13,9 +13,6 @@ export class BankTestComponent implements OnInit {
 
   public interestPct: number = 0.1;
 
-  public newPlayerName: string = "";
-  public newPlayerAmount: number = 1000;
-
   public transferFrom: Player;
   public transferTo: Player;
   public transferAmount: number;
@@ -30,10 +27,6 @@ export class BankTestComponent implements OnInit {
 
   public get players(): Player[] {
     return this._playerService.players;
-  }
-
-  public createPlayer(): void {
-    this._playerService.createPlayer(this.newPlayerName, this.newPlayerAmount);
   }
 
   public deletePlayer(player:Player): void {
