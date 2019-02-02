@@ -15,9 +15,9 @@ export class PlayerService {
     return this._players;
   }
 
-  public createPlayer(name: string, startingBalance: number): Player {
+  public createPlayer(firstName: string, lastName: string, startingBalance: number): Player {
     const account = this._bankService.OpenAccount(startingBalance);
-    const player = new Player(name, account);
+    const player = new Player(firstName, lastName, account);
     this._players.push(player);
 
     return player;

@@ -17,7 +17,8 @@ export class PlayersComponent implements OnInit {
   @ViewChild("addPlayerModal")
   private _addPlayerModal: ElementRef;
 
-  public createPlayerName: string = "";
+  public createPlayerFirstName: string = "";
+  public createPlayerLastName: string = "";
   public createPlayerAmount: number = 1000;
 
   constructor(
@@ -34,9 +35,16 @@ export class PlayersComponent implements OnInit {
 
   public createPlayer(): void {
     this._modalService.open(this._addPlayerModal).result.then(() => {
-      this._playerService.createPlayer(this.createPlayerName, this.createPlayerAmount);
-      this.createPlayerName = "";
-    }, () => {}); 
+      this._playerService.createPlayer(this.createPlayerFirstName, this.createPlayerLastName, this.createPlayerAmount);
+      this.clearCreatePlayerInputs();
+    }, () => {
+      this.clearCreatePlayerInputs();
+    }); 
+  }
+
+  private clearCreatePlayerInputs(): void {
+    this.createPlayerFirstName = "";
+    this.createPlayerLastName = "";
   }
 
   public deletePlayer(player: Player) {

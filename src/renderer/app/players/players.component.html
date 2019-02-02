@@ -59,11 +59,15 @@
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label for="create-player-name" class="col-form-label">Name:</label>
-        <input type="text" class="form-control" id="create-player-name" [(ngModel)]="createPlayerName" ngbAutofocus required>
+        <label for="create-player-name" class="col-form-label">First Name:</label>
+        <input type="text" class="form-control" id="create-player-name" [(ngModel)]="createPlayerFirstName" ngbAutofocus required>
       </div>
-      <div class="create-player-amount">
-        <label for="message-text" class="col-form-label">Starting amount:</label>
+      <div class="form-group">
+        <label for="create-player-name" class="col-form-label">Last Name:</label>
+        <input type="text" class="form-control" id="create-player-name" [(ngModel)]="createPlayerLastName" ngbAutofocus required>
+      </div>
+      <div class="form-group">
+        <label for="create-player-amount" class="col-form-label">Starting amount:</label>
         <input type="number" class="form-control" id="create-player-amount" value="1000" step="100" [(ngModel)]="createPlayerAmount" required>
       </div>
     </div>
