@@ -17,6 +17,9 @@ export class PlayersComponent implements OnInit {
   @ViewChild("addPlayerModal")
   private _addPlayerModal: ElementRef;
 
+  @ViewChild("confirmDeadModal")
+  private _confirmDeadModal: ElementRef;
+
   public createPlayerFirstName: string = "";
   public createPlayerLastName: string = "";
   public createPlayerAmount: number = 1000;
@@ -50,6 +53,12 @@ export class PlayersComponent implements OnInit {
   public deletePlayer(player: Player) {
     this._modalService.open(this._confirmDeleteModal).result.then(() => {
       this._playerService.deletePlayer(player);
+    }, () => {});
+  }
+
+  public setDead(player: Player) {
+    this._modalService.open(this._confirmDeadModal).result.then(() => {
+      player.setDead();
     }, () => {});
   }
 }

@@ -14,20 +14,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let player of players">
+    <tr *ngFor="let player of players" [class.table-danger]="player.isDead">
       <td>{{player.name}}</td>
       <td>{{player.account.accountNumber}}</td>
       <td>{{player.account.balance | currency:"£"}}</td>
       <td class="text-right">
-        <!-- <div class="btn-group" role="group">
-          <button class="btn btn-sm btn-danger" (click)="deletePlayer(player)">Delete</button>
-        </div> -->
         <div ngbDropdown placement="bottom-right">
-          <button class="btn btn-sm btn-outline-primary" ngbDropdownToggle>Actions</button>
+          <button class="btn btn-sm btn-light" ngbDropdownToggle>Actions</button>
           <div ngbDropdownMenu class="dropdown-menu-right">
             <button class="dropdown-item">Transactions</button>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item">Edit</button>
+            <button class="dropdown-item text-danger" (click)="setDead(player)">Mark as Dead</button>
             <button class="dropdown-item text-danger" (click)="deletePlayer(player)">Delete</button>
           </div>
         </div>
@@ -76,3 +74,18 @@
       <button type="button" class="btn btn-success" (click)="modal.close()">Create</button>
     </div>
   </ng-template>
+  <ng-template #confirmDeadModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Player Death</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you wish to mark this player as dead?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" ngbAutofocus (click)="modal.dismiss()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close()">Mark Dead</button>
+      </div>
+    </ng-template>
