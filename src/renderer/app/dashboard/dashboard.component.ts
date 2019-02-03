@@ -19,6 +19,14 @@ export class DashboardComponent implements OnInit {
     return this._playerService.players.length;
   }
 
+  public get totalMoney(): number {
+    let total = 0;
+    for (let player of this._playerService.players) {
+      total += player.account.balance;
+    }
+    return total;
+  }
+
   public get transactionCount(): number {
     let transactionCount = 0;
     for (let player of this._playerService.players) {

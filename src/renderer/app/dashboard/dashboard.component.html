@@ -5,22 +5,28 @@
       <a routerLink="/players">
         <div class="card-body">
           <h5 class="card-title">Players</h5>
-          <p class="card-text h1 text-success">{{playerCount}}</p>
+          <p class="card-text h3 text-success">{{playerCount}}</p>
         </div>
       </a>
     </div>
     <div class="card">
       <div class="card-body">
+        <h5 class="card-title">Total Money</h5>
+        <p class="card-text h3 text-primary">{{totalMoney | currency:"£"}}</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
         <h5 class="card-title">Transactions</h5>
-        <p class="card-text h1 text-warning">{{transactionCount}}</p>
+        <p class="card-text h3 text-warning">{{transactionCount}}</p>
       </div>
     </div>
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Deaths</h5>
-        <p class="card-text h1 text-danger">{{deathCount}}</p>
+        <p class="card-text h3 text-danger">{{deathCount}}</p>
       </div>
     </div>
   </div>
   <hr />
-  <button class="btn btn-primary btn-lg" (click)="seedPlayers()">Seed Players</button>
+  <button class="btn btn-primary btn-lg" (click)="seedPlayers()">dev:seedPlayers()</button>
