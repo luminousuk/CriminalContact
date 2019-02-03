@@ -1,0 +1,12 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.luminousuk.criminalcontact
+productName: CriminalContact
+copyright: Copyright © 2019 Luminous Development Ltd
+files:
+  - filter:
+      - build
+win:
+  target: NSIS
+electronVersion: 4.0.3
