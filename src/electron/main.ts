@@ -47,7 +47,7 @@ export default class Main {
 
         Main.mainWindow.loadURL(
             url.format({
-                pathname: path.join(__dirname, "../dist/CriminalContact/index.html"),
+                pathname: path.join(__dirname, "../build/CriminalContact/index.html"),
                 protocol: "file:",
                 slashes: true
             })

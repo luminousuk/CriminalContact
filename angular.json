@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/CriminalContact",
+            "outputPath": "build/CriminalContact",
             "index": "src/renderer/index.html",
             "main": "src/renderer/main.ts",
             "polyfills": "src/renderer/polyfills.ts",

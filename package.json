@@ -6,25 +6,31 @@
   "author": "Chris Pickford <chris@luminousuk.com>",
   "repository": "https://github.com/luminousuk/CriminalContact.git",
   "license": "Apache-2.0",
-  "main": "dist/app.js",
+  "main": "build/app.js",
   "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron": "ng build --base-href ./ && tsc --p ./src/electron && electron ."
+    "electron": "ng build --base-href ./ && tsc --p ./src/electron && electron .",
+    "package": "ng build --base-href ./ --prod && tsc --p ./src/electron/tsconfig.prod.json && electron-builder"
   },
   "build": {
     "appId": "com.luminousuk.criminalcontact",
     "productName": "CriminalContact",
     "copyright": "Copyright © 2019 Luminous Development Ltd",
     "directories": {
-      "output": "build"
+      "output": "dist"
     },
-    "asar": false
+    "files": [
+      "build"
+    ],
+    "win": {
+      "target": "NSIS"
+    }
   },
   "dependencies": {
     "@angular/animations": "7.2.2",
