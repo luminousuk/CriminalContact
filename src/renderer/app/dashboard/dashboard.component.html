@@ -1,32 +1,40 @@
 <h1 class="display-3">Criminal Contact</h1>
 <hr />
 <div class="card-deck">
-    <div class="card">
-      <a routerLink="/players">
-        <div class="card-body">
-          <h5 class="card-title">Players</h5>
-          <p class="card-text h3 text-success">{{playerCount}}</p>
-        </div>
-      </a>
-    </div>
-    <div class="card">
+  <div class="card">
+    <a routerLink="/players">
       <div class="card-body">
-        <h5 class="card-title">Total Money</h5>
-        <p class="card-text h3 text-primary">{{totalMoney | currency:"£"}}</p>
+        <h5 class="card-title">Players</h5>
+        <p class="card-text h3 text-success">{{playerCount}}</p>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Transactions</h5>
-        <p class="card-text h3 text-warning">{{transactionCount}}</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Deaths</h5>
-        <p class="card-text h3 text-danger">{{deathCount}}</p>
-      </div>
+    </a>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Total Money</h5>
+      <p class="card-text h3 text-primary">{{totalMoney | currency:"£"}}</p>
     </div>
   </div>
-  <hr />
-  <button class="btn btn-primary btn-lg" (click)="seedPlayers()">dev:seedPlayers()</button>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Transactions</h5>
+      <p class="card-text h3 text-warning">{{transactionCount}}</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Deaths</h5>
+      <p class="card-text h3 text-danger">{{deathCount}}</p>
+    </div>
+  </div>
+</div>
+<hr />
+<button class="btn btn-primary btn-lg" (click)="seedPlayers()">dev:seedPlayers()</button>
+<div class="card">
+  <div class="card-body">
+    <div class="form-group">
+      <label for="bankInterestIntervalMs" class="col-form-label">Bank Interest Interval</label>
+      <input type="number" class="form-control" [(ngModel)]="bankInterestIntervalMs" [ngModelOptions]="{updateOn: 'blur'}" id="bankInterestIntervalMs">
+    </div>
+  </div>
+</div>

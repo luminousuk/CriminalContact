@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Account } from "../shared/models/account.model";
+import { TimerService } from './timer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,24 @@ import { Account } from "../shared/models/account.model";
 export class BankService {
 
   private readonly _accounts: Map<number, Account> = new Map<number, Account>();
+  private _interestIntervalMs: number = 10000;
+  private _interestTimerId: string;
 
-  constructor() { }
+  constructor(
+      private _timerService: TimerService
+  ) {
+      this._interestTimerId = _timerService.subscribe(() => this.GenerateInterest(0.1), this._interestIntervalMs);
+  }
+
+  public get interestIntervalMs(): number {
+      return this._interestIntervalMs;
+  }
+
+  public SetInterestIntervalMs(interval: number): void {
+      this._interestIntervalMs = interval;
+      this._timerService.unsubscribe(this._interestTimerId);
+      this._interestTimerId = this._timerService.subscribe(() => this.GenerateInterest(0.1), this._interestIntervalMs);
+  }
 
   public OpenAccount(openingBalance: number): Account {
     const accountNumber = this.GetNextAccountNumber();

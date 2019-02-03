@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../services/player.service';
+import { BankService } from '../services/bank.service';
 
 @Component({
   selector: 'cc-dashboard',
@@ -8,11 +9,22 @@ import { PlayerService } from '../services/player.service';
 })
 export class DashboardComponent implements OnInit {
 
+  private _bankInterestIntervalMs: number = 10000;
+
   constructor(
-    private _playerService: PlayerService
+    private _playerService: PlayerService,
+    private _bankService: BankService
   ) { }
 
   ngOnInit() {
+  }
+
+  public get bankInterestIntervalMs(): number {
+    return this._bankInterestIntervalMs;
+  }
+  public set bankInterestIntervalMs(value: number) {
+    this._bankInterestIntervalMs = value;
+    this._bankService.SetInterestIntervalMs(value);
   }
 
   public get playerCount(): number {
