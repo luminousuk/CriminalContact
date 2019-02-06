@@ -1,4 +1,8 @@
+[![CircleCI](https://circleci.com/gh/luminousuk/CriminalContact.svg?style=shield)](https://circleci.com/gh/luminousuk/CriminalContact)
+
 # CriminalContact
+
+Game management system for Criminal Contact live action role play events
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 
