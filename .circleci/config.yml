@@ -24,4 +24,4 @@ jobs:
           name: Build Angular
           command: yarn run build:ng
       - store_artifacts:
-          path: /build
+          path: build
