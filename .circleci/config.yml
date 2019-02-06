@@ -3,6 +3,9 @@ jobs:
     working_directory: ~/CriminalContact
     docker:
       - image: circleci/node:10-browsers
+    branches:
+      only:
+        - master
     steps:
       - checkout
       - restore_cache:
