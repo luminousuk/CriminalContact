@@ -12,6 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BankingComponent } from './banking/banking.component';
 import { PlayersComponent } from './players/players.component';
+import { SelectPlayerComponent } from './select-player/select-player.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PlayersComponent } from './players/players.component';
     SidebarComponent,
     DashboardComponent,
     BankingComponent,
-    PlayersComponent
+    PlayersComponent,
+    SelectPlayerComponent
   ],
   imports: [
     BrowserModule,

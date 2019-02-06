@@ -1,0 +1,4 @@
+<select class="custom-select mb-2">
+  <option selected disabled>{{placeholder}}</option>
+  <option *ngFor="let player of players" [ngValue]="player">{{player.name}}</option>
+</select>
