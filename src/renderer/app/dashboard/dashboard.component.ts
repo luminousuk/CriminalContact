@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../services/player.service';
-import { BankService } from '../services/bank.service';
+import { GameService } from '../services/game.service';
+import { TimerService } from '../services/timer.service';
 
 @Component({
   selector: 'cc-dashboard',
@@ -9,22 +10,16 @@ import { BankService } from '../services/bank.service';
 })
 export class DashboardComponent implements OnInit {
 
-  private _bankInterestIntervalMs: number = 10000;
+  private _gameElapsedTime: Date;
+  private _gameElapsedTimeTimerId: string;
 
   constructor(
-    private _playerService: PlayerService,
-    private _bankService: BankService
+    private readonly _playerService: PlayerService,
+    private readonly _gameService: GameService,
+    private readonly _timerService: TimerService
   ) { }
 
   ngOnInit() {
-  }
-
-  public get bankInterestIntervalMs(): number {
-    return this._bankInterestIntervalMs;
-  }
-  public set bankInterestIntervalMs(value: number) {
-    this._bankInterestIntervalMs = value;
-    this._bankService.SetInterestIntervalMs(value);
   }
 
   public get playerCount(): number {
@@ -66,6 +61,38 @@ export class DashboardComponent implements OnInit {
     ].forEach(p => {
       this._playerService.createPlayer(p.firstName, p.lastName, p.startingAmount);
     });
+  }
+
+  public StartGame(): void {
+    this._gameService.StartGame();
+    this._gameElapsedTimeTimerId = this._timerService.subscribe(() => {
+      this._gameElapsedTime = new Date(Date.now() - this._gameService.startTime.getTime());
+    }, 1000);
+  }
+
+  public EndGame(): void {
+    this._gameService.EndGame();
+    this._timerService.unsubscribe(this._gameElapsedTimeTimerId);
+  }
+
+  public get startGameButtonDisabled(): boolean {
+    return !this._gameService.canStartGame;
+  }
+
+  public get endGameButtonDisabled(): boolean {
+    return !this._gameService.hasStarted || this._gameService.hasEnded;
+  }
+
+  public get showCurrentGamePanel(): boolean {
+    return this._gameService.hasStarted;
+  }
+
+  public get gameStartTime(): Date {
+    return this._gameService.startTime;
+  }
+
+  public get gameElapsedTime(): Date {
+    return this._gameElapsedTime;
   }
 
 }
