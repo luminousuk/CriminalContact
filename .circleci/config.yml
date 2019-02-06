@@ -1,0 +1,22 @@
+jobs:
+  build:
+    working_directory: ~/CriminalContact
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build Electron
+          command: yarn run build:electron
+      - run:
+          name: Build Angular
+          command: yarn run build:ng
