@@ -10,8 +10,7 @@ import { TimerService } from '../services/timer.service';
 })
 export class DashboardComponent implements OnInit {
 
-  private _gameElapsedTime: Date;
-  private _gameElapsedTimeTimerId: string;
+  
 
   constructor(
     private readonly _playerService: PlayerService,
@@ -65,14 +64,10 @@ export class DashboardComponent implements OnInit {
 
   public StartGame(): void {
     this._gameService.StartGame();
-    this._gameElapsedTimeTimerId = this._timerService.subscribe(() => {
-      this._gameElapsedTime = new Date(Date.now() - this._gameService.startTime.getTime());
-    }, 1000);
   }
 
   public EndGame(): void {
     this._gameService.EndGame();
-    this._timerService.unsubscribe(this._gameElapsedTimeTimerId);
   }
 
   public get startGameButtonDisabled(): boolean {
@@ -91,8 +86,8 @@ export class DashboardComponent implements OnInit {
     return this._gameService.startTime;
   }
 
-  public get gameElapsedTime(): Date {
-    return this._gameElapsedTime;
+  public get gameElapsedTime(): number {
+    return this._gameService.elapsedTime;
   }
 
 }

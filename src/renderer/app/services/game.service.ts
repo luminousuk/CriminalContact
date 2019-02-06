@@ -11,7 +11,9 @@ export class GameService {
   private _startTime: Date;
   private _endTime: Date;
   private _interestTimerId: string;
-  private _interestIntervalMs: number = 1000;
+  private _interestIntervalMs: number = 5000;
+  private _elapsedTime: number = 0;
+  private _elapsedTimeTimerId: string;
 
   constructor(
     private readonly _bankService: BankService,
@@ -26,6 +28,9 @@ export class GameService {
 
     this._startTime = new Date();
     this._interestTimerId = this._timerService.subscribe(() => this._bankService.GenerateInterest(0.1), this._interestIntervalMs);
+    this._elapsedTimeTimerId = this._timerService.subscribe(() => {
+      this._elapsedTime = Math.floor((Date.now() - this.startTime.getTime()) / 1000);
+    }, 1000);
   }
 
   public EndGame() {
@@ -39,10 +44,15 @@ export class GameService {
 
     this._endTime = new Date();
     this._timerService.unsubscribe(this._interestTimerId);
+    this._timerService.unsubscribe(this._elapsedTimeTimerId);
   }
 
   public get startTime(): Date {
     return this._startTime;
+  }
+
+  public get elapsedTime(): number {
+    return this._elapsedTime;
   }
 
   public get endTime(): Date {

@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
+const hoursDivisor = 60 * 60;
+
 /*
  * Displays milliseconds in hh:mm:ss format
  * Usage:
@@ -10,12 +12,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 */
 @Pipe({name: "elapsedTime"})
 export class ElapsedTimePipe implements PipeTransform {
-    transform(milliseconds: number): string {
-        const hours: number = Math.floor(milliseconds / (60*60*1000));
-        milliseconds = milliseconds % (60*60*1000);
-        const minutes: number = Math.floor(milliseconds / (60*1000));
-        milliseconds = milliseconds % (60*1000);
-        const seconds: number = Math.floor(milliseconds / 1000);
+    transform(seconds: number): string {
+        const hours: number = Math.floor(seconds / hoursDivisor);
+        const minutes: number = Math.floor((seconds % hoursDivisor ) / 60);
 
         return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     }
