@@ -47,7 +47,7 @@ export class BankingComponent implements OnInit {
   }
 
   public withdraw(): void {
-    this._bankService.Deposit(this.withdrawPlayer.account.accountNumber, this.withdrawAmount);
+    this._bankService.Withdraw(this.withdrawPlayer.account.accountNumber, this.withdrawAmount);
   }
 
   public transfer(): void {
