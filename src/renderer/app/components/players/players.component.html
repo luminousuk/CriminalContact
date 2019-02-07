@@ -10,6 +10,7 @@
       <th scope="col">Name</th>
       <th scope="col">Account #</th>
       <th scope="col">Balance</th>
+      <th scope="col">Role</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -18,6 +19,11 @@
       <td>{{player.name}}</td>
       <td>{{player.account.accountNumber}}</td>
       <td>{{player.account.balance | currency:"£"}}</td>
+      <td>
+        <!-- <cc-select-role (roleSelected)="setPlayerRole(player, $event)"></cc-select-role> -->
+        {{getPlayerRole(player)}}
+        <button type="button" class="btn btn-primary btn-sm" (click)="setPlayerRole(player, 'Mayor')">Set Mayor</button>
+      </td>
       <td class="text-right">
         <div ngbDropdown placement="bottom-right">
           <button class="btn btn-sm btn-light" ngbDropdownToggle>Actions</button>
