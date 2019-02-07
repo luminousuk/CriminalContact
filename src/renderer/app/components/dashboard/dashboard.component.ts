@@ -48,15 +48,15 @@ export class DashboardComponent implements OnInit {
   public seedPlayers(): void {
     [
       {firstName: "Jeff", lastName: "Goldblum", startingAmount: 5000},
-      {firstName: "Brian", lastName: "Blessed", startingAmount: 1750},
-      {firstName: "Tony", lastName: "Hawk", startingAmount: 4500},
-      {firstName: "Lionel", lastName: "Ritchie", startingAmount: 9900},
-      {firstName: "Bruce", lastName: "Willis", startingAmount: 7420},
-      {firstName: "Bill", lastName: "Gates", startingAmount: 50000},
-      {firstName: "Katy", lastName: "Price", startingAmount: 2130},
-      {firstName: "Princess", lastName: "Peach", startingAmount: 6400},
-      {firstName: "Snoop", lastName: "Dogg", startingAmount: 420},
-      {firstName: "Arnold", lastName: "Schwarzeneggar", startingAmount: 6666}
+      {firstName: "Brian", lastName: "Blessed", startingAmount: 5000},
+      {firstName: "Tony", lastName: "Hawk", startingAmount: 5000},
+      {firstName: "Lionel", lastName: "Ritchie", startingAmount: 5000},
+      {firstName: "Bruce", lastName: "Willis", startingAmount: 5000},
+      {firstName: "Bill", lastName: "Gates", startingAmount: 15000},
+      {firstName: "Katy", lastName: "Price", startingAmount: 5000},
+      {firstName: "Princess", lastName: "Peach", startingAmount: 5000},
+      {firstName: "Snoop", lastName: "Dogg", startingAmount: 5000},
+      {firstName: "Arnold", lastName: "Schwarzeneggar", startingAmount: 5000}
     ].forEach(p => {
       this._playerService.createPlayer(p.firstName, p.lastName, p.startingAmount);
     });
