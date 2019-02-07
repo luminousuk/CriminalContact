@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../services/player.service';
-import { GameService } from '../services/game.service';
-import { TimerService } from '../services/timer.service';
+import { PlayerService } from '../../services/player.service';
+import { GameService } from '../../services/game.service';
+import { TimerService } from '../../services/timer.service';
 
 @Component({
   selector: 'cc-dashboard',

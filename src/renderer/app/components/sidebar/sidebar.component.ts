@@ -34,12 +34,6 @@ export class SidebarComponent implements OnInit {
       floatBottom: false
     },
     {
-      iconClass: "code",
-      title: "Bank Test",
-      route: "/bank-test",
-      floatBottom: false
-    },
-    {
       iconClass: "cog",
       title: "Settings",
       route: "/settings",

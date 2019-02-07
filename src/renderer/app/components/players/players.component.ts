@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { PlayerService } from '../services/player.service';
-import { Player } from '../shared/models/player.model';
+import { PlayerService } from '../../services/player.service';
+import { Player } from '../../models/player.model';
 
 @Component({
   selector: 'cc-players',

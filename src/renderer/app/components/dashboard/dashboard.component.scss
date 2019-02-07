@@ -1,0 +1,13 @@
+.card {
+    a {
+        color: inherit;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .card-text {
+        font-size: 3vw;
+    }
+}

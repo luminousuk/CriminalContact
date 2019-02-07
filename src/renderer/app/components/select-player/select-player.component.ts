@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PlayerService } from '../services/player.service';
-import { Player } from '../shared/models/player.model';
+import { PlayerService } from '../../services/player.service';
+import { Player } from '../../models/player.model';
 
 @Component({
   selector: 'cc-select-player',

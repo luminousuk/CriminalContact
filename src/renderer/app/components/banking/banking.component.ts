@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Player } from '../shared/models/player.model';
-import { BankService } from '../services/bank.service';
+import { Player } from '../../models/player.model';
+import { BankService } from '../../services/bank.service';
 
 @Component({
   selector: 'cc-banking',
