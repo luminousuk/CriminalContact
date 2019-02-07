@@ -7,7 +7,6 @@ jobs:
     branches:
       ignore:
         - uwp-project
-        - electron-rebuild
     steps:
       - checkout
       - restore_cache:
