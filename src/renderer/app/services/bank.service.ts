@@ -27,6 +27,16 @@ public GetAccount(accountNumber: number): Account {
     return this._accounts.get(accountNumber) as Account;
 }
 
+public Deposit(accountNumber: number, amount: number) {
+    const account: Account = this.GetAccount(accountNumber);
+    account.Deposit(amount, "Cash deposit");
+}
+
+public Withdraw(accountNumber: number, amount: number) {
+    const account: Account = this.GetAccount(accountNumber);
+    account.Withdraw(amount, "Cash withdrawal");
+}
+
 public TransferFunds(from: number, to: number, amount: number) {
     if (amount <= 0) {
         throw new Error("Cannot transfer a negative amount");
