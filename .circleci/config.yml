@@ -4,8 +4,9 @@ jobs:
     docker:
       - image: circleci/node:10-browsers
     branches:
-      only:
-        - master
+      ignore:
+        - uwp-project
+        - electron-rebuild
     steps:
       - checkout
       - restore_cache:
