@@ -1,9 +1,11 @@
 import { Account } from "./account.model";
 import Entity from './entity.model';
+import IPlayerRole from './roles/playerrole.i';
 
 export class Player extends Entity {
 
     private _isDead: boolean;
+    private _role?: IPlayerRole;
 
     constructor(
         private _firstName: string,
@@ -35,5 +37,9 @@ export class Player extends Entity {
 
     public setDead(): void {
         this._isDead = true;
+    }
+
+    public set role(role: IPlayerRole) {
+        this._role = role;
     }
 }
