@@ -5,6 +5,7 @@ import { PlayerService } from '../../services/player.service';
 import { Player } from '../../models/player.model';
 import { RoleService } from '../../services/role.service';
 import IPlayerRole from '../../models/roles/playerrole.i';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'cc-players',
@@ -24,13 +25,14 @@ export class PlayersComponent implements OnInit {
 
   public createPlayerFirstName: string = "";
   public createPlayerLastName: string = "";
-  public createPlayerAmount: number = 1000;
+  public createPlayerAmount: number = this._settingsService.playerStartingAmount;
   public createPlayerRole: IPlayerRole;
 
   constructor(
     private readonly _playerService: PlayerService,
     private readonly _roleService: RoleService,
-    private readonly _modalService: NgbModal
+    private readonly _modalService: NgbModal,
+    private readonly _settingsService: SettingsService
   ) { }
 
   ngOnInit() {
