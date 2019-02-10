@@ -13,6 +13,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BankingComponent } from './components/banking/banking.component';
 import { PlayersComponent } from './components/players/players.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PlayersComponent } from './components/players/players.component';
     SidebarComponent,
     DashboardComponent,
     BankingComponent,
-    PlayersComponent
+    PlayersComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
