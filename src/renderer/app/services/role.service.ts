@@ -107,14 +107,14 @@ export class RoleService {
   private readonly _roleAssignments: Map<IPlayerRole, Player> = new Map<IPlayerRole, Player>();
   private readonly _playerAssignments: Map<Player, IPlayerRole> = new Map<Player, IPlayerRole>();
 
-  constructor() { }
+  constructor() {
+    this.setAvailableRoles();
+  }
+
+  public availableRoles: IPlayerRole[];
 
   public get roles(): IPlayerRole[] {
     return this._roles;
-  }
-
-  public get availableRoles(): IPlayerRole[] {
-    return this._roles.filter(r => !this._roleAssignments.has(r));
   }
 
   public getRole(roleName: string): IPlayerRole {
@@ -137,6 +137,7 @@ export class RoleService {
     this._roleAssignments.set(role, player);
     this._playerAssignments.set(player, role);
     player.role = role;
+    this.setAvailableRoles();
   }
 
   public unassignRole(roleName: string): void {
@@ -151,6 +152,7 @@ export class RoleService {
     this._roleAssignments.delete(role);
     this._playerAssignments.delete(player);
     player.role = null;
+    this.setAvailableRoles();
   }
 
   public getPlayerForRole(roleName: string): Player {
@@ -161,5 +163,9 @@ export class RoleService {
 
   public getRoleForPlayer(player: Player): IPlayerRole {
     return this._playerAssignments.get(player);
+  }
+
+  private setAvailableRoles(): void {
+    this.availableRoles = this._roles.filter(r => !this._roleAssignments.has(r));
   }
 }
