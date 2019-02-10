@@ -39,6 +39,10 @@ export class Player extends Entity {
         this._isDead = true;
     }
 
+    public get role(): IPlayerRole {
+        return this._role;
+    }
+
     public set role(role: IPlayerRole) {
         this._role = role;
     }

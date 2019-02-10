@@ -35,6 +35,10 @@ export class RoleService {
     return this._roles;
   }
 
+  public get availableRoles(): IPlayerRole[] {
+    return this._roles.filter(r => !this._roleAssignments.has(r));
+  }
+
   public getRole(roleName: string): IPlayerRole {
     const role = this._roles.find(role => role.name == roleName);
 
@@ -54,6 +58,7 @@ export class RoleService {
 
     this._roleAssignments.set(role, player);
     this._playerAssignments.set(player, role);
+    player.role = role;
   }
 
   public unassignRole(roleName: string): void {
@@ -67,6 +72,7 @@ export class RoleService {
 
     this._roleAssignments.delete(role);
     this._playerAssignments.delete(player);
+    player.role = null;
   }
 
   public getPlayerForRole(roleName: string): Player {

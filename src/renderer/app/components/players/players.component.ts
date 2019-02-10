@@ -25,6 +25,7 @@ export class PlayersComponent implements OnInit {
   public createPlayerFirstName: string = "";
   public createPlayerLastName: string = "";
   public createPlayerAmount: number = 1000;
+  public createPlayerRole: IPlayerRole;
 
   constructor(
     private readonly _playerService: PlayerService,
@@ -39,9 +40,18 @@ export class PlayersComponent implements OnInit {
     return this._playerService.players;
   }
 
+  public get roles(): IPlayerRole[] {
+    return this._roleService.availableRoles;
+  }
+
   public createPlayer(): void {
     this._modalService.open(this._addPlayerModal).result.then(() => {
-      this._playerService.createPlayer(this.createPlayerFirstName, this.createPlayerLastName, this.createPlayerAmount);
+      const newPlayer = this._playerService.createPlayer(this.createPlayerFirstName, this.createPlayerLastName, this.createPlayerAmount);
+
+      if (!!this.createPlayerRole) {
+        this._roleService.assignRole(this.createPlayerRole.name, newPlayer);
+      }
+
       this.clearCreatePlayerInputs();
     }, () => {
       this.clearCreatePlayerInputs();
@@ -51,6 +61,7 @@ export class PlayersComponent implements OnInit {
   private clearCreatePlayerInputs(): void {
     this.createPlayerFirstName = "";
     this.createPlayerLastName = "";
+    this.createPlayerRole = null;
   }
 
   public deletePlayer(player: Player) {
