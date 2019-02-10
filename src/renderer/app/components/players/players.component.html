@@ -70,7 +70,12 @@
       </div>
       <div class="form-group">
         <label for="create-player-amount" class="col-form-label">Starting amount:</label>
-        <input type="number" class="form-control" id="create-player-amount" value="1000" step="100" [(ngModel)]="createPlayerAmount" required>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">£</span>
+          </div>
+          <input currencyMask class="form-control" id="create-player-amount" [(ngModel)]="createPlayerAmount" [options]="{ prefix: '', allowNegative: false }" required>
+        </div>
       </div>
       <div class="form-group">
         <label for="create-player-role" class="col-form-label">Role:</label>
