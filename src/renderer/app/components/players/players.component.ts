@@ -1,10 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { PlayerService } from '../../services/player.service';
 import { Player } from '../../models/player.model';
 import { RoleService } from '../../services/role.service';
 import IPlayerRole from '../../models/roles/playerrole.i';
+import { CreatePlayerComponent } from "../dialogs/create-player/create-player.component";
 
 @Component({
   selector: 'cc-players',
@@ -13,24 +14,21 @@ import IPlayerRole from '../../models/roles/playerrole.i';
 })
 export class PlayersComponent implements OnInit {
 
-  @ViewChild("confirmDeleteModal")
-  private _confirmDeleteModal: ElementRef;
+  private _createPlayerDialogRef: MatDialogRef<CreatePlayerComponent>;
 
-  @ViewChild("addPlayerModal")
-  private _addPlayerModal: ElementRef;
+  // @ViewChild("confirmDeleteModal")
+  // private _confirmDeleteModal: ElementRef;
 
-  @ViewChild("confirmDeadModal")
-  private _confirmDeadModal: ElementRef;
+  // @ViewChild("addPlayerModal")
+  // private _addPlayerModal: ElementRef;
 
-  public createPlayerFirstName: string = "";
-  public createPlayerLastName: string = "";
-  public createPlayerAmount: number = 1000;
-  public createPlayerRole: IPlayerRole;
+  // @ViewChild("confirmDeadModal")
+  // private _confirmDeadModal: ElementRef;
 
   constructor(
     private readonly _playerService: PlayerService,
     private readonly _roleService: RoleService,
-    private readonly _modalService: NgbModal
+    private readonly _dialogService: MatDialog
   ) { }
 
   ngOnInit() {
@@ -40,40 +38,37 @@ export class PlayersComponent implements OnInit {
     return this._playerService.players;
   }
 
-  public get roles(): IPlayerRole[] {
-    return this._roleService.availableRoles;
-  }
-
   public createPlayer(): void {
-    this._modalService.open(this._addPlayerModal).result.then(() => {
-      const newPlayer = this._playerService.createPlayer(this.createPlayerFirstName, this.createPlayerLastName, this.createPlayerAmount);
+    this._createPlayerDialogRef = this._dialogService.open(CreatePlayerComponent);
+    this._createPlayerDialogRef
+      .afterClosed()
+      .subscribe(data => {
+        console.log(data);
+      });
 
-      if (!!this.createPlayerRole) {
-        this._roleService.assignRole(this.createPlayerRole.name, newPlayer);
-      }
+    // this._modalService.open(this._addPlayerModal).result.then(() => {
+    //   const newPlayer = this._playerService.createPlayer(this.createPlayerFirstName, this.createPlayerLastName, this.createPlayerAmount);
 
-      this.clearCreatePlayerInputs();
-    }, () => {
-      this.clearCreatePlayerInputs();
-    }); 
-  }
+    //   if (!!this.createPlayerRole) {
+    //     this._roleService.assignRole(this.createPlayerRole.name, newPlayer);
+    //   }
 
-  private clearCreatePlayerInputs(): void {
-    this.createPlayerFirstName = "";
-    this.createPlayerLastName = "";
-    this.createPlayerRole = null;
+    //   this.clearCreatePlayerInputs();
+    // }, () => {
+    //   this.clearCreatePlayerInputs();
+    // }); 
   }
 
   public deletePlayer(player: Player) {
-    this._modalService.open(this._confirmDeleteModal).result.then(() => {
-      this._playerService.deletePlayer(player);
-    }, () => {});
+    // this._modalService.open(this._confirmDeleteModal).result.then(() => {
+    //   this._playerService.deletePlayer(player);
+    // }, () => {});
   }
 
   public setDead(player: Player) {
-    this._modalService.open(this._confirmDeadModal).result.then(() => {
-      player.setDead();
-    }, () => {});
+    // this._modalService.open(this._confirmDeadModal).result.then(() => {
+    //   player.setDead();
+    // }, () => {});
   }
 
   public getPlayerRole(player: Player): string {

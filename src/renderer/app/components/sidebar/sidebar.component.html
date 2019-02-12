@@ -5,8 +5,8 @@
     routerLink="{{item.route}}"
     routerLinkActive="active"
     placement="right"
-    ngbTooltip="{{item.title}}"
-    data-container="body">
-      <span class="oi oi-{{item.iconClass}}"></span>
+    matTooltip="{{item.title}}"
+    matTooltipPosition="right">
+      <mat-icon>{{item.iconClass}}</mat-icon>
   </a>
 </nav>

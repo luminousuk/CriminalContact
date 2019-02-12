@@ -28,13 +28,13 @@ export class SidebarComponent implements OnInit {
       floatBottom: false
     },
     {
-      iconClass: "credit-card",
+      iconClass: "credit_card",
       title: "Banking",
       route: "/banking",
       floatBottom: false
     },
     {
-      iconClass: "cog",
+      iconClass: "settings",
       title: "Settings",
       route: "/settings",
       floatBottom: true
