@@ -1,10 +1,8 @@
-<cc-sidebar></cc-sidebar>
-<div class="container-fluid pl-5 pt-2">
-  <div class="row">
-    <main role="main" class="col">
-      <div class="container-fluid">
-        <router-outlet></router-outlet>
-      </div>
-    </main>
-  </div>
-</div>
+<mat-sidenav-container class="sidenav">
+  <mat-sidenav mode="side" opened fixedInViewport>
+    <cc-sidebar class="mat-elevation-z6"></cc-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

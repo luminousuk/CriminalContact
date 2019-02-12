@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+// Imports functions, variables, and mixins that are needed by other Bootstrap files
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Roboto", "Helvetica", sans-serif;
+}
