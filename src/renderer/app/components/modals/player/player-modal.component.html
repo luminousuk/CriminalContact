@@ -1,0 +1,47 @@
+<form (ngSubmit)="Save()" #playerForm="ngForm" class="needs-validation">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">
+      {{ edit ? "Edit" : "Create" }} Player
+    </h5>
+    <button type="button" class="close" aria-label="Close" (click)="Close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="firstName" class="col-form-label">First Name:</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="firstName" required autoFocus>
+    </div>
+    <div class="form-group">
+      <label for="lastName" class="col-form-label">Last Name:</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="role" class="col-form-label">Role:</label>
+      <ng-select
+        id="role"
+        class="mb-2"
+        name="role"
+        [items]="availableRoles"
+        bindLabel="name"
+        placeholder="Select role..."
+        notFoundText="No roles found"
+        [(ngModel)]="role"
+        [clearable]="true">
+      </ng-select>
+    </div>
+    <div class="form-group" *ngIf="!edit">
+      <label for="startingAmount" class="col-form-label">Starting amount:</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text">£</span>
+        </div>
+        <input currencyMask class="form-control" id="startingAmount" name="startingAmount" [(ngModel)]="startingAmount" [options]="{ prefix: '', allowNegative: false }" required>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="Close()">Cancel</button>
+    <button type="submit" class="btn btn-success" [disabled]="!playerForm.form.valid">{{ edit ? "Update" : "Create" }}</button>
+  </div>
+</form>

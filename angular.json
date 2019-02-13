@@ -27,8 +27,9 @@
               "src/renderer/assets"
             ],
             "styles": [
-              "node_modules/bootstrap-scss/bootstrap.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/open-iconic/font/css/open-iconic-bootstrap.scss",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/renderer/styles.scss"
             ],
             "scripts": []
@@ -85,8 +86,9 @@
             "tsConfig": "src/renderer/tsconfig.spec.json",
             "karmaConfig": "src/renderer/karma.conf.js",
             "styles": [
-              "node_modules/bootstrap-scss/bootstrap.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/open-iconic/font/css/open-iconic-bootstrap.scss",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/renderer/styles.scss"
             ],
             "scripts": [],

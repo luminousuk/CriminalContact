@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Account } from "../models/account.model";
+import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,9 @@ export class BankService {
 
   private readonly _accounts: Map<number, Account> = new Map<number, Account>();
 
-  constructor() {      
+  constructor(
+      private readonly _settingsService: SettingsService
+  ) {      
   }
 
   public OpenAccount(openingBalance: number): Account {
@@ -50,9 +53,9 @@ public TransferFunds(from: number, to: number, amount: number) {
 
 }
 
-public GenerateInterest(interestPct: number) {
+public GenerateInterest() {
     this._accounts.forEach((act: Account, key: number) => {
-        const interestAmount = act.balance * interestPct;
+        const interestAmount = act.balance * this._settingsService.accountInterestPct;
         act.Deposit(interestAmount, "Interest");
     });
 }

@@ -1,7 +1,7 @@
-import { Player } from "../player.model";
+import IRoleConfiguration from './roleconfiguration.i';
 
 export default interface IPlayerRole {
     name: string;
     description: string;
-    player: Player;
+    config?: IRoleConfiguration;
 }

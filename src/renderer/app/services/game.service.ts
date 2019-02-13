@@ -27,7 +27,7 @@ export class GameService {
     }
 
     this._startTime = new Date();
-    this._interestTimerId = this._timerService.subscribe(() => this._bankService.GenerateInterest(0.1), this._interestIntervalMs);
+    this._interestTimerId = this._timerService.subscribe(() => this._bankService.GenerateInterest(), this._interestIntervalMs);
     this._elapsedTimeTimerId = this._timerService.subscribe(() => {
       this._elapsedTime = Math.floor((Date.now() - this.startTime.getTime()) / 1000);
     }, 1000);

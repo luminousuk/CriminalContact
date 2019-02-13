@@ -19,6 +19,7 @@ export class PlayerService {
     const account = this._bankService.OpenAccount(startingBalance);
     const player = new Player(firstName, lastName, account);
     this._players.push(player);
+    this._players.sort((a, b) => a.name.localeCompare(b.name));
 
     return player;
   }

@@ -1,0 +1,45 @@
+<h1>
+  Settings
+</h1>
+<tabset>
+  <tab heading="Banking">
+    <div class="form-group mt-2">
+      <label for="accountInterestPct">Interest Amount</label>
+      <div class="input-group">
+        <input type="number" class="form-control" id="accountInterestPct" [value]="accountInterestPct * 100" (input)="accountInterestPct = $event.target.value / 100" min="0" max="100" step="5">
+        <div class="input-group-append">
+          <span class="input-group-text">%</span>
+        </div>
+      </div>
+      <small class="form-text text-muted">
+        The interest percentage for players (overridden by certain roles).
+      </small>
+    </div>
+    <div class="form-group mt-2">
+      <label for="accountInterestPct">Interest Interval</label>
+      <div class="input-group">
+        <input type="number" class="form-control" id="accountInterestInterval" [(ngModel)]="accountInterestInterval" min="0" step="10">
+        <div class="input-group-append">
+          <span class="input-group-text">minutes</span>
+        </div>
+      </div>
+      <small class="form-text text-muted">
+        When enabled, interest will be automatically generated after this time period.
+      </small>
+    </div>
+  </tab>
+  <tab heading="Players">
+    <div class="form-group mt-2">
+      <label for="playerStartingAmount">Default player starting balance</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">£</span>
+        </div>
+        <input currencyMask class="form-control" id="playerStartingAmount" [(ngModel)]="playerStartingAmount" [options]="{ prefix: '', allowNegative: false, align: 'left' }">
+      </div>
+      <small class="form-text text-muted">
+        When creating a new player, the default account balance will be set to this amount.
+      </small>
+    </div>
+  </tab>
+</tabset>

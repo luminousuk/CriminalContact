@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../../models/player.model';
 import { BankService } from '../../services/bank.service';
+import { PlayerService } from '../../services/player.service';
 
 @Component({
   selector: 'cc-banking',
@@ -20,34 +21,27 @@ export class BankingComponent implements OnInit {
   public transferAmount: number;
 
   constructor(
-    private readonly _bankService: BankService
+    private readonly _bankService: BankService,
+    private readonly _playerService: PlayerService
   ) { }
 
   ngOnInit() {
   }
 
-  public setDepositPlayer(player: Player) {
-    this.depositPlayer = player;
-  }
-
-  public setWithdrawPlayer(player: Player) {
-    this.withdrawPlayer = player;
-  }
-
-  public setTransferPayor(player: Player) {
-    this.transferPayor = player;
-  }
-
-  public setTransferPayee(player: Player) {
-    this.transferPayee = player;
+  public get players(): Player[] {
+    return this._playerService.players;
   }
 
   public deposit(): void {
     this._bankService.Deposit(this.depositPlayer.account.accountNumber, this.depositAmount);
+    this.depositPlayer = null;
+    this.depositAmount = null;
   }
 
   public withdraw(): void {
     this._bankService.Withdraw(this.withdrawPlayer.account.accountNumber, this.withdrawAmount);
+    this.withdrawPlayer = null;
+    this.withdrawAmount = null;
   }
 
   public transfer(): void {
@@ -58,5 +52,4 @@ export class BankingComponent implements OnInit {
     this.transferPayee = null;
     this.transferAmount = null;
   }
-
 }
