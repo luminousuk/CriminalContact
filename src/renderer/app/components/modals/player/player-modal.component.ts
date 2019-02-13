@@ -31,6 +31,7 @@ export class PlayerModalComponent extends BaseModalComponent<PlayerModalResult> 
     this.availableRoles = this._roleService.availableRoles;
   }
 
+  public edit: boolean = false;
   public firstName: string;
   public lastName: string;
   public startingAmount: number;

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from "ngx-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
@@ -15,6 +16,7 @@ import { PlayerModalComponent } from "./components/modals/player/player-modal.co
         PlayerModalComponent
     ],
     imports: [
+        BrowserModule,
         FormsModule,
         NgSelectModule,
         ModalModule.forRoot(),

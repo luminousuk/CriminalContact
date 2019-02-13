@@ -1,5 +1,7 @@
 <div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLabel">Create Player</h5>
+  <h5 class="modal-title" id="exampleModalLabel">
+    {{ edit ? "Edit" : "Create" }} Player
+  </h5>
   <button type="button" class="close" aria-label="Close" (click)="Close()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -21,10 +23,11 @@
       bindLabel="name"
       placeholder="Select role..."
       notFoundText="No roles found"
-      [(ngModel)]="role">
+      [(ngModel)]="role"
+      [clearable]="true">
     </ng-select>
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="!edit">
     <label for="create-player-amount" class="col-form-label">Starting amount:</label>
     <div class="input-group mb-2">
       <div class="input-group-prepend">

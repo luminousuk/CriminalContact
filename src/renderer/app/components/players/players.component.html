@@ -30,7 +30,7 @@
           <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
             <li role="menuitem"><button class="dropdown-item">Transactions</button></li>
             <li class="divider dropdown-divider"></li>
-            <li role="menuitem"><button class="dropdown-item">Edit</button></li>
+            <li role="menuitem"><button class="dropdown-item" (click)="editPlayer(player)">Edit</button></li>
             <li role="menuitem"><button class="dropdown-item text-danger" (click)="setDead(player)">Mark as Dead</button></li>
             <li role="menuitem"><button class="dropdown-item text-danger" (click)="deletePlayer(player)">Delete</button></li>
           </ul>

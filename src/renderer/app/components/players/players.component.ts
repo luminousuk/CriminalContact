@@ -38,6 +38,28 @@ export class PlayersComponent implements OnInit {
       });
   }
 
+  public editPlayer(player: Player): void {
+    this._modalService.show(PlayerModalComponent, {
+      initialState: {
+        edit: true,
+        firstName: player.firstName,
+        lastName: player.lastName,
+        role: player.role
+      }
+    }).content.result.subscribe(
+      (updatedPlayer: PlayerModalResult) => {
+        player.firstName = updatedPlayer.firstName;
+        player.lastName = updatedPlayer.lastName;
+
+        if (!updatedPlayer.role) {
+          this._roleService.unassignPlayer(player);
+        }
+        else if (player.role !== updatedPlayer.role) {
+          this._roleService.assignRole(updatedPlayer.role.name, player);
+        }
+      });
+  }
+
   public deletePlayer(player: Player) {
     this._modalService.show(ConfirmModalComponent, {
       initialState: {

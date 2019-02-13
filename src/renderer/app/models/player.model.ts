@@ -8,23 +8,15 @@ export class Player extends Entity {
     private _role?: IPlayerRole;
 
     constructor(
-        private _firstName: string,
-        private _lastName: string,
+        public firstName: string,
+        public lastName: string,
         private _account: Account
     ) {
         super();
     }
 
-    public get firstName(): string {
-        return this._firstName;
-    }
-
-    public get lastName(): string {
-        return this._lastName;
-    }
-
     public get name(): string {
-        return `${this._firstName} ${this._lastName}`;
+        return `${this.firstName} ${this.lastName}`;
     }
 
     public get account(): Account {

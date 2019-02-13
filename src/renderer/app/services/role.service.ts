@@ -134,6 +134,10 @@ export class RoleService {
       throw new Error(`${roleName} role already assigned.`);
     }
 
+    if (this._playerAssignments.has(player)) {
+      this.unassignPlayer(player);
+    }
+
     this._roleAssignments.set(role, player);
     this._playerAssignments.set(player, role);
     player.role = role;
@@ -144,7 +148,7 @@ export class RoleService {
     const role = this.getRole(roleName);
 
     if (!this._roleAssignments.has(role)) {
-      throw new Error(`${roleName} role not assigned.`);
+      return;
     }
 
     const player = this._roleAssignments.get(role);
