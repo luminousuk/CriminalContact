@@ -4,8 +4,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { PlayerService } from '../../services/player.service';
 import { Player } from '../../models/player.model';
 import { RoleService } from '../../services/role.service';
-import IPlayerRole from '../../models/roles/playerrole.i';
 import { PlayerModalComponent, PlayerModalResult } from '../modals/player/player-modal.component';
+import { ConfirmModalComponent } from "../modals/confirm/confirm-modal.component";
 
 @Component({
   selector: 'cc-players',
@@ -27,10 +27,6 @@ export class PlayersComponent implements OnInit {
     return this._playerService.players;
   }
 
-  public get roles(): IPlayerRole[] {
-    return this._roleService.availableRoles;
-  }
-
   public createPlayer(): void {
     this._modalService.show(PlayerModalComponent).content.result.subscribe(
       (player: PlayerModalResult) => {
@@ -43,15 +39,30 @@ export class PlayersComponent implements OnInit {
   }
 
   public deletePlayer(player: Player) {
-    // this._modalService.open(this._confirmDeleteModal).result.then(() => {
-    //   this._playerService.deletePlayer(player);
-    // }, () => {});
+    this._modalService.show(ConfirmModalComponent, {
+      initialState: {
+        title: "Delete Player",
+        text: `Are you sure you wish to delete ${player.name}?`
+      }
+    }).content.result.subscribe(
+      (result: boolean) => {
+        if (!result) return;
+        this._playerService.deletePlayer(player);
+        this._roleService.unassignPlayer(player);
+    });
   }
 
   public setDead(player: Player) {
-    // this._modalService.open(this._confirmDeadModal).result.then(() => {
-    //   player.setDead();
-    // }, () => {});
+    this._modalService.show(ConfirmModalComponent, {
+      initialState: {
+        title: "Player Dead",
+        text: `Are you sure you wish to set ${player.name} to dead?`
+      }
+    }).content.result.subscribe(
+      (result: boolean) => {
+        if (!result) return;
+        player.setDead();
+    });
   }
 
   public getPlayerRole(player: Player): string {
