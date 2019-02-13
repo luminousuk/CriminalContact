@@ -2,10 +2,10 @@
   <a *ngFor="let item of items"
     class="cc-sidebar-item"
     [class.mt-auto]="item.floatBottom"
-    routerLink="{{item.route}}"
+    [routerLink]="item.route"
     routerLinkActive="active"
     placement="right"
-    ngbTooltip="{{item.title}}"
+    [tooltip]="item.title"
     data-container="body">
       <span class="oi oi-{{item.iconClass}}"></span>
   </a>

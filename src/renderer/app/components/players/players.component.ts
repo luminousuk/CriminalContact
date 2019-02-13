@@ -1,11 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { PlayerService } from '../../services/player.service';
 import { Player } from '../../models/player.model';
 import { RoleService } from '../../services/role.service';
 import IPlayerRole from '../../models/roles/playerrole.i';
 import { SettingsService } from '../../services/settings.service';
+import { PlayerModalComponent } from '../player-modal/player-modal.component';
 
 @Component({
   selector: 'cc-players',
@@ -31,7 +32,7 @@ export class PlayersComponent implements OnInit {
   constructor(
     private readonly _playerService: PlayerService,
     private readonly _roleService: RoleService,
-    private readonly _modalService: NgbModal,
+    private readonly _modalService: BsModalService,
     private readonly _settingsService: SettingsService
   ) { }
 
@@ -47,17 +48,15 @@ export class PlayersComponent implements OnInit {
   }
 
   public createPlayer(): void {
-    this._modalService.open(this._addPlayerModal).result.then(() => {
-      const newPlayer = this._playerService.createPlayer(this.createPlayerFirstName, this.createPlayerLastName, this.createPlayerAmount);
+    this._modalService.show(PlayerModalComponent)
+      .content.playerResult.subscribe(
+        (player: {firstName: string, lastName: string, startingAmount: number, role: IPlayerRole}) => {
+          const newPlayer = this._playerService.createPlayer(player.firstName, player.lastName, player.startingAmount);
 
-      if (!!this.createPlayerRole) {
-        this._roleService.assignRole(this.createPlayerRole.name, newPlayer);
-      }
-
-      this.clearCreatePlayerInputs();
-    }, () => {
-      this.clearCreatePlayerInputs();
-    }); 
+          if (!!player.role) {
+            this._roleService.assignRole(player.role.name, newPlayer);
+          }
+        });
   }
 
   private clearCreatePlayerInputs(): void {
@@ -67,23 +66,19 @@ export class PlayersComponent implements OnInit {
   }
 
   public deletePlayer(player: Player) {
-    this._modalService.open(this._confirmDeleteModal).result.then(() => {
-      this._playerService.deletePlayer(player);
-    }, () => {});
+    // this._modalService.open(this._confirmDeleteModal).result.then(() => {
+    //   this._playerService.deletePlayer(player);
+    // }, () => {});
   }
 
   public setDead(player: Player) {
-    this._modalService.open(this._confirmDeadModal).result.then(() => {
-      player.setDead();
-    }, () => {});
+    // this._modalService.open(this._confirmDeadModal).result.then(() => {
+    //   player.setDead();
+    // }, () => {});
   }
 
   public getPlayerRole(player: Player): string {
     const role = this._roleService.getRoleForPlayer(player);
     return !!role ? role.name : "";
-  }
-
-  public setPlayerRole(player: Player, role: string) {
-    this._roleService.assignRole(role, player);
   }
 }
