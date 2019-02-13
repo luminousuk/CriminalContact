@@ -1,12 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { PlayerService } from '../../services/player.service';
 import { Player } from '../../models/player.model';
 import { RoleService } from '../../services/role.service';
 import IPlayerRole from '../../models/roles/playerrole.i';
-import { SettingsService } from '../../services/settings.service';
-import { PlayerModalComponent } from '../player-modal/player-modal.component';
+import { PlayerModalComponent, PlayerModalResult } from '../modals/player/player-modal.component';
 
 @Component({
   selector: 'cc-players',
@@ -15,25 +14,10 @@ import { PlayerModalComponent } from '../player-modal/player-modal.component';
 })
 export class PlayersComponent implements OnInit {
 
-  @ViewChild("confirmDeleteModal")
-  private _confirmDeleteModal: ElementRef;
-
-  @ViewChild("addPlayerModal")
-  private _addPlayerModal: ElementRef;
-
-  @ViewChild("confirmDeadModal")
-  private _confirmDeadModal: ElementRef;
-
-  public createPlayerFirstName: string = "";
-  public createPlayerLastName: string = "";
-  public createPlayerAmount: number = this._settingsService.playerStartingAmount;
-  public createPlayerRole: IPlayerRole;
-
   constructor(
     private readonly _playerService: PlayerService,
     private readonly _roleService: RoleService,
-    private readonly _modalService: BsModalService,
-    private readonly _settingsService: SettingsService
+    private readonly _modalService: BsModalService
   ) { }
 
   ngOnInit() {
@@ -48,21 +32,14 @@ export class PlayersComponent implements OnInit {
   }
 
   public createPlayer(): void {
-    this._modalService.show(PlayerModalComponent)
-      .content.playerResult.subscribe(
-        (player: {firstName: string, lastName: string, startingAmount: number, role: IPlayerRole}) => {
-          const newPlayer = this._playerService.createPlayer(player.firstName, player.lastName, player.startingAmount);
+    this._modalService.show(PlayerModalComponent).content.result.subscribe(
+      (player: PlayerModalResult) => {
+        const newPlayer = this._playerService.createPlayer(player.firstName, player.lastName, player.startingAmount);
 
-          if (!!player.role) {
-            this._roleService.assignRole(player.role.name, newPlayer);
-          }
-        });
-  }
-
-  private clearCreatePlayerInputs(): void {
-    this.createPlayerFirstName = "";
-    this.createPlayerLastName = "";
-    this.createPlayerRole = null;
+        if (!!player.role) {
+          this._roleService.assignRole(player.role.name, newPlayer);
+        }
+      });
   }
 
   public deletePlayer(player: Player) {
