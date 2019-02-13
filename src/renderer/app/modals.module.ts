@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 import { ModalModule } from "ngx-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { CurrencyMaskModule } from "ng2-currency-mask";
@@ -16,7 +16,7 @@ import { PlayerModalComponent } from "./components/modals/player/player-modal.co
         PlayerModalComponent
     ],
     imports: [
-        BrowserModule,
+        CommonModule,
         FormsModule,
         NgSelectModule,
         ModalModule.forRoot(),

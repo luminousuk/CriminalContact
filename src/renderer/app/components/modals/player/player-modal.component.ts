@@ -14,7 +14,8 @@ export interface PlayerModalResult {
 }
 
 @Component({
-  templateUrl: "./player-modal.component.html"
+  templateUrl: "./player-modal.component.html",
+  styleUrls: ["player-modal.component.scss"]
 })
 export class PlayerModalComponent extends BaseModalComponent<PlayerModalResult> implements OnInit {
 
@@ -38,7 +39,7 @@ export class PlayerModalComponent extends BaseModalComponent<PlayerModalResult> 
   public role: IPlayerRole;
   public availableRoles: IPlayerRole[];
 
-  public Ok(): void {
+  public Save(): void {
     this.Close();
     this.result.emit({
       firstName: this.firstName,
