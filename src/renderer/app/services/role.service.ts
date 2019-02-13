@@ -155,6 +155,17 @@ export class RoleService {
     this.setAvailableRoles();
   }
 
+  public unassignPlayer(player: Player): void {
+    if (!this._playerAssignments.has(player)) {
+      return;
+    }
+    
+    const role = this._playerAssignments.get(player);
+    this._playerAssignments.delete(player);
+    this._roleAssignments.delete(role);
+    this.setAvailableRoles();
+  }
+
   public getPlayerForRole(roleName: string): Player {
     const role = this.getRole(roleName);
 

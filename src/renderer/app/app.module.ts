@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import { ElapsedTimePipe } from "./pipes/elapsed-time.pipe";
+
+import { NgxBootstrapModule } from "./ngx-bootstrap.module";
+import { ModalsModule } from "./modals.module";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
@@ -29,11 +31,14 @@ import { SettingsComponent } from './components/settings/settings.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule,
+    NgxBootstrapModule,
     NgSelectModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    ModalsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
