@@ -15,6 +15,7 @@ export class ElapsedTimePipe implements PipeTransform {
     transform(seconds: number): string {
         const hours: number = Math.floor(seconds / hoursDivisor);
         const minutes: number = Math.floor((seconds % hoursDivisor ) / 60);
+        seconds = seconds % 60;
 
         return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     }
