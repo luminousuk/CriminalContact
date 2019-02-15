@@ -29,6 +29,13 @@ export class SettingsComponent implements OnInit {
     this._settingsService.accountInterestPct = value;
   }
 
+  public get accountInterestAutoCalculateEnabled(): boolean {
+    return this._settingsService.accountInterestAutoCalculateEnabled;
+  }
+  public set accountInterestAutoCalculateEnabled(value: boolean) {
+    this._settingsService.accountInterestAutoCalculateEnabled = value;
+  }
+
   public get accountInterestInterval(): number {
     return this._settingsService.accountInterestInterval;
   }
