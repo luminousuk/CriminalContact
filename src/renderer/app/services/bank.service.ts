@@ -8,10 +8,15 @@ import { SettingsService } from './settings.service';
 export class BankService {
 
   private readonly _accounts: Map<number, Account> = new Map<number, Account>();
+  private _interestPct: number;
 
   constructor(
       private readonly _settingsService: SettingsService
-  ) {      
+  ) {
+      this._settingsService.accountInterestPct$.subscribe(interestPct => {
+        this._interestPct = interestPct;
+        console.debug(`BankService._interestPct = ${interestPct}`);
+      });
   }
 
   public OpenAccount(openingBalance: number): Account {
@@ -55,7 +60,7 @@ public TransferFunds(from: number, to: number, amount: number) {
 
 public GenerateInterest() {
     this._accounts.forEach((act: Account, key: number) => {
-        const interestAmount = act.balance * this._settingsService.accountInterestPct;
+        const interestAmount = act.balance * this._interestPct;
         act.Deposit(interestAmount, "Interest");
     });
 }

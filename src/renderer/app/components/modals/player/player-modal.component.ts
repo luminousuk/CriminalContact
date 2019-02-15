@@ -25,10 +25,15 @@ export class PlayerModalComponent extends BaseModalComponent<PlayerModalResult> 
     private readonly _roleService: RoleService    
   ) {
     super(_bsModalRef);
+
+    this._settingsService.playerStartingAmount$.subscribe(amount => {
+      this.startingAmount = amount;
+      console.debug(`PlayerModalComponent.startingAmount = ${amount}`);
+    })
   }
 
   ngOnInit() {
-    this.startingAmount = this._settingsService.playerStartingAmount;
+    // TODO: change role service to update available roles using observable
     this.availableRoles = this._roleService.availableRoles;
   }
 
