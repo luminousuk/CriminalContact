@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
     this._gameService.StartGame();
   }
 
-  public EndGame(): void {
+  public StopGame(): void {
     this._gameService.EndGame();
   }
 
@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit {
     return !this._gameService.canStartGame;
   }
 
-  public get endGameButtonDisabled(): boolean {
+  public get stopGameButtonDisabled(): boolean {
     return !this._gameService.hasStarted || this._gameService.hasEnded;
   }
 

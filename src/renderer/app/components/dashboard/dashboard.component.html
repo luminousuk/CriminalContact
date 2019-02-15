@@ -1,11 +1,11 @@
 <h1>
   <span class="display-3">Criminal Contact</span>
-  <div class="btn-group float-right mt-4" role="group">
-    <button type="button" class="btn btn-lg btn-success" (click)="StartGame()" [disabled]="startGameButtonDisabled">
+  <div class="float-right mt-4">
+    <button type="button" class="btn btn-outline-success mr-2" (click)="StartGame()" [disabled]="startGameButtonDisabled">
       Start Game
     </button>
-    <button type="button" class="btn btn-lg btn-danger" (click)="EndGame()" [disabled]="endGameButtonDisabled">
-      End Game
+    <button type="button" class="btn btn-outline-danger" (click)="StopGame()" [disabled]="stopGameButtonDisabled">
+      Stop Game
     </button>
   </div>
 </h1>
