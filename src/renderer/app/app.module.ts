@@ -1,8 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { ToastrModule } from "ngx-toastr";
 
 import { NgxBootstrapModule } from "./ngx-bootstrap.module";
 import { ModalsModule } from "./modals.module";
@@ -28,11 +30,16 @@ import { SettingsComponent } from './components/settings/settings.component';
     SettingsComponent
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     NgxBootstrapModule,
     NgSelectModule,
+    ToastrModule.forRoot({
+      positionClass: "toast-bottom-right",
+      toastClass: "toast toast-bootstrap-compatibility-fix"
+    }),
     CurrencyMaskModule,
     ModalsModule
   ],

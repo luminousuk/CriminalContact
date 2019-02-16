@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Account } from "../models/account.model";
 import { SettingsService } from './settings.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class BankService {
   private _interestPct: number;
 
   constructor(
-      private readonly _settingsService: SettingsService
+      private readonly _settingsService: SettingsService,
+      private readonly _toastrService: ToastrService
   ) {
       this._settingsService.accountInterestPct$.subscribe(interestPct => {
         this._interestPct = interestPct;
@@ -63,6 +65,10 @@ public GenerateInterest() {
         const interestAmount = act.balance * this._interestPct;
         act.Deposit(interestAmount, "Interest");
     });
+
+    this._toastrService.info(
+        "Interest has been calculated for all players",
+        "Bank");
 }
 
 private GetNextAccountNumber(): number {

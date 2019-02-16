@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 import { Player } from '../models/player.model';
 import { BankService } from './bank.service';
 
@@ -9,7 +11,10 @@ export class PlayerService {
 
   private _players: Player[] = [];
 
-  constructor(private _bankService: BankService) { }
+  constructor(
+    private readonly _bankService: BankService,
+    private readonly _toastrService: ToastrService
+    ) { }
 
   public get players(): Player[] {
     return this._players;
@@ -21,10 +26,18 @@ export class PlayerService {
     this._players.push(player);
     this._players.sort((a, b) => a.name.localeCompare(b.name));
 
+    this._toastrService.success(
+      `${player.name} has been created`,
+      "Player created");
+
     return player;
   }
 
   public deletePlayer(player:Player): void {
     this._players = this._players.filter(p => p !== player);
+
+    this._toastrService.error(
+      `${player.name} has been deleted`,
+      "Player deleted");
   }
 }
