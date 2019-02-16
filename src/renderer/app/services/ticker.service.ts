@@ -5,7 +5,7 @@ import { Guid } from "guid-typescript";
 @Injectable({
   providedIn: 'root'
 })
-export class TimerService {
+export class TickerService {
   private _subscriptions: Map<string, Subscription>;
 
   constructor() {

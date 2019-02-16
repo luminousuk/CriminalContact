@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BankService } from './bank.service';
 import { PlayerService } from './player.service';
-import { TimerService } from './timer.service';
+import { TickerService } from './ticker.service';
 import { SettingsService } from './settings.service';
+import { ClockService } from './clock.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  private _startTime: Date;
-  private _endTime: Date;
+  private _startTimeMs: number;
+  private _endTimeMs: number;
   private _interestTimerId: string;
   private _interestIntervalMs: number;
-  private _elapsedTime: number = 0;
-  private _elapsedTimeTimerId: string;
 
   constructor(
     private readonly _bankService: BankService,
     private readonly _playerService: PlayerService,
-    private readonly _timerService: TimerService,
-    private readonly _settingsService: SettingsService
+    private readonly _tickerService: TickerService,
+    private readonly _settingsService: SettingsService,
+    private readonly _clockService: ClockService
   ) {
     this._settingsService.accountInterestInterval$.subscribe(intervalMs => {
       this._interestIntervalMs = intervalMs * 1000;
@@ -43,73 +43,73 @@ export class GameService {
     if (this.hasStarted && !this.hasEnded) {
       this.AttemptDisableInterestTimer();
       // Doesn't take into account current time remaining
-      this._interestTimerId = this._timerService.subscribe(() => this._bankService.GenerateInterest(), this._interestIntervalMs);
+      this._interestTimerId = this._tickerService.subscribe(() => this._bankService.GenerateInterest(), this._interestIntervalMs);
     }
   }
 
   private AttemptDisableInterestTimer(): void {
     if (!!this._interestTimerId) {
-      this._timerService.unsubscribe(this._interestTimerId);
+      this._tickerService.unsubscribe(this._interestTimerId);
       this._interestTimerId = null;
     }
-    
   }
 
   public StartGame() {
-    if (!this.canStartGame) {
-      throw new Error("Unable to start game.");
+    if (this.hasEnded) {
+      throw new Error("Game already ended.");
     }
 
-    this._startTime = new Date();
-    this._elapsedTimeTimerId = this._timerService.subscribe(() => {
-      this._elapsedTime = Math.floor((Date.now() - this.startTime.getTime()) / 1000);
-    }, 1000);
+    if (this.isRunning) {
+      throw new Error("Game already running.");
+    }
+
+    if (this._playerService.players.length === 0) {
+      throw new Error("Not enough players to start game.");
+    }
+
+    this._clockService.Start();
+    this._startTimeMs = this._startTimeMs || this._clockService.now;
+
     this.AttemptResetInterestTimer();
   }
 
+  public StopGame() {
+    this.AttemptDisableInterestTimer();
+    this._clockService.Stop();
+  }
+
   public EndGame() {
-    if (!this.hasStarted) {
-      throw new Error("Game not started.");
-    }
+    this.StopGame();
 
     if (this.hasEnded) {
       throw new Error("Game already ended.");
     }
 
-    this._endTime = new Date();
-    this._timerService.unsubscribe(this._interestTimerId);
-    this._timerService.unsubscribe(this._elapsedTimeTimerId);
+    this._endTimeMs = this._clockService.now;
+    this._tickerService.unsubscribe(this._interestTimerId);
   }
 
-  public get startTime(): Date {
-    return this._startTime;
+  public get startTimeMs(): number {
+    return this._startTimeMs;
   }
 
-  public get elapsedTime(): number {
-    return this._elapsedTime;
+  public get elapsedSeconds(): number {
+    return this._clockService.elapsedSeconds;
   }
 
-  public get endTime(): Date {
-    return this._endTime;
+  public get endTime(): number {
+    return this._endTimeMs;
   }
 
   public get hasStarted(): boolean {
-    return !!this._startTime;
+    return !!this._startTimeMs;
+  }
+
+  public get isRunning(): boolean {
+    return this._clockService.isRunning;
   }
 
   public get hasEnded(): boolean {
-    return !!this._endTime;
-  }
-
-  public get canStartGame(): boolean {
-    if (this.hasStarted) {
-      return false;
-    }
-
-    if (this._playerService.players.length === 0) {
-      return false;
-    }
-
-    return true;
+    return !!this._endTimeMs;
   }
 }

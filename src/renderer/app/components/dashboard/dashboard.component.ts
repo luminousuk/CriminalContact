@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
 import { GameService } from '../../services/game.service';
-import { TimerService } from '../../services/timer.service';
 
 @Component({
   selector: 'cc-dashboard',
@@ -15,7 +14,6 @@ export class DashboardComponent implements OnInit {
   constructor(
     private readonly _playerService: PlayerService,
     private readonly _gameService: GameService,
-    private readonly _timerService: TimerService
   ) { }
 
   ngOnInit() {
@@ -67,15 +65,15 @@ export class DashboardComponent implements OnInit {
   }
 
   public StopGame(): void {
-    this._gameService.EndGame();
+    this._gameService.StopGame();
   }
 
   public get startGameButtonDisabled(): boolean {
-    return !this._gameService.canStartGame;
+    return this._gameService.isRunning || this._gameService.hasEnded;
   }
 
   public get stopGameButtonDisabled(): boolean {
-    return !this._gameService.hasStarted || this._gameService.hasEnded;
+    return !this._gameService.isRunning;
   }
 
   public get showCurrentGamePanel(): boolean {
@@ -83,11 +81,11 @@ export class DashboardComponent implements OnInit {
   }
 
   public get gameStartTime(): Date {
-    return this._gameService.startTime;
+    return new Date(this._gameService.startTimeMs);
   }
 
-  public get gameElapsedTime(): number {
-    return this._gameService.elapsedTime;
+  public get gameElapsedSeconds(): number {
+    return this._gameService.elapsedSeconds;
   }
 
 }
