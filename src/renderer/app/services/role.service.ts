@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import IPlayerRole from '../models/roles/playerrole.i';
 import { Player } from '../models/player.model';
+import { CcError } from '../core/cc-error';
 
 @Injectable({
   providedIn: 'root'
@@ -131,7 +132,7 @@ export class RoleService {
     const role = this.getRole(roleName);
 
     if (this._roleAssignments.has(role)) {
-      throw new Error(`${roleName} role already assigned.`);
+      throw new CcError(`${roleName} role already assigned.`);
     }
 
     if (this._playerAssignments.has(player)) {

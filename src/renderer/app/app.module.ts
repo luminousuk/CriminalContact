@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { ToastrModule } from "ngx-toastr";
 
 import { NgxBootstrapModule } from "./ngx-bootstrap.module";
 import { ModalsModule } from "./modals.module";
+import { AppRoutingModule } from './app-routing.module';
 
 import { ElapsedTimePipe } from "./pipes/elapsed-time.pipe";
 
-import { AppRoutingModule } from './app-routing.module';
+import { GlobalErrorHandlerService } from "./services/global-error-handler.service";
+
 import { AppComponent } from './components/app/app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -43,7 +45,11 @@ import { SettingsComponent } from './components/settings/settings.component';
     CurrencyMaskModule,
     ModalsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: ErrorHandler, useClass: GlobalErrorHandlerService
+    }
+  ],
   bootstrap: [
     AppComponent
   ]

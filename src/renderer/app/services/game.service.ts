@@ -6,6 +6,7 @@ import { PlayerService } from './player.service';
 import { TickerService } from './ticker.service';
 import { SettingsService } from './settings.service';
 import { ClockService } from './clock.service';
+import { CcError } from '../core/cc-error';
 
 @Injectable({
   providedIn: 'root'
@@ -59,15 +60,15 @@ export class GameService {
 
   public StartGame() {
     if (this.hasEnded) {
-      throw new Error("Game already ended.");
+      throw new CcError("Game already ended.");
     }
 
     if (this.isRunning) {
-      throw new Error("Game already running.");
+      throw new CcError("Game already running.");
     }
 
     if (this._playerService.players.length === 0) {
-      throw new Error("Not enough players to start game.");
+      throw new CcError("Not enough players to start game.");
     }
 
     this._clockService.Start();
@@ -94,7 +95,7 @@ export class GameService {
     this.StopGame();
 
     if (this.hasEnded) {
-      throw new Error("Game already ended.");
+      throw new CcError("Game already ended.");
     }
 
     this._endTimeMs = this._clockService.now;

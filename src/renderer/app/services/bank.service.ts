@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Account } from "../models/account.model";
 import { SettingsService } from './settings.service';
 import { ToastrService } from 'ngx-toastr';
+import { CcError } from '../core/cc-error';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class BankService {
 
 public GetAccount(accountNumber: number): Account {
     if (!this._accounts.has(accountNumber)) {
-        throw new Error(`Account #${accountNumber} does not exist`);
+        throw new CcError(`Account #${accountNumber} does not exist`);
     }
 
     return this._accounts.get(accountNumber) as Account;
@@ -49,7 +50,7 @@ public Withdraw(accountNumber: number, amount: number) {
 
 public TransferFunds(from: number, to: number, amount: number) {
     if (amount <= 0) {
-        throw new Error("Cannot transfer a negative amount");
+        throw new CcError("Cannot transfer a negative amount");
     }
     
     const fromAccount: Account = this.GetAccount(from);

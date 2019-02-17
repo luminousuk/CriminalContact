@@ -1,4 +1,5 @@
 import { Transaction } from "./transaction.model";
+import { CcError } from '../core/cc-error';
 
 export class Account {        
     private readonly _transactions: Transaction[];
@@ -28,7 +29,7 @@ export class Account {
     public Deposit(amount: number, description: string): void {
 
         if (amount <= 0) {
-            throw new Error("Cannot deposit a negative amount");
+            throw new CcError("Cannot deposit a negative amount", "Account error");
         }
         this.CreateTransaction(amount, description);
     }
@@ -36,11 +37,11 @@ export class Account {
     public Withdraw(amount: number, description: string): void {
 
         if (amount <= 0) {
-            throw new Error("Cannot withdraw a negative amount");
+            throw new CcError("Cannot withdraw a negative amount", "Account error");
         }
 
         if (amount > this._balance) {
-            throw new Error("Insufficient balance");
+            throw new CcError(`Insufficient balance for account #${this._accountNumber}`, "Account error");
         }
 
         this.CreateTransaction(amount * -1, description);

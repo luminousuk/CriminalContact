@@ -22,7 +22,7 @@ export class TickerService {
 
   public unsubscribe(id: string): void {
     if (!this._subscriptions.has(id)) {
-      throw new Error(`Subscription with id ${id} does not exist.`);
+      throw new Error(`Ticker subscription with id ${id} does not exist.`);
     }
 
     this._subscriptions.get(id).unsubscribe();
