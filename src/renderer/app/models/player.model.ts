@@ -1,6 +1,6 @@
 import { Account } from "./account.model";
 import Entity from './entity.model';
-import IPlayerRole from './roles/playerrole.i';
+import IPlayerRole from './playerrole.i';
 
 export class Player extends Entity {
 

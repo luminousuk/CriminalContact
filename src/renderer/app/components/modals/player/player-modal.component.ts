@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { BsModalRef } from "ngx-bootstrap";
 
-import IPlayerRole from "../../../models/roles/playerrole.i";
+import IPlayerRole from "../../../models/playerrole.i";
 import { RoleService } from "../../../services/role.service";
 import { SettingsService } from "../../../services/settings.service";
 import { BaseModalComponent } from '../base-modal.component';

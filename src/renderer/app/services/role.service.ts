@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import IPlayerRole from '../models/roles/playerrole.i';
+import IPlayerRole from '../models/playerrole.i';
 import { Player } from '../models/player.model';
 import { CcError } from '../core/cc-error';
 
