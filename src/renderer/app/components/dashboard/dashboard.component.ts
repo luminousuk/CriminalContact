@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public get deathCount(): number {
-    return this._playerService.players.filter(p => p.isDead).length;
+    return this._playerService.players.filter(p => p.isEliminated).length;
   }
 
   public seedPlayers(): void {

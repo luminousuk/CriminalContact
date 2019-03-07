@@ -67,7 +67,7 @@ public TransferFunds(from: number, to: number, amount: number): void {
 public GenerateInterest(): void {
     this._playerAccounts.forEach((account: Account, player: Player) => {
 
-        if (player.isDead) {
+        if (player.isEliminated) {
             return;
         }
 

@@ -3,7 +3,7 @@ import IPlayerRole from './playerrole.i';
 
 export class Player extends Entity {
 
-    private _isDead: boolean;
+    private _isEliminated: boolean;
     private _role?: IPlayerRole;
     private _accountNumber: number;
 
@@ -26,12 +26,12 @@ export class Player extends Entity {
         this._accountNumber = value;
     }
 
-    public get isDead(): boolean {
-        return this._isDead;
+    public get isEliminated(): boolean {
+        return this._isEliminated;
     }
 
-    public setDead(): void {
-        this._isDead = true;
+    public setEliminated(): void {
+        this._isEliminated = true;
     }
 
     public get role(): IPlayerRole {

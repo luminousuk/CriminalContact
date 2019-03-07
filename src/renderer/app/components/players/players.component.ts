@@ -76,16 +76,16 @@ export class PlayersComponent implements OnInit {
     });
   }
 
-  public setDead(player: Player) {
+  public setEliminated(player: Player) {
     this._modalService.show(ConfirmModalComponent, {
       initialState: {
-        title: "Player Dead",
-        text: `Are you sure you wish to set ${player.name} to dead?`
+        title: "Eliminate Player",
+        text: `Are you sure you wish to eliminate ${player.name}?`
       }
     }).content.result.subscribe(
       (result: boolean) => {
         if (!result) return;
-        player.setDead();
+        player.setEliminated();
     });
   }
 
