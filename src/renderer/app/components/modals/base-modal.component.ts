@@ -9,6 +9,8 @@ export class BaseModalComponent<T> {
         protected readonly _bsModalRef: BsModalRef
     ) { }
 
+    public title: string;
+
     @Output()
     public result: EventEmitter<T> = new EventEmitter<T>();
 

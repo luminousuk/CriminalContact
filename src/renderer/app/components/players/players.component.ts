@@ -30,7 +30,11 @@ export class PlayersComponent implements OnInit {
   }
 
   public createPlayer(): void {
-    this._modalService.show(PlayerModalComponent).content.result.subscribe(
+    this._modalService.show(PlayerModalComponent, {
+      initialState: {
+        title: "Create Player"
+      }
+    }).content.result.subscribe(
       (player: PlayerModalResult) => {
         const newPlayer = this._playerService.createPlayer(player.firstName, player.lastName, player.startingAmount);
 
@@ -43,7 +47,8 @@ export class PlayersComponent implements OnInit {
   public editPlayer(player: Player): void {
     this._modalService.show(PlayerModalComponent, {
       initialState: {
-        edit: true,
+        showStartingAmount: false,
+        title: "Edit Player",
         firstName: player.firstName,
         lastName: player.lastName,
         role: player.role
@@ -76,7 +81,7 @@ export class PlayersComponent implements OnInit {
     });
   }
 
-  public setEliminated(player: Player) {
+  public eliminatePlayer(player: Player) {
     this._modalService.show(ConfirmModalComponent, {
       initialState: {
         title: "Eliminate Player",
@@ -85,7 +90,29 @@ export class PlayersComponent implements OnInit {
     }).content.result.subscribe(
       (result: boolean) => {
         if (!result) return;
-        player.setEliminated();
+
+        this._playerService.eliminatePlayer(player);        
+
+        this._modalService.show(PlayerModalComponent,
+          {
+            initialState: {
+              title: `Create descendent of ${player.name}`,
+              showRole: false,
+              showStartingAmount: false,
+              lastName: player.lastName,
+              role: player.role
+            }
+          }
+        ).content.result.subscribe(
+            (result: PlayerModalResult) => {
+              const descendentPlayer = this._playerService.createPlayer(result.firstName, result.lastName, 0);
+              if (!!player.role) {
+                this._roleService.transferRole(player, descendentPlayer);
+              }
+              const balance = this._bankService.GetAccount(player.accountNumber).balance;
+              this._bankService.TransferFunds(player.accountNumber, descendentPlayer.accountNumber, balance, "Inheritance");
+            }
+          );
     });
   }
 

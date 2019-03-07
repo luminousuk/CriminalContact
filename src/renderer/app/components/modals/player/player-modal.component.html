@@ -1,7 +1,7 @@
 <form (ngSubmit)="Save()" #playerForm="ngForm" class="needs-validation">
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">
-      {{ edit ? "Edit" : "Create" }} Player
+      {{ title }}
     </h5>
     <button type="button" class="close" aria-label="Close" (click)="Close()">
       <span aria-hidden="true">&times;</span>
@@ -16,7 +16,7 @@
       <label for="lastName" class="col-form-label">Last Name:</label>
       <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="lastName" required>
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="showRole">
       <label for="role" class="col-form-label">Role:</label>
       <ng-select
         id="role"
@@ -30,7 +30,7 @@
         [clearable]="true">
       </ng-select>
     </div>
-    <div class="form-group" *ngIf="!edit">
+    <div class="form-group" *ngIf="showStartingAmount">
       <label for="startingAmount" class="col-form-label">Starting amount:</label>
       <div class="input-group mb-2">
         <div class="input-group-prepend">
@@ -42,6 +42,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="Close()">Cancel</button>
-    <button type="submit" class="btn btn-success" [disabled]="!playerForm.form.valid">{{ edit ? "Update" : "Create" }}</button>
+    <button type="submit" class="btn btn-success" [disabled]="!playerForm.form.valid">Save</button>
   </div>
 </form>

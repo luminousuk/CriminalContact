@@ -51,7 +51,7 @@ public Withdraw(accountNumber: number, amount: number): void {
     account.Withdraw(amount, "Cash withdrawal");
 }
 
-public TransferFunds(from: number, to: number, amount: number): void {
+public TransferFunds(from: number, to: number, amount: number, description: string = null): void {
     if (amount <= 0) {
         throw new CcError("Cannot transfer a negative amount");
     }
@@ -59,9 +59,8 @@ public TransferFunds(from: number, to: number, amount: number): void {
     const fromAccount: Account = this.GetAccount(from);
     const toAccount: Account = this.GetAccount(to);
 
-    fromAccount.Withdraw(amount, `Transfer to #${to}`);
-    toAccount.Deposit(amount, `Transfer from #${from}`);
-
+    fromAccount.Withdraw(amount, !!description ? description : `Transfer to #${to}`);
+    toAccount.Deposit(amount, !!description ? description : `Transfer from #${from}`);
 }
 
 public GenerateInterest(): void {
