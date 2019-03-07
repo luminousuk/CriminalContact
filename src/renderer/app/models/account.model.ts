@@ -1,11 +1,13 @@
 import { Transaction } from "./transaction.model";
 import { CcError } from '../core/cc-error';
+import { Player } from './player.model';
 
-export class Account {        
+export class Account {
     private readonly _transactions: Transaction[];
     private _balance: number;
-
+    
     constructor(
+        private readonly _player: Player,
         private readonly _accountNumber: number,
         openingBalance: number
     ) {

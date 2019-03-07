@@ -17,8 +17,8 @@
   <tbody>
     <tr *ngFor="let player of players" [class.table-danger]="player.isDead">
       <td>{{player.name}}</td>
-      <td>{{player.account.accountNumber}}</td>
-      <td>{{player.account.balance | currency:"£"}}</td>
+      <td>{{player.accountNumber}}</td>
+      <td>{{getPlayerBalance(player) | currency:"£"}}</td>
       <td>
         {{getPlayerRole(player)}}
       </td>

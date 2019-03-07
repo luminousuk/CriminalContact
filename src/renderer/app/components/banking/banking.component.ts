@@ -33,20 +33,20 @@ export class BankingComponent implements OnInit {
   }
 
   public deposit(): void {
-    this._bankService.Deposit(this.depositPlayer.account.accountNumber, this.depositAmount);
+    this._bankService.Deposit(this.depositPlayer.accountNumber, this.depositAmount);
     this.depositPlayer = null;
     this.depositAmount = null;
   }
 
   public withdraw(): void {
-    this._bankService.Withdraw(this.withdrawPlayer.account.accountNumber, this.withdrawAmount);
+    this._bankService.Withdraw(this.withdrawPlayer.accountNumber, this.withdrawAmount);
     this.withdrawPlayer = null;
     this.withdrawAmount = null;
   }
 
   public transfer(): void {
-    const from = this.transferPayor.account.accountNumber;
-    const to = this.transferPayee.account.accountNumber;
+    const from = this.transferPayor.accountNumber;
+    const to = this.transferPayee.accountNumber;
     this._bankService.TransferFunds(from, to, this.transferAmount);
     this.transferPayor = null;
     this.transferPayee = null;

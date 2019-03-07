@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
 import { GameService } from '../../services/game.service';
+import { BankService } from '../../services/bank.service';
 
 @Component({
   selector: 'cc-dashboard',
@@ -14,6 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private readonly _playerService: PlayerService,
     private readonly _gameService: GameService,
+    private readonly _bankService: BankService,
   ) { }
 
   ngOnInit() {
@@ -24,19 +26,11 @@ export class DashboardComponent implements OnInit {
   }
 
   public get totalMoney(): number {
-    let total = 0;
-    for (let player of this._playerService.players) {
-      total += player.account.balance;
-    }
-    return total;
+    return this._bankService.GetTotalMoneyInBank();
   }
 
   public get transactionCount(): number {
-    let transactionCount = 0;
-    for (let player of this._playerService.players) {
-      transactionCount += player.account.transactions.length;
-    }
-    return transactionCount;
+    return this._bankService.GetTotalTransactionCount();
   }
 
   public get deathCount(): number {

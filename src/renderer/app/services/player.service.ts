@@ -21,11 +21,12 @@ export class PlayerService {
   }
 
   public createPlayer(firstName: string, lastName: string, startingBalance: number): Player {
-    const account = this._bankService.OpenAccount(startingBalance);
-    const player = new Player(firstName, lastName, account);
+    const player = new Player(firstName, lastName);
     this._players.push(player);
     this._players.sort((a, b) => a.name.localeCompare(b.name));
-
+    
+    this._bankService.OpenAccount(player, startingBalance);
+    
     this._toastrService.success(
       `${player.name} has been created`,
       "Player created");

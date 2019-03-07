@@ -1,4 +1,3 @@
-import { Account } from "./account.model";
 import Entity from './entity.model';
 import IPlayerRole from './playerrole.i';
 
@@ -6,11 +5,11 @@ export class Player extends Entity {
 
     private _isDead: boolean;
     private _role?: IPlayerRole;
+    private _accountNumber: number;
 
     constructor(
         public firstName: string,
-        public lastName: string,
-        private _account: Account
+        public lastName: string
     ) {
         super();
     }
@@ -19,8 +18,12 @@ export class Player extends Entity {
         return `${this.firstName} ${this.lastName}`;
     }
 
-    public get account(): Account {
-        return this._account;
+    public get accountNumber(): number {
+        return this._accountNumber;
+    }
+
+    public set accountNumber(value: number) {
+        this._accountNumber = value;
     }
 
     public get isDead(): boolean {

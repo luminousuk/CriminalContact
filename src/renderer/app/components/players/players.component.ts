@@ -6,6 +6,7 @@ import { Player } from '../../models/player.model';
 import { RoleService } from '../../services/role.service';
 import { PlayerModalComponent, PlayerModalResult } from '../modals/player/player-modal.component';
 import { ConfirmModalComponent } from "../modals/confirm/confirm-modal.component";
+import { BankService } from '../../services/bank.service';
 
 @Component({
   selector: 'cc-players',
@@ -17,6 +18,7 @@ export class PlayersComponent implements OnInit {
   constructor(
     private readonly _playerService: PlayerService,
     private readonly _roleService: RoleService,
+    private readonly _bankService: BankService,
     private readonly _modalService: BsModalService
   ) { }
 
@@ -90,5 +92,10 @@ export class PlayersComponent implements OnInit {
   public getPlayerRole(player: Player): string {
     const role = this._roleService.getRoleForPlayer(player);
     return !!role ? role.name : "";
+  }
+
+  public getPlayerBalance(player: Player): number {
+    const account = this._bankService.GetAccount(player.accountNumber);
+    return account.balance;
   }
 }
