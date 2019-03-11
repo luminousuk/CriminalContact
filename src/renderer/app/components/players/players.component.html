@@ -28,10 +28,9 @@
             Actions <span class="caret"></span>
           </button>
           <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-            <li role="menuitem"><button class="dropdown-item">Transactions</button></li>
-            <li class="divider dropdown-divider"></li>
             <li role="menuitem"><button class="dropdown-item" (click)="editPlayer(player)" [class.disabled]="player.isEliminated">Edit</button></li>
             <li role="menuitem"><button class="dropdown-item text-danger" (click)="eliminatePlayer(player)" [class.disabled]="player.isEliminated">Eliminate</button></li>
+            <li class="divider dropdown-divider"></li>
             <li role="menuitem"><button class="dropdown-item text-danger" (click)="deletePlayer(player)">Delete</button></li>
           </ul>
         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { PlayerService } from '../../services/player.service';
@@ -13,7 +13,7 @@ import { BankService } from '../../services/bank.service';
   templateUrl: './players.component.html',
   styleUrls: ['./players.component.scss']
 })
-export class PlayersComponent implements OnInit {
+export class PlayersComponent {
 
   constructor(
     private readonly _playerService: PlayerService,
@@ -21,9 +21,6 @@ export class PlayersComponent implements OnInit {
     private readonly _bankService: BankService,
     private readonly _modalService: BsModalService
   ) { }
-
-  ngOnInit() {
-  }
 
   public get players(): Player[] {
     return this._playerService.players;
