@@ -11,6 +11,7 @@ import { ModalsModule } from "./modals.module";
 import { AppRoutingModule } from './app-routing.module';
 
 import { ElapsedTimePipe } from "./pipes/elapsed-time.pipe";
+import { MathAbsPipe } from "./pipes/math-abs.pipe";
 
 import { GlobalErrorHandlerService } from "./services/global-error-handler.service";
 
@@ -26,6 +27,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 @NgModule({
   declarations: [
     ElapsedTimePipe,
+    MathAbsPipe,
     AppComponent,
     SidebarComponent,
     DashboardComponent,
