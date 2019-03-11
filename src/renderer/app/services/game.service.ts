@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 import { BankService } from './bank.service';
 import { PlayerService } from './player.service';
@@ -7,6 +6,7 @@ import { TickerService } from './ticker.service';
 import { SettingsService } from './settings.service';
 import { ClockService } from './clock.service';
 import { CcError } from '../core/cc-error';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class GameService {
     private readonly _tickerService: TickerService,
     private readonly _settingsService: SettingsService,
     private readonly _clockService: ClockService,
-    private readonly _toastrService: ToastrService
+    private readonly _logService: LogService
   ) {
     this._settingsService.accountInterestInterval$.subscribe(intervalMs => {
       this._interestIntervalMs = intervalMs * 1000;
@@ -73,9 +73,9 @@ export class GameService {
 
     this._clockService.Start();
     
-    this._toastrService.info(
+    this._logService.Info(
       `Game ${!this._startTimeMs? "started" : "resumed"} at ${new Date(this._clockService.now).toLocaleTimeString()}`,
-      `Game ${!this._startTimeMs? "started" : "resumed"}`);
+      "Game");
 
     this._startTimeMs = this._startTimeMs || this._clockService.now;
 
@@ -86,9 +86,9 @@ export class GameService {
     this.AttemptDisableInterestTimer();
     this._clockService.Stop();
 
-    this._toastrService.info(
+    this._logService.Info(
       `Game stopped at ${new Date(this._clockService.now).toLocaleTimeString()}`,
-      "Game stopped");
+      "Game");
   }
 
   public EndGame() {

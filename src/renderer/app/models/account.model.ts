@@ -7,7 +7,6 @@ export class Account {
     private _balance: number;
     
     constructor(
-        private readonly _player: Player,
         private readonly _accountNumber: number,
         openingBalance: number
     ) {
@@ -31,7 +30,7 @@ export class Account {
     public Deposit(amount: number, description: string): void {
 
         if (amount <= 0) {
-            throw new CcError("Cannot deposit a negative amount", "Account error");
+            throw new CcError("Cannot deposit a negative amount", "Account");
         }
         this.CreateTransaction(amount, description);
     }
@@ -39,11 +38,11 @@ export class Account {
     public Withdraw(amount: number, description: string): void {
 
         if (amount <= 0) {
-            throw new CcError("Cannot withdraw a negative amount", "Account error");
+            throw new CcError("Cannot withdraw a negative amount", "Account");
         }
 
         if (amount > this._balance) {
-            throw new CcError(`Insufficient balance for account #${this._accountNumber}`, "Account error");
+            throw new CcError(`Insufficient balance for account #${this._accountNumber}`, "Account");
         }
 
         this.CreateTransaction(amount * -1, description);

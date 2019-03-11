@@ -1,1 +1,19 @@
-works!
+<h2>Game Log</h2>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Timestamp</th>
+      <th scope="col">Category</th>
+      <th scope="col">Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let log of Logs.slice().reverse()" [ngClass]="{'table-warning': log.severity == 2, 'table-danger': log.severity >= 3}">
+      <td><span class="oi oi-{{ GetIconClassForSeverity(log.severity) }}"></span></td>
+      <td>{{ log.timestamp | date:"medium" }}</td>
+      <td>{{ log.category }}</td>
+      <td>{{ log.message }}</td>
+    </tr>
+  </tbody>
+</table>

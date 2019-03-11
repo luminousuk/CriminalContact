@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 import { Player } from '../models/player.model';
 import { BankService } from './bank.service';
 import { RoleService, RoleNames } from './role.service';
 import { CcError } from '../core/cc-error';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class PlayerService {
   constructor(
     private readonly _bankService: BankService,
     private readonly _roleService: RoleService,
-    private readonly _toastrService: ToastrService
+    private readonly _logService: LogService
     ) { }
 
   public get players(): Player[] {
@@ -30,9 +30,9 @@ export class PlayerService {
     
     this._bankService.OpenAccount(player, startingBalance);
     
-    this._toastrService.success(
+    this._logService.Info(
       `${player.name} has been created`,
-      "Player created");
+      "Player");
 
     return player;
   }
@@ -51,16 +51,16 @@ export class PlayerService {
       this._bankService.TransferFunds(player.accountNumber, undertaker.accountNumber, undertakerAmount, `Player elimination (${player.name})`);
     }
 
-    this._toastrService.info(
+    this._logService.Info(
       `${player.name} has been eliminated`,
-      "Player eliminated");
+      "Player");
   }
 
   public deletePlayer(player: Player): void {
     this._players = this._players.filter(p => p !== player);
 
-    this._toastrService.error(
+    this._logService.Info(
       `${player.name} has been deleted`,
-      "Player deleted");
+      "Player");
   }
 }

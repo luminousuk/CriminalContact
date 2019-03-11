@@ -1,22 +1,21 @@
 import { Injectable, ErrorHandler } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { CcError } from '../core/cc-error';
+import { LogService } from './log.service';
 
 @Injectable()
 export class GlobalErrorHandlerService implements ErrorHandler {
   constructor(
-    private readonly _toastrService: ToastrService
+    private readonly _logService: LogService
   ) { }
 
   handleError(error: any): void {
     console.error(error);
 
     if (error instanceof CcError) {
-      this._toastrService.error(error.message, error.toastTitle);
-      return;
+      this._logService.Error(error.message, error.toastTitle, error);
     }
-
-    // Log to error log
-    
+    else {
+      this._logService.Critical(error.message, "Critical Error", error);
+    }
   }
 }

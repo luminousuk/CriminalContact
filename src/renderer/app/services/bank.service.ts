@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Account } from "../models/account.model";
 import { SettingsService } from './settings.service';
-import { ToastrService } from 'ngx-toastr';
 import { CcError } from '../core/cc-error';
 import { Player } from '../models/player.model';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class BankService {
 
   constructor(
       private readonly _settingsService: SettingsService,
-      private readonly _toastrService: ToastrService
+      private readonly _logService: LogService
   ) {
       this._settingsService.accountInterestPct$.subscribe(interestPct => {
         this._defaultInterestPct = interestPct;
@@ -35,7 +35,7 @@ export class BankService {
 
 public GetAccount(accountNumber: number): Account {
     if (!this._accountNumbers.has(accountNumber)) {
-        throw new CcError(`Account #${accountNumber} does not exist`);
+        throw new CcError(`Account #${accountNumber} does not exist`, "Bank");
     }
 
     return this._accountNumbers.get(accountNumber) as Account;
@@ -53,7 +53,7 @@ public Withdraw(accountNumber: number, amount: number): void {
 
 public TransferFunds(from: number, to: number, amount: number, description: string = null): void {
     if (amount <= 0) {
-        throw new CcError("Cannot transfer a negative amount");
+        throw new CcError("Cannot transfer a negative amount", "Bank");
     }
     
     const fromAccount: Account = this.GetAccount(from);
@@ -65,7 +65,6 @@ public TransferFunds(from: number, to: number, amount: number, description: stri
 
 public GenerateInterest(): void {
     this._playerAccounts.forEach((account: Account, player: Player) => {
-
         if (player.isEliminated) {
             return;
         }
@@ -75,7 +74,7 @@ public GenerateInterest(): void {
         account.Deposit(interestAmount, "Interest");
     });
 
-    this._toastrService.info(
+    this._logService.Info(
         "Interest has been calculated for all players",
         "Bank");
 }
