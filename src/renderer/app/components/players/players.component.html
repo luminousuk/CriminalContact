@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let player of players" [class.table-danger]="player.isEliminated">
-      <td>{{player.name}}</td>
+      <td><a routerLink="./{{player.id}}/transactions" title="View transactions">{{player.name}}</a></td>
       <td>{{player.accountNumber}}</td>
       <td>{{getPlayerBalance(player) | currency:"£"}}</td>
       <td>

@@ -21,6 +21,7 @@ import { BankingComponent } from './components/banking/banking.component';
 import { PlayersComponent } from './components/players/players.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { GameLogComponent } from "./components/gamelog/gamelog.component";
+import { TransactionsComponent } from './components/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GameLogComponent } from "./components/gamelog/gamelog.component";
     BankingComponent,
     GameLogComponent,
     PlayersComponent,
-    SettingsComponent
+    SettingsComponent,
+    TransactionsComponent
   ],
   imports: [
     CommonModule,
