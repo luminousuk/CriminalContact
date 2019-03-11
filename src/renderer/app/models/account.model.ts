@@ -7,6 +7,7 @@ export class Account {
     private _balance: number;
     
     constructor(
+        private readonly _player: Player,
         private readonly _accountNumber: number,
         openingBalance: number
     ) {
