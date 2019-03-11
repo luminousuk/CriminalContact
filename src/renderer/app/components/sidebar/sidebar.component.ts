@@ -34,6 +34,12 @@ export class SidebarComponent implements OnInit {
       floatBottom: false
     },
     {
+      iconClass: "list-rich",
+      title: "Game Log",
+      route: "/log",
+      floatBottom: false
+    },
+    {
       iconClass: "cog",
       title: "Settings",
       route: "/settings",

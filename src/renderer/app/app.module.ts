@@ -20,6 +20,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BankingComponent } from './components/banking/banking.component';
 import { PlayersComponent } from './components/players/players.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { GameLogComponent } from "./components/gamelog/gamelog.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     SidebarComponent,
     DashboardComponent,
     BankingComponent,
+    GameLogComponent,
     PlayersComponent,
     SettingsComponent
   ],
