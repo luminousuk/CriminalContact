@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap.scss";
+$icon-font-path: "~open-iconic/font/fonts/";
+@import "~open-iconic/font/css/open-iconic-bootstrap.scss";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ngx-toastr/toastr-bs4-alert.scss";
+
+.toast-bootstrap-compatibility-fix {
+  opacity:1;
+}

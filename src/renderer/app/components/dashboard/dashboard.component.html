@@ -1,11 +1,11 @@
 <h1>
   <span class="display-3">Criminal Contact</span>
-  <div class="btn-group float-right mt-4" role="group">
-    <button type="button" class="btn btn-lg btn-success" (click)="StartGame()" [disabled]="startGameButtonDisabled">
+  <div class="float-right mt-4">
+    <button type="button" class="btn btn-outline-success mr-2" (click)="StartGame()" [disabled]="startGameButtonDisabled">
       Start Game
     </button>
-    <button type="button" class="btn btn-lg btn-danger" (click)="EndGame()" [disabled]="endGameButtonDisabled">
-      End Game
+    <button type="button" class="btn btn-outline-danger" (click)="StopGame()" [disabled]="stopGameButtonDisabled">
+      Stop Game
     </button>
   </div>
 </h1>
@@ -16,44 +16,65 @@
       <div class="card-body">
         <h5 class="card-title">Game Start Time</h5>
         <p class="card-text h3 text-secondary">{{gameStartTime | date:'mediumTime'}}</p>
+        <h5 class="card-title">Elapsed Time</h5>
+        <p class="card-text h3 text-secondary">{{gameElapsedSeconds | elapsedTime}}</p>
       </div>
     </div>
     <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Elapsed Time</h5>
-        <p class="card-text h3 text-secondary">{{gameElapsedTime | elapsedTime}}</p>
+        <h5 class="card-header">Leaderboard</h5>
+        <div class="card-body p-0">
+          <table class="table table-sm mb-0">
+            <tbody>
+              <tr *ngFor="let player of leaderboardData; index as i" [attr.data-index]="i">
+                <th scope="row">{{i+1}}</th>
+                <td>{{player.playerName}}</td>
+                <td>{{player.balance | currency:"£"}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
   </div>
 </div>
 <hr />
-<div class="card-deck">
-  <div class="card">
-    <a routerLink="/players">
-      <div class="card-body">
-        <h5 class="card-title">Players</h5>
-        <p class="card-text h3 text-success">{{playerCount}}</p>
+<div class="row">
+  <div class="col-sm">
+    <div class="card-deck">
+      <div class="card">
+        <a routerLink="/players">
+          <div class="card-body">
+            <h5 class="card-title">Players</h5>
+            <p class="card-text h3 text-success">{{playerCount}}</p>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Total Money</h5>
-      <p class="card-text h3 text-primary">{{totalMoney | currency:"£"}}</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Transactions</h5>
-      <p class="card-text h3 text-warning">{{transactionCount}}</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Deaths</h5>
-      <p class="card-text h3 text-danger">{{deathCount}}</p>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Money</h5>
+          <p class="card-text h3 text-primary">{{totalMoney | currency:"£"}}</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Transactions</h5>
+          <p class="card-text h3 text-warning">{{transactionCount}}</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Deaths</h5>
+          <p class="card-text h3 text-danger">{{deathCount}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-sm">
+    
+  </div>
+  <div class="col-sm"></div>
+</div>
+
 <hr />
 <button class="btn btn-primary btn-lg" (click)="seedPlayers()">dev:seedPlayers()</button>

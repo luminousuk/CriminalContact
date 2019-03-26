@@ -1,0 +1,29 @@
+<div *ngIf="!!player">
+  <h3>
+    Transactions for {{player.name}}
+    <small><a routerLink="/players">back</a></small>
+  </h3>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Timestamp</th>
+        <th scope="col">Description</th>
+        <th scope="col" class="text-right">Deposit</th>
+        <th scope="col" class="text-right">Withdrawal</th>
+        <th scope="col" class="text-right">Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trn of account.transactions">
+        <td>{{trn.timestamp | date:"medium"}}</td>
+        <td>{{trn.description}}</td>
+        <td class="text-right"><span *ngIf="trn.amount >= 0">{{trn.amount | currency:"£"}}</span></td>
+        <td class="text-right"><span *ngIf="trn.amount < 0">{{trn.amount | abs | currency:"£"}}</span></td>
+        <td class="text-right">{{trn.cumulativeBalance | currency:"£"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="!player">
+  <p>Player does not exist.</p>
+</div>

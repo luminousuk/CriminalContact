@@ -1,10 +1,13 @@
 import { Transaction } from "./transaction.model";
+import { CcError } from "../core/cc-error";
+import { Player } from "./player.model";
 
-export class Account {        
+export class Account {
     private readonly _transactions: Transaction[];
     private _balance: number;
 
     constructor(
+        private readonly _player: Player,
         private readonly _accountNumber: number,
         openingBalance: number
     ) {
@@ -28,7 +31,7 @@ export class Account {
     public Deposit(amount: number, description: string): void {
 
         if (amount <= 0) {
-            throw new Error("Cannot deposit a negative amount");
+            throw new CcError("Cannot deposit a negative amount", "Account");
         }
         this.CreateTransaction(amount, description);
     }
@@ -36,21 +39,20 @@ export class Account {
     public Withdraw(amount: number, description: string): void {
 
         if (amount <= 0) {
-            throw new Error("Cannot withdraw a negative amount");
+            throw new CcError("Cannot withdraw a negative amount", "Account");
         }
 
         if (amount > this._balance) {
-            throw new Error("Insufficient balance");
+            throw new CcError(`Insufficient balance for account #${this._accountNumber}`, "Account");
         }
 
         this.CreateTransaction(amount * -1, description);
     }
 
-    private CreateTransaction(amount: number, description: string)
-    {
+    private CreateTransaction(amount: number, description: string) {
         this._balance += amount;
         const transaction = new Transaction(this, amount, description);
         this._transactions.push(transaction);
-        //console.log(`Account #${this._accountNumber} new balance £${this._balance}`);
+        // console.log(`Account #${this._accountNumber} new balance £${this._balance}`);
     }
 }

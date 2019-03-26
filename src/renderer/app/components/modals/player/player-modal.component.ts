@@ -1,16 +1,16 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { BsModalRef } from "ngx-bootstrap";
 
-import IPlayerRole from "../../../models/roles/playerrole.i";
+import IPlayerRole from "../../../models/playerrole.i";
 import { RoleService } from "../../../services/role.service";
 import { SettingsService } from "../../../services/settings.service";
-import { BaseModalComponent } from '../base-modal.component';
+import { BaseModalComponent } from "../base-modal.component";
 
 export interface PlayerModalResult {
   firstName: string;
   lastName: string;
   startingAmount: number;
-  role: IPlayerRole
+  role: IPlayerRole;
 }
 
 @Component({
@@ -19,25 +19,34 @@ export interface PlayerModalResult {
 })
 export class PlayerModalComponent extends BaseModalComponent<PlayerModalResult> implements OnInit {
 
-  constructor(
-    protected readonly _bsModalRef: BsModalRef,
-    private readonly _settingsService: SettingsService,
-    private readonly _roleService: RoleService    
-  ) {
-    super(_bsModalRef);
-  }
+  public showRole = true;
+  public showStartingAmount = true;
 
-  ngOnInit() {
-    this.startingAmount = this._settingsService.playerStartingAmount;
-    this.availableRoles = this._roleService.availableRoles;
-  }
-
-  public edit: boolean = false;
   public firstName: string;
   public lastName: string;
   public startingAmount: number;
   public role: IPlayerRole;
   public availableRoles: IPlayerRole[];
+
+  constructor(
+    protected readonly _bsModalRef: BsModalRef,
+    private readonly _settingsService: SettingsService,
+    private readonly _roleService: RoleService
+  ) {
+    super(_bsModalRef);
+  }
+
+  ngOnInit() {
+    if (this.showRole) {
+      this.availableRoles = this._roleService.availableRoles;
+    }
+
+    if (this.showStartingAmount) {
+      this._settingsService.playerStartingAmount$.subscribe(amount => {
+        this.startingAmount = amount;
+      });
+    }
+  }
 
   public Save(): void {
     this.Close();

@@ -1,16 +1,15 @@
-import { Account } from "./account.model";
-import Entity from './entity.model';
-import IPlayerRole from './roles/playerrole.i';
+import Entity from "./entity.model";
+import IPlayerRole from "./playerrole.i";
 
 export class Player extends Entity {
 
-    private _isDead: boolean;
+    private _isEliminated: boolean;
     private _role?: IPlayerRole;
+    private _accountNumber: number;
 
     constructor(
         public firstName: string,
-        public lastName: string,
-        private _account: Account
+        public lastName: string
     ) {
         super();
     }
@@ -19,16 +18,20 @@ export class Player extends Entity {
         return `${this.firstName} ${this.lastName}`;
     }
 
-    public get account(): Account {
-        return this._account;
+    public get accountNumber(): number {
+        return this._accountNumber;
     }
 
-    public get isDead(): boolean {
-        return this._isDead;
+    public set accountNumber(value: number) {
+        this._accountNumber = value;
     }
 
-    public setDead(): void {
-        this._isDead = true;
+    public get isEliminated(): boolean {
+        return this._isEliminated;
+    }
+
+    public setEliminated(): void {
+        this._isEliminated = true;
     }
 
     public get role(): IPlayerRole {

@@ -53,7 +53,7 @@ export default class Main {
             })
         );
 
-        //Main.mainWindow.webContents.openDevTools();
+        // Main.mainWindow.webContents.openDevTools();
 
         Main.mainWindow.on("closed", Main.onClose);
         Main.mainWindow.on("ready-to-show", Main.onReadyToShow);

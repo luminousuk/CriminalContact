@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { IpcRenderer } from "electron";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class FileService {
   private ipc: IpcRenderer;
@@ -11,12 +11,10 @@ export class FileService {
     if ((<any>window).require) {
       try {
         this.ipc = (<any>window).require("electron").ipcRenderer;
-      }
-      catch (error) {
+      } catch (error) {
         throw error;
       }
-    }
-    else {
+    } else {
       console.warn("Could not load electron ipc");
     }
   }

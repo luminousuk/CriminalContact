@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PlayerModalComponent } from './player-modal.component';
+import { PlayerModalComponent } from "./player-modal.component";
 
-describe('PlayerModalComponent', () => {
+describe("PlayerModalComponent", () => {
   let component: PlayerModalComponent;
   let fixture: ComponentFixture<PlayerModalComponent>;
 
@@ -19,7 +19,7 @@ describe('PlayerModalComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

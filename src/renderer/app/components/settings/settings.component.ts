@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { SettingsService } from '../../services/settings.service';
+import { Component, OnInit } from "@angular/core";
+import { SettingsService } from "../../services/settings.service";
 
 @Component({
-  selector: 'cc-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  selector: "cc-settings",
+  templateUrl: "./settings.component.html",
+  styleUrls: ["./settings.component.scss"]
 })
 export class SettingsComponent implements OnInit {
 
@@ -27,6 +27,13 @@ export class SettingsComponent implements OnInit {
   }
   public set accountInterestPct(value: number) {
     this._settingsService.accountInterestPct = value;
+  }
+
+  public get accountInterestAutoCalculateEnabled(): boolean {
+    return this._settingsService.accountInterestAutoCalculateEnabled;
+  }
+  public set accountInterestAutoCalculateEnabled(value: boolean) {
+    this._settingsService.accountInterestAutoCalculateEnabled = value;
   }
 
   public get accountInterestInterval(): number {

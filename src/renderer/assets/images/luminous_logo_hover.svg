@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="200" height="200"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  
+  <style type="text/css">
+  .logo {
+    fill: #01AFD0;
+  }
+  .logo:hover {
+    fill: #8BBB34;
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+  </style>
+  
+  <defs>
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+    </filter>
+    <path id="logo" d="m-9 -62 h-28 v-14 h46 v124 h32 v14 h-82 v-14 h32 z" />
+  </defs>
+  
+  <rect width="100%" height="100%" fill="#000000" />
+  
+  <g class="logo">
+    <use xlink:href="#logo" transform="translate(100,100)" filter="url(#blur)" />
+    <use xlink:href="#logo" transform="translate(100,100)" />
+    <rect x="0" y="0" width="200" opacity="0" height="200" />
+  </g>
+  
+</svg>

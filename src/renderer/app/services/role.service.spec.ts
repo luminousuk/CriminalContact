@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { RoleService } from './role.service';
+import { RoleService } from "./role.service";
 
-describe('RoleService', () => {
+describe("RoleService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  it("should be created", () => {
     const service: RoleService = TestBed.get(RoleService);
     expect(service).toBeTruthy();
   });

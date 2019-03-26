@@ -6,7 +6,14 @@
     <div class="form-group mt-2">
       <label for="accountInterestPct">Interest Amount</label>
       <div class="input-group">
-        <input type="number" class="form-control" id="accountInterestPct" [value]="accountInterestPct * 100" (input)="accountInterestPct = $event.target.value / 100" min="0" max="100" step="5">
+        <input type="number"
+          class="form-control"
+          id="accountInterestPct"
+          [value]="accountInterestPct * 100"
+          (input)="accountInterestPct = $event.target.value / 100"
+          min="0"
+          max="100"
+          step="5">
         <div class="input-group-append">
           <span class="input-group-text">%</span>
         </div>
@@ -16,9 +23,29 @@
       </small>
     </div>
     <div class="form-group mt-2">
+      <label for="accountInterestAutoCalculateEnabled">Automatic Interest Generation</label>
+      <div class="input-group">
+        <button btnCheckbox
+          class="btn"
+          id="accountInterestAutoCalculateEnabled"
+          [(ngModel)]="accountInterestAutoCalculateEnabled"
+          [ngClass]="{'btn-success': accountInterestAutoCalculateEnabled, 'btn-danger': !accountInterestAutoCalculateEnabled}"
+          role="button">{{accountInterestAutoCalculateEnabled ? "Enabled" : "Disabled"}}</button>
+      </div>
+      <small class="form-text text-muted">
+        Enable or disable automatic interest generation.
+      </small>
+    </div>
+    <div class="form-group mt-2">
       <label for="accountInterestPct">Interest Interval</label>
       <div class="input-group">
-        <input type="number" class="form-control" id="accountInterestInterval" [(ngModel)]="accountInterestInterval" min="0" step="10">
+        <input type="number"
+          class="form-control"
+          id="accountInterestInterval"
+          [(ngModel)]="accountInterestInterval"
+          [disabled]="!accountInterestAutoCalculateEnabled"
+          min="0"
+          step="10">
         <div class="input-group-append">
           <span class="input-group-text">minutes</span>
         </div>
@@ -35,11 +62,31 @@
         <div class="input-group-prepend">
           <span class="input-group-text">£</span>
         </div>
-        <input currencyMask class="form-control" id="playerStartingAmount" [(ngModel)]="playerStartingAmount" [options]="{ prefix: '', allowNegative: false, align: 'left' }">
+        <input currencyMask
+          class="form-control"
+          id="playerStartingAmount"
+          [(ngModel)]="playerStartingAmount"
+          [options]="{ prefix: '', allowNegative: false, align: 'left' }">
       </div>
       <small class="form-text text-muted">
         When creating a new player, the default account balance will be set to this amount.
       </small>
+    </div>
+  </tab>
+  <tab heading="About">
+    <div class="row mt-4 justify-content-center ld-about">
+      <div class="col-md-8">
+      <div class="media">
+          <object type="image/svg+xml" data="assets/images/luminous_logo_hover.svg" class=" ld-logo mr-3" alt="Luminous Development"></object>
+          <div class="media-body">
+            <h2 class="mt-0 ld-heading">Luminous Development</h2>
+            <p><em>https://www.luminousuk.com</em></p>
+            <p>The Criminal Contact application was designed and built by <strong>Luminous Development Ltd.</strong></p>
+            <p><small>&copy; Copyright Luminous Development 2019. All rights reserved.</small></p>
+            <p><small>Distributed under the Apache License 2.0.</small></p>
+          </div>
+        </div>
+      </div>
     </div>
   </tab>
 </tabset>

@@ -1,12 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef } from "ngx-bootstrap";
 
-import { BaseModalComponent } from '../base-modal.component';
+import { BaseModalComponent } from "../base-modal.component";
 
 @Component({
   templateUrl: "./confirm-modal.component.html"
 })
 export class ConfirmModalComponent extends BaseModalComponent<boolean> implements OnInit {
+
+  public title: string;
+  public text: string;
 
   constructor(
     protected readonly _bsModalRef: BsModalRef
@@ -16,9 +19,6 @@ export class ConfirmModalComponent extends BaseModalComponent<boolean> implement
 
   ngOnInit() {
   }
-
-  public title: string;
-  public text: string;
 
   public Yes(): void {
     this.result.emit(true);

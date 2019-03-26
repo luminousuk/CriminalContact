@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../../services/player.service';
-import { GameService } from '../../services/game.service';
-import { TimerService } from '../../services/timer.service';
+import { Component, OnInit } from "@angular/core";
+import { PlayerService } from "../../services/player.service";
+import { GameService } from "../../services/game.service";
+import { BankService } from "../../services/bank.service";
+import { ILeaderboardPlayer } from "../../models/dashboard/leaderboardplayer.i";
 
 @Component({
-  selector: 'cc-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: "cc-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
-
-  
 
   constructor(
     private readonly _playerService: PlayerService,
     private readonly _gameService: GameService,
-    private readonly _timerService: TimerService
+    private readonly _bankService: BankService,
   ) { }
 
   ngOnInit() {
@@ -26,23 +25,27 @@ export class DashboardComponent implements OnInit {
   }
 
   public get totalMoney(): number {
-    let total = 0;
-    for (let player of this._playerService.players) {
-      total += player.account.balance;
-    }
-    return total;
+    return this._bankService.GetTotalMoneyInBank();
   }
 
   public get transactionCount(): number {
-    let transactionCount = 0;
-    for (let player of this._playerService.players) {
-      transactionCount += player.account.transactions.length;
-    }
-    return transactionCount;
+    return this._bankService.GetTotalTransactionCount();
   }
 
   public get deathCount(): number {
-    return this._playerService.players.filter(p => p.isDead).length;
+    return this._playerService.players.filter(p => p.isEliminated).length;
+  }
+
+  public get leaderboardData(): ILeaderboardPlayer[] {
+    const leaderboard: ILeaderboardPlayer[] = this._playerService.players.map(player => {
+      const balance = this._bankService.GetAccount(player.accountNumber).balance;
+      return {
+        playerName: player.name,
+        balance: balance
+      };
+    });
+
+    return leaderboard.sort((a, b) => b.balance - a.balance).slice(0, 5);
   }
 
   public seedPlayers(): void {
@@ -66,16 +69,16 @@ export class DashboardComponent implements OnInit {
     this._gameService.StartGame();
   }
 
-  public EndGame(): void {
-    this._gameService.EndGame();
+  public StopGame(): void {
+    this._gameService.StopGame();
   }
 
   public get startGameButtonDisabled(): boolean {
-    return !this._gameService.canStartGame;
+    return this._gameService.isRunning || this._gameService.hasEnded;
   }
 
-  public get endGameButtonDisabled(): boolean {
-    return !this._gameService.hasStarted || this._gameService.hasEnded;
+  public get stopGameButtonDisabled(): boolean {
+    return !this._gameService.isRunning;
   }
 
   public get showCurrentGamePanel(): boolean {
@@ -83,11 +86,11 @@ export class DashboardComponent implements OnInit {
   }
 
   public get gameStartTime(): Date {
-    return this._gameService.startTime;
+    return new Date(this._gameService.startTimeMs);
   }
 
-  public get gameElapsedTime(): number {
-    return this._gameService.elapsedTime;
+  public get gameElapsedSeconds(): number {
+    return this._gameService.elapsedSeconds;
   }
 
 }

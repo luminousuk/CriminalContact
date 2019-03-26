@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { interval, Subscription } from "rxjs";
 import { Guid } from "guid-typescript";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-export class TimerService {
+export class TickerService {
   private _subscriptions: Map<string, Subscription>;
 
   constructor() {
@@ -22,7 +22,7 @@ export class TimerService {
 
   public unsubscribe(id: string): void {
     if (!this._subscriptions.has(id)) {
-      throw new Error(`Subscription with id ${id} does not exist.`);
+      throw new Error(`Ticker subscription with id ${id} does not exist.`);
     }
 
     this._subscriptions.get(id).unsubscribe();
