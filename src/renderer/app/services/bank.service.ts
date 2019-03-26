@@ -69,6 +69,10 @@ public GenerateInterest(): void {
             return;
         }
 
+        if (account.balance <= 0) {
+            return;
+        }
+
         const interestAmount = account.balance * this.GetPlayerInterestPct(player);
 
         account.Deposit(interestAmount, "Interest");
