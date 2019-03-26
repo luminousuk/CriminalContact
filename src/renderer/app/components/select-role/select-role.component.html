@@ -1,4 +1,0 @@
-<select class="custom-select mb-2" [(ngModel)]="roles" (ngModelChange)="setRole($event)">
-  <option selected disabled [ngValue]="null">Select role...</option>
-  <option *ngFor="let role of roles" [(ngValue)]="role">{{role.name}}</option>
-</select>
