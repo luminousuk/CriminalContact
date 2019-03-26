@@ -1,5 +1,5 @@
-import Entity from './entity.model';
-import IPlayerRole from './playerrole.i';
+import Entity from "./entity.model";
+import IPlayerRole from "./playerrole.i";
 
 export class Player extends Entity {
 

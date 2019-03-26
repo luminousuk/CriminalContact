@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { SettingsService } from '../../services/settings.service';
+import { Component, OnInit } from "@angular/core";
+import { SettingsService } from "../../services/settings.service";
 
 @Component({
-  selector: 'cc-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  selector: "cc-settings",
+  templateUrl: "./settings.component.html",
+  styleUrls: ["./settings.component.scss"]
 })
 export class SettingsComponent implements OnInit {
 

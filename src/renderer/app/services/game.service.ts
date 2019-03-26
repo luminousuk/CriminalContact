@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { BankService } from './bank.service';
-import { PlayerService } from './player.service';
-import { TickerService } from './ticker.service';
-import { SettingsService } from './settings.service';
-import { ClockService } from './clock.service';
-import { CcError } from '../core/cc-error';
-import { LogService } from './log.service';
+import { BankService } from "./bank.service";
+import { PlayerService } from "./player.service";
+import { TickerService } from "./ticker.service";
+import { SettingsService } from "./settings.service";
+import { ClockService } from "./clock.service";
+import { CcError } from "../core/cc-error";
+import { LogService } from "./log.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class GameService {
 
@@ -28,7 +28,7 @@ export class GameService {
   ) {
     this._settingsService.accountInterestInterval$.subscribe(intervalMs => {
       this._interestIntervalMs = intervalMs * 1000;
-      console.debug(`GameService._interestIntervalMs = ${intervalMs * 1000}`);
+      // console.debug(`GameService._interestIntervalMs = ${intervalMs * 1000}`);
 
       this.AttemptResetInterestTimer();
     });
@@ -39,14 +39,14 @@ export class GameService {
       } else {
         this.AttemptDisableInterestTimer();
       }
-      console.debug(`GameService: autoInterestEnabled = ${autoInterestEnabled}`);
+      // console.debug(`GameService: autoInterestEnabled = ${autoInterestEnabled}`);
     });
   }
 
   private AttemptResetInterestTimer(): void {
     if (this.hasStarted && !this.hasEnded) {
       this.AttemptDisableInterestTimer();
-      // Doesn't take into account current time remaining
+      // Doesn"t take into account current time remaining
       this._interestTimerId = this._tickerService.subscribe(() => this._bankService.GenerateInterest(), this._interestIntervalMs);
     }
   }
@@ -72,14 +72,14 @@ export class GameService {
     }
 
     this._clockService.Start();
-    
+
     this._logService.Info(
-      `Game ${!this._startTimeMs? "started" : "resumed"} at ${new Date(this._clockService.now).toLocaleTimeString()}`,
+      `Game ${!this._startTimeMs ? "started" : "resumed"} at ${new Date(this._clockService.now).toLocaleTimeString()}`,
       "Game");
 
     this._startTimeMs = this._startTimeMs || this._clockService.now;
 
-    this.AttemptResetInterestTimer();   
+    this.AttemptResetInterestTimer();
   }
 
   public StopGame() {

@@ -4,13 +4,13 @@ import { BsModalRef } from "ngx-bootstrap";
 import IPlayerRole from "../../../models/playerrole.i";
 import { RoleService } from "../../../services/role.service";
 import { SettingsService } from "../../../services/settings.service";
-import { BaseModalComponent } from '../base-modal.component';
+import { BaseModalComponent } from "../base-modal.component";
 
 export interface PlayerModalResult {
   firstName: string;
   lastName: string;
   startingAmount: number;
-  role: IPlayerRole
+  role: IPlayerRole;
 }
 
 @Component({
@@ -19,10 +19,19 @@ export interface PlayerModalResult {
 })
 export class PlayerModalComponent extends BaseModalComponent<PlayerModalResult> implements OnInit {
 
+  public showRole = true;
+  public showStartingAmount = true;
+
+  public firstName: string;
+  public lastName: string;
+  public startingAmount: number;
+  public role: IPlayerRole;
+  public availableRoles: IPlayerRole[];
+
   constructor(
     protected readonly _bsModalRef: BsModalRef,
     private readonly _settingsService: SettingsService,
-    private readonly _roleService: RoleService    
+    private readonly _roleService: RoleService
   ) {
     super(_bsModalRef);
   }
@@ -38,15 +47,6 @@ export class PlayerModalComponent extends BaseModalComponent<PlayerModalResult> 
       });
     }
   }
-
-  public showRole: boolean = true;
-  public showStartingAmount: boolean = true;
-
-  public firstName: string;
-  public lastName: string;
-  public startingAmount: number;
-  public role: IPlayerRole;
-  public availableRoles: IPlayerRole[];
 
   public Save(): void {
     this.Close();

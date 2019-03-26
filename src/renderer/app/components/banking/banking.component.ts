@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Player } from '../../models/player.model';
-import { BankService } from '../../services/bank.service';
-import { PlayerService } from '../../services/player.service';
+import { Component, OnInit } from "@angular/core";
+import { Player } from "../../models/player.model";
+import { BankService } from "../../services/bank.service";
+import { PlayerService } from "../../services/player.service";
 
 @Component({
-  selector: 'cc-banking',
-  templateUrl: './banking.component.html',
-  styleUrls: ['./banking.component.scss']
+  selector: "cc-banking",
+  templateUrl: "./banking.component.html",
+  styleUrls: ["./banking.component.scss"]
 })
 export class BankingComponent implements OnInit {
 
@@ -15,7 +15,7 @@ export class BankingComponent implements OnInit {
 
   public withdrawPlayer: Player;
   public withdrawAmount: number;
-  
+
   public transferPayor: Player;
   public transferPayee: Player;
   public transferAmount: number;

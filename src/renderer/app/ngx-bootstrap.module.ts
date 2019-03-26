@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 import { BsDropdownModule, ButtonsModule, TabsModule, TooltipModule } from "ngx-bootstrap";
 
 @NgModule({

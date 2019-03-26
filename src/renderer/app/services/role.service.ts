@@ -1,29 +1,30 @@
-import { Injectable } from '@angular/core';
-import IPlayerRole from '../models/playerrole.i';
-import { Player } from '../models/player.model';
-import { CcError } from '../core/cc-error';
+import { Injectable } from "@angular/core";
+import IPlayerRole from "../models/playerrole.i";
+import { Player } from "../models/player.model";
+import { CcError } from "../core/cc-error";
 
 export class RoleNames {
-  public static Mayor: string = "Mayor";
-  public static PoliceChief: string = "Police Chief";
-  public static Police: string = "Police";
-  public static Doctor: string = "Doctor";
-  public static Undertaker: string = "Undertaker";
-  public static StoreKeeper: string = "Store Keeper";
-  public static Goldsmith: string = "Goldsmith";
-  public static Reporter: string = "Reporter";
-  public static ArmsDealer: string = "Arms Dealer";
-  public static Chemist: string = "Chemist";
-  public static Distiller: string = "Distiller";
-  public static Farmer: string = "Farmer";
-  public static Miner: string = "Miner";
+  public static Mayor = "Mayor";
+  public static PoliceChief = "Police Chief";
+  public static Police = "Police";
+  public static Doctor = "Doctor";
+  public static Undertaker = "Undertaker";
+  public static StoreKeeper = "Store Keeper";
+  public static Goldsmith = "Goldsmith";
+  public static Reporter = "Reporter";
+  public static ArmsDealer = "Arms Dealer";
+  public static Chemist = "Chemist";
+  public static Distiller = "Distiller";
+  public static Farmer = "Farmer";
+  public static Miner = "Miner";
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class RoleService {
 
+  // TODO: Move to json file / settings
   private readonly _roles: IPlayerRole[] = [
     {
       name: RoleNames.Mayor,
@@ -135,7 +136,7 @@ export class RoleService {
   }
 
   public getRole(roleName: string): IPlayerRole {
-    const role = this._roles.find(role => role.name == roleName);
+    const role = this._roles.find(r => r.name === roleName);
 
     if (!role) {
       throw new CcError("Role does not exist.");
@@ -176,7 +177,7 @@ export class RoleService {
     if (!this._playerAssignments.has(player)) {
       return;
     }
-    
+
     const role = this._playerAssignments.get(player);
     this.removeRole(player, role);
   }
@@ -199,7 +200,7 @@ export class RoleService {
     }
 
     if (!!this.getRoleForPlayer(toPlayer)) {
-      throw new CcError("Target player already has a role", "Cannot transfer role")
+      throw new CcError("Target player already has a role", "Cannot transfer role");
     }
 
     this.unassignPlayer(fromPlayer);

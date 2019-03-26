@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BankService } from '../../services/bank.service';
-import { PlayerService } from '../../services/player.service';
-import { Player } from '../../models/player.model';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { BankService } from "../../services/bank.service";
+import { PlayerService } from "../../services/player.service";
+import { Player } from "../../models/player.model";
 import { Account } from "../../models/account.model";
 
 @Component({
-  selector: 'cc-transactions',
-  templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.scss']
+  selector: "cc-transactions",
+  templateUrl: "./transactions.component.html",
+  styleUrls: ["./transactions.component.scss"]
 })
 export class TransactionsComponent implements OnInit {
 

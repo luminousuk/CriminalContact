@@ -16,5 +16,5 @@ export class BaseModalComponent<T> {
 
     public Close(): void {
         this._bsModalRef.hide();
-    };
+    }
 }

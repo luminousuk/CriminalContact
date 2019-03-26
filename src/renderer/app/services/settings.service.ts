@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class SettingsService {
 
   private readonly _debounceTimeMs = 500;
-  
+
   private _playerStartingAmount = new BehaviorSubject<number>(5000);
   private _accountInterestPct = new BehaviorSubject<number>(0.1);
   private _accountInterestAutoCalculateEnabled = new BehaviorSubject<boolean>(true);

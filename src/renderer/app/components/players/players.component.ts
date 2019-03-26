@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { Component } from "@angular/core";
+import { BsModalService } from "ngx-bootstrap/modal";
 
-import { PlayerService } from '../../services/player.service';
-import { Player } from '../../models/player.model';
-import { RoleService } from '../../services/role.service';
-import { PlayerModalComponent, PlayerModalResult } from '../modals/player/player-modal.component';
+import { PlayerService } from "../../services/player.service";
+import { Player } from "../../models/player.model";
+import { RoleService } from "../../services/role.service";
+import { PlayerModalComponent, PlayerModalResult } from "../modals/player/player-modal.component";
 import { ConfirmModalComponent } from "../modals/confirm/confirm-modal.component";
-import { BankService } from '../../services/bank.service';
+import { BankService } from "../../services/bank.service";
 
 @Component({
-  selector: 'cc-players',
-  templateUrl: './players.component.html',
-  styleUrls: ['./players.component.scss']
+  selector: "cc-players",
+  templateUrl: "./players.component.html",
+  styleUrls: ["./players.component.scss"]
 })
 export class PlayersComponent {
 
@@ -57,8 +57,7 @@ export class PlayersComponent {
 
         if (!updatedPlayer.role) {
           this._roleService.unassignPlayer(player);
-        }
-        else if (player.role !== updatedPlayer.role) {
+        } else if (player.role !== updatedPlayer.role) {
           this._roleService.assignRole(updatedPlayer.role.name, player);
         }
       });
@@ -72,7 +71,7 @@ export class PlayersComponent {
       }
     }).content.result.subscribe(
       (result: boolean) => {
-        if (!result) return;
+        if (!result) { return; }
         this._playerService.deletePlayer(player);
         this._roleService.unassignPlayer(player);
     });
@@ -86,9 +85,9 @@ export class PlayersComponent {
       }
     }).content.result.subscribe(
       (result: boolean) => {
-        if (!result) return;
+        if (!result) { return; }
 
-        this._playerService.eliminatePlayer(player);        
+        this._playerService.eliminatePlayer(player);
 
         this._modalService.show(PlayerModalComponent,
           {
@@ -101,8 +100,8 @@ export class PlayersComponent {
             }
           }
         ).content.result.subscribe(
-            (result: PlayerModalResult) => {
-              const descendentPlayer = this._playerService.createPlayer(result.firstName, result.lastName, 0);
+            (modalResult: PlayerModalResult) => {
+              const descendentPlayer = this._playerService.createPlayer(modalResult.firstName, modalResult.lastName, 0);
               if (!!player.role) {
                 this._roleService.transferRole(player, descendentPlayer);
               }

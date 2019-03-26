@@ -3,7 +3,7 @@ export interface ILogEntry {
   readonly severity: LogSeverity;
   readonly message: string;
   readonly category?: string;
-  readonly error?: Error; 
+  readonly error?: Error;
 }
 
 export enum LogSeverity {

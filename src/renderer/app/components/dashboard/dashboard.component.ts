@@ -1,17 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../../services/player.service';
-import { GameService } from '../../services/game.service';
-import { BankService } from '../../services/bank.service';
-import { ILeaderboardPlayer } from '../../models/dashboard/leaderboardplayer.i';
+import { Component, OnInit } from "@angular/core";
+import { PlayerService } from "../../services/player.service";
+import { GameService } from "../../services/game.service";
+import { BankService } from "../../services/bank.service";
+import { ILeaderboardPlayer } from "../../models/dashboard/leaderboardplayer.i";
 
 @Component({
-  selector: 'cc-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: "cc-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
-
-  
 
   constructor(
     private readonly _playerService: PlayerService,
@@ -39,15 +37,15 @@ export class DashboardComponent implements OnInit {
   }
 
   public get leaderboardData(): ILeaderboardPlayer[] {
-    let leaderboard: ILeaderboardPlayer[] = this._playerService.players.map(player => {
-      let balance = this._bankService.GetAccount(player.accountNumber).balance;
+    const leaderboard: ILeaderboardPlayer[] = this._playerService.players.map(player => {
+      const balance = this._bankService.GetAccount(player.accountNumber).balance;
       return {
         playerName: player.name,
         balance: balance
       };
     });
 
-    return leaderboard.sort((a,b) => b.balance - a.balance).slice(0, 5);
+    return leaderboard.sort((a, b) => b.balance - a.balance).slice(0, 5);
   }
 
   public seedPlayers(): void {

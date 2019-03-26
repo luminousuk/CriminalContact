@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 interface ISidebarItem {
   iconClass: string;
@@ -8,9 +8,9 @@ interface ISidebarItem {
 }
 
 @Component({
-  selector: 'cc-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  selector: "cc-sidebar",
+  templateUrl: "./sidebar.component.html",
+  styleUrls: ["./sidebar.component.scss"]
 })
 export class SidebarComponent implements OnInit {
 

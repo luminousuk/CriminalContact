@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { Account } from "../models/account.model";
-import { SettingsService } from './settings.service';
-import { CcError } from '../core/cc-error';
-import { Player } from '../models/player.model';
-import { LogService } from './log.service';
+import { SettingsService } from "./settings.service";
+import { CcError } from "../core/cc-error";
+import { Player } from "../models/player.model";
+import { LogService } from "./log.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class BankService {
   private readonly _accounts: Account[] = [];
@@ -20,7 +20,7 @@ export class BankService {
   ) {
       this._settingsService.accountInterestPct$.subscribe(interestPct => {
         this._defaultInterestPct = interestPct;
-        console.debug(`BankService._interestPct = ${interestPct}`);
+        // console.debug(`BankService._interestPct = ${interestPct}`);
       });
   }
 
@@ -55,7 +55,7 @@ public TransferFunds(from: number, to: number, amount: number, description: stri
     if (amount <= 0) {
         throw new CcError("Cannot transfer a negative amount", "Bank");
     }
-    
+
     const fromAccount: Account = this.GetAccount(from);
     const toAccount: Account = this.GetAccount(to);
 
@@ -84,13 +84,13 @@ public GenerateInterest(): void {
 }
 
 public GetTotalMoneyInBank(): number {
-    let total: number = 0;
+    let total = 0;
     this._accounts.forEach((account) => total += account.balance);
     return total;
 }
 
 public GetTotalTransactionCount(): number {
-    let total: number = 0;
+    let total = 0;
     this._accounts.forEach((account) => total += account.transactions.length);
     return total;
 }

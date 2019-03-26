@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { TickerService } from './ticker.service';
+import { Injectable } from "@angular/core";
+import { TickerService } from "./ticker.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ClockService {
 
-  private _lastTick: number = 0;
-  private _elapsedMs: number = 0;
+  private _lastTick = 0;
+  private _elapsedMs = 0;
   private _tickerId: string;
 
   constructor(

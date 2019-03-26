@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ILogEntry, LogSeverity } from '../core/log-entry.i';
-import { ToastrService } from 'ngx-toastr';
+import { Injectable } from "@angular/core";
+import { ILogEntry, LogSeverity } from "../core/log-entry.i";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class LogService {
   private readonly _log: ILogEntry[] = [];

@@ -1,6 +1,6 @@
-import { Injectable, ErrorHandler } from '@angular/core';
-import { CcError } from '../core/cc-error';
-import { LogService } from './log.service';
+import { Injectable, ErrorHandler } from "@angular/core";
+import { CcError } from "../core/cc-error";
+import { LogService } from "./log.service";
 
 @Injectable()
 export class GlobalErrorHandlerService implements ErrorHandler {
@@ -13,8 +13,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
 
     if (error instanceof CcError) {
       this._logService.Error(error.message, error.toastTitle, error);
-    }
-    else {
+    } else {
       this._logService.Critical(error.message, "Critical Error", error);
     }
   }

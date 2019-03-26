@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { interval, Subscription } from "rxjs";
 import { Guid } from "guid-typescript";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class TickerService {
   private _subscriptions: Map<string, Subscription>;
