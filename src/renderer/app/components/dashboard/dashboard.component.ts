@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
 import { GameService } from '../../services/game.service';
 import { BankService } from '../../services/bank.service';
+import { ILeaderboardPlayer } from '../../models/dashboard/leaderboardplayer.i';
 
 @Component({
   selector: 'cc-dashboard',
@@ -35,6 +36,18 @@ export class DashboardComponent implements OnInit {
 
   public get deathCount(): number {
     return this._playerService.players.filter(p => p.isEliminated).length;
+  }
+
+  public get leaderboardData(): ILeaderboardPlayer[] {
+    let leaderboard: ILeaderboardPlayer[] = this._playerService.players.map(player => {
+      let balance = this._bankService.GetAccount(player.accountNumber).balance;
+      return {
+        playerName: player.name,
+        balance: balance
+      };
+    });
+
+    return leaderboard.sort((a,b) => b.balance - a.balance).slice(0, 5);
   }
 
   public seedPlayers(): void {
